@@ -14,7 +14,7 @@ summary(plot_meta)
 ## load lidar ----------------
 
 
-### adapt file_path! 
+### adapt file_path 
 files_raw <- as.data.table(list.files("/Volumes/Untitled/lidar_exclosures_2025", pattern = ".laz", full.names = TRUE))
 
 
@@ -53,7 +53,7 @@ for(i in 1:nrow(files)){
     # discard irrelevant variables
     select(X:Z) %>% 
     ## remove duplicates
-    # unique() %>%
+    unique() %>%
     # calculate horizontal and 3d distance
     mutate(distance_2d = sqrt(X^2 + Y^2),
            distance_3d = sqrt(distance_2d^2 + Z^2), 
@@ -75,44 +75,7 @@ for(i in 1:nrow(files)){
   #hist(df$Z)
   #hist(df$point_height)
   #summary(df$point_height)
-  
-  
-  ## Vizualize 
-  p_a <- df %>%
-    sample_n(100000) %>%
-    arrange(point_height) %>% 
-    ggplot(aes(x = X, y = Y, color = point_height)) +
-    geom_point(alpha = 0.5) +
-    scale_color_viridis_c() +
-    theme_minimal() +
-    theme(legend.position = "none")
-  p_a
-  
-  p_b <- df %>%
-    sample_n(100000) %>%
-    arrange(point_height) %>% 
-    ggplot(aes(x = X, y = point_height, color = point_height)) +
-    geom_point(alpha = 0.5) +
-    scale_color_viridis_c() +
-    theme_minimal() +
-    labs(x = "X", y = "Height") +
-    theme(legend.position = "none")
-  p_b 
-  
-  p_c <- df %>%
-    sample_n(100000) %>%
-    arrange(point_height) %>% 
-    ggplot(aes(x = Y, y = point_height, color = point_height)) +
-    geom_point(alpha = 0.5) +
-    scale_color_viridis_c() +
-    theme_minimal() +
-    labs(x = "Y", y = "Height") +
-    theme(legend.position = "none")
-  p_c
 
-  print(grid.arrange(p_a, p_b, p_c, ncol = 3, top=textGrob(paste0(file), gp = gpar(fontsize = 20))))
-  
-  
   if(nrow(df)<1){next}
   
   tmp_full <- df %>% 
@@ -146,8 +109,10 @@ for(i in 1:nrow(files)){
   
 }
 
-
-
 reserve_lidar <- res %>% unique()
+fwrite(reserve_lidar, "data/processed/fragments/lidar_metrics_750cm_radius.csv")
 
-#fwrite(reserve_lidar, "data/processedData/dataFragments/LidarResultsWaterberg2024Radius10m.csv")
+
+
+
+
