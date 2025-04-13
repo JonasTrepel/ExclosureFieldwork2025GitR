@@ -1,27 +1,49 @@
-effect,component,group,term,estimate,std.error,ci_lb,ci_ub,scale,formula,response_name,response_tier,n,sig
-fixed,cond,,Intercept,0.274441487667741,0.132666464707472,-0.000950420255866203,0.530562161554694,plot,1 + (1 | exclosure_id/cluster_id),plant_richness_plot,taxonomic_diversity,107,non-significant
-fixed,cond,,Intercept,0.149651258346199,0.152466668448147,-0.149481579572839,0.436897965162956,site,1,plant_richness_site,taxonomic_diversity,6,non-significant
-fixed,cond,,Intercept,-0.14432143827826,0.126901252847603,-0.390618315449527,0.105659409603982,plot,1 + (1 | exclosure_id/cluster_id),woody_richness_plot,taxonomic_diversity,78,non-significant
-fixed,cond,,Intercept,-0.215868255218506,0.2533653645426,-0.726053851125786,0.238514732435447,site,1,woody_richness_site,taxonomic_diversity,6,non-significant
-fixed,cond,,Intercept,0.317941439009153,0.17054191795522,-0.0584086259278277,0.626297708717339,plot,1 + (1 | exclosure_id/cluster_id),forb_richness_plot,taxonomic_diversity,81,non-significant
-fixed,cond,,Intercept,0.296117164508748,0.190575402890934,-0.0977500165876812,0.660963505174504,site,1,forb_richness_site,taxonomic_diversity,6,non-significant
-fixed,cond,,Intercept,0.344261548917558,0.151845928120371,0.0273311186786053,0.632951654116308,plot,1 + (1 | exclosure_id/cluster_id),graminoid_richness_plot,taxonomic_diversity,66,significant
-fixed,cond,,Intercept,0.421741634972106,0.347208409149808,-0.272424908322283,1.10409294513152,site,1,graminoid_richness_site,taxonomic_diversity,6,non-significant
-fixed,cond,,Intercept,-0.200518508549803,0.0910646835809398,-0.384242581819033,-0.0230292321293331,plot,1 + (1 | exclosure_id/cluster_id),berger_parker_plot,dominance,108,significant
-fixed,cond,,Intercept,-0.320573095740499,0.0911866651189187,-0.491249082937527,-0.133090683583783,site,1,berger_parker_site,dominance,6,significant
-fixed,cond,,Intercept,0.169494400510224,0.201401912104049,-0.242453500903417,0.551818201315458,plot,1 + (1 | exclosure_id/cluster_id),functional_dispersion_plot,functional_diversity,105,non-significant
-fixed,cond,,Intercept,0.0103421092823778,0.134239438764667,-0.280643352582844,0.280731405897095,site,1,functional_dispersion_site,functional_diversity,6,non-significant
-fixed,cond,,Intercept,-0.036764607838076,0.040380113609363,-0.118602318727973,0.0439105006039413,plot,1 + (1 | exclosure_id/cluster_id),functional_specialization_plot,functional_diversity,105,non-significant
-fixed,cond,,Intercept,-0.0367675261690898,0.0475111024474819,-0.131296849221313,0.0628723273326718,site,1,functional_specialization_site,functional_diversity,6,non-significant
-fixed,cond,,Intercept,0.133165759334878,0.074483695792639,-0.0181152373806976,0.289729109841286,plot,1 + (1 | exclosure_id/cluster_id),functional_diversity_plot,functional_diversity,108,non-significant
-fixed,cond,,Intercept,0.11608007573592,0.153408552040243,-0.206687071830272,0.406496158740269,site,1,functional_diversity_site,functional_diversity,6,non-significant
-fixed,cond,,Intercept,-0.362253723353736,0.158848444462834,-0.659786776589346,-0.026042516372834,plot,1 + (1 | exclosure_id/cluster_id),functional_nearerst_neighbour_distance_plot,functional_diversity,105,significant
-fixed,cond,,Intercept,-0.128377355322121,0.153727479735133,-0.448059371171019,0.173308758447302,site,1,functional_nearerst_neighbour_distance_site,functional_diversity,6,non-significant
-fixed,cond,,Intercept,0.211702232588335,0.129206513854859,-0.0488518625289134,0.459101724479393,plot,1 + (1 | exclosure_id/cluster_id),plant_evenness_plot,dominance,105,non-significant
-fixed,cond,,Intercept,0.174825391311994,0.0822771118880351,0.0103590101807444,0.326092701068024,site,1,plant_evenness_site,dominance,6,significant
-fixed,cond,,Intercept,0.343519347653575,0.172931481286786,-0.0212611333736167,0.676555927020582,plot,1 + (1 | exclosure_id/cluster_id),shannon_diversity_plot,taxonomic_diversity,105,non-significant
-fixed,cond,,Intercept,0.223272832830862,0.104887685045003,0.0137473163120527,0.457417546689603,site,1,shannon_diversity_site,taxonomic_diversity,6,significant
-fixed,cond,,Intercept,-0.135656433847431,0.0512250725951873,-0.254448755710976,-0.0397113434337027,plot,1 + (1 | exclosure_id/cluster_id),point_return_fraction_plot,structure,107,significant
-fixed,cond,,Intercept,-0.141138424319622,0.0513371514935888,-0.238031926032056,-0.0337759857075353,site,1,point_return_fraction_site,structure,6,significant
-fixed,cond,,Intercept,-0.380366462229339,0.0950924100673907,-0.561277363912679,-0.180232757413627,plot,1 + (1 | exclosure_id/cluster_id),mean_point_height_plot,structure,107,significant
-fixed,cond,,Intercept,-0.420133682187314,0.148774249384988,-0.716454820904646,-0.131043884467927,site,1,mean_point_height_site,structure,6,significant
+effect,component,group,term,estimate,std.error,ci_lb,ci_ub,scale,formula,response_name,response_tier,n,sig,percent_change,ci_ub_percent_change,ci_lb_percent_change,clean_response,clean_response_tier
+fixed,cond,,Intercept,0.274471329433988,0.134998934009193,0.00186562920025247,0.525780758609911,plot,1 + (1 | exclosure_id/cluster_id),plant_richness_plot,taxonomic_diversity,107,significant,31.5834847798419,69.1779204052122,0.186737056915676,Plant Richness,"Taxonomic
+Diversity"
+fixed,cond,,Intercept,0.149142424842178,0.133791145820852,-0.133756018157014,0.410073403066912,site,1,plant_richness_site,taxonomic_diversity,6,non-significant,16.0838309648983,50.6928394219033,-12.5196525267807,Plant Richness,"Taxonomic
+Diversity"
+fixed,cond,,Intercept,-0.145862072009415,0.124459469836792,-0.392629018556833,0.10282054254932,plot,1 + (1 | exclosure_id/cluster_id),woody_richness_plot,taxonomic_diversity,78,non-significant,-13.5723097059506,10.8292499882036,-32.4720782817994,Woody Richness,"Taxonomic
+Diversity"
+fixed,cond,,Intercept,-0.213036435583829,0.238016876968703,-0.708621182513123,0.23893970730163,site,1,woody_richness_site,taxonomic_diversity,6,non-significant,-19.1873307887768,26.9901968459267,-50.7677447365737,Woody Richness,"Taxonomic
+Diversity"
+fixed,cond,,Intercept,0.323663060982852,0.175220875592925,-0.033181729698044,0.664197658761369,plot,1 + (1 | exclosure_id/cluster_id),forb_richness_plot,taxonomic_diversity,81,non-significant,38.2181517770466,94.2931002120387,-3.26372549254049,Forb Richness,"Taxonomic
+Diversity"
+fixed,cond,,Intercept,0.306877358457309,0.190599126566065,-0.0861792690084567,0.70689566401135,site,1,forb_richness_site,taxonomic_diversity,6,non-significant,35.9174266621083,102.76868569354,-8.25702502441904,Forb Richness,"Taxonomic
+Diversity"
+fixed,cond,,Intercept,0.342084148216094,0.139700401723827,0.0484023820574194,0.609982499485077,plot,1 + (1 | exclosure_id/cluster_id),graminoid_richness_plot,taxonomic_diversity,66,significant,40.7878763016087,84.039919056631,4.95929077190405,Graminoid Richness,"Taxonomic
+Diversity"
+fixed,cond,,Intercept,0.420154143741668,0.307008331823275,-0.210406347032551,1.03438995022857,site,1,graminoid_richness_site,taxonomic_diversity,6,non-significant,52.2196174549548,181.338940443796,-18.974506562087,Graminoid Richness,"Taxonomic
+Diversity"
+fixed,cond,,Intercept,-0.197925345794241,0.0962149930228506,-0.390237286525525,-0.00900115580223211,plot,1 + (1 | exclosure_id/cluster_id),berger_parker_plot,dominance,108,significant,-17.9568900516234,-0.896076667313628,-32.3103762915867,Plant Dominance,Dominance
+fixed,cond,,Intercept,-0.327809870295812,0.0809020652626447,-0.500762953727267,-0.173066442797715,site,1,berger_parker_site,dominance,6,significant,-27.9500004865718,-15.8918270835149,-39.3931918629522,Plant Dominance,Dominance
+fixed,cond,,Intercept,0.172484046196504,0.211177092921191,-0.25984412843433,0.595834976046104,plot,1 + (1 | exclosure_id/cluster_id),functional_dispersion_plot,functional_diversity,105,non-significant,18.8252863311084,81.4545414554972,-22.8828219811342,Plant Functional Dispersion,"Functional
+Diversity"
+fixed,cond,,Intercept,0.0073416915671112,0.174207950297609,-0.303651594298392,0.320746836349923,site,1,functional_dispersion_site,functional_diversity,6,non-significant,0.736870785926969,37.8156637560991,-26.1882013828157,Plant Functional Dispersion,"Functional
+Diversity"
+fixed,cond,,Intercept,-0.0348311915600484,0.0376477151130278,-0.113241732660067,0.0432091215775832,plot,1 + (1 | exclosure_id/cluster_id),functional_specialization_plot,functional_diversity,105,non-significant,-3.42315676396464,4.41562276183334,-10.7065217475511,Plant Functional Specialization,"Functional
+Diversity"
+fixed,cond,,Intercept,-0.036347072680513,0.0527310086858077,-0.137200838863501,0.0708652631041149,site,1,functional_specialization_site,functional_diversity,6,non-significant,-3.56944487159706,7.34365846109792,-12.8204881792287,Plant Functional Specialization,"Functional
+Diversity"
+fixed,cond,,Intercept,0.134110210664492,0.0735096371828474,-0.0100711697360869,0.285556467448326,plot,1 + (1 | exclosure_id/cluster_id),functional_diversity_plot,functional_diversity,108,non-significant,14.3518840671378,33.0502203326747,-1.0020625328906,Plant Functional Diversity,"Functional
+Diversity"
+fixed,cond,,Intercept,0.114673088731819,0.173421272484151,-0.203698310976472,0.459593547142301,site,1,functional_diversity_site,functional_diversity,6,non-significant,12.1506744445046,58.3430264426369,-18.4291575652318,Plant Functional Diversity,"Functional
+Diversity"
+fixed,cond,,Intercept,-0.359524972298026,0.167704087526574,-0.688684920160695,-0.00801818927065654,plot,1 + (1 | exclosure_id/cluster_id),functional_nearerst_neighbour_distance_plot,functional_diversity,105,significant,-30.1992179618817,-0.798612933583265,-49.7763884445849,Plant Functional Distance,"Functional
+Diversity"
+fixed,cond,,Intercept,-0.123010169516011,0.168603058161975,-0.44986703278358,0.230964341154397,site,1,functional_nearerst_neighbour_distance_site,functional_diversity,6,non-significant,-11.5745329926928,25.9814315124109,-36.2287059100822,Plant Functional Distance,"Functional
+Diversity"
+fixed,cond,,Intercept,0.21340777336269,0.128254494350092,-0.0440743533335904,0.478948435792558,plot,1 + (1 | exclosure_id/cluster_id),plant_evenness_plot,dominance,105,non-significant,23.7889326633377,61.437588939913,-4.31171925986287,Plant Evenness,Dominance
+fixed,cond,,Intercept,0.178439997663799,0.0802213016320484,0.0107854056759373,0.334659693888289,site,1,plant_evenness_site,dominance,6,significant,19.5351157259619,39.7464738502902,1.08437778307742,Plant Evenness,Dominance
+fixed,cond,,Intercept,0.349305962007134,0.173237417021866,-0.00586211894395552,0.671205798530362,plot,1 + (1 | exclosure_id/cluster_id),shannon_diversity_plot,taxonomic_diversity,105,non-significant,41.8083003495463,95.6595158378101,-0.584497025028952,Shannon Diversity,"Taxonomic
+Diversity"
+fixed,cond,,Intercept,0.219822405890259,0.108099154954845,0.00751405764588833,0.437202292667502,site,1,shannon_diversity_site,taxonomic_diversity,6,significant,24.5855454349004,54.8369269126773,0.754235901868094,Shannon Diversity,"Taxonomic
+Diversity"
+fixed,cond,,Intercept,-0.131566228904794,0.0499380785465122,-0.229103903638938,-0.0325638015606323,plot,1 + (1 | exclosure_id/cluster_id),point_return_fraction_plot,structure,107,significant,-12.327879107049,-3.20393095415271,-20.4754099730667,Vegetation Density,"Vegetation
+Structure"
+fixed,cond,,Intercept,-0.142712306333462,0.0539445069172708,-0.251285643412527,-0.0337802891454504,site,1,point_return_fraction_site,structure,6,significant,-13.2996535575407,-3.32161057799322,-22.2199833669036,Vegetation Density,"Vegetation
+Structure"
+fixed,cond,,Intercept,-0.375499889764331,0.0934580409714194,-0.557395247261905,-0.17455349581761,plot,1 + (1 | exclosure_id/cluster_id),mean_point_height_plot,structure,107,significant,-31.3054204225655,-16.0168074468039,-42.7301138342964,Vegetation Height,"Vegetation
+Structure"
+fixed,cond,,Intercept,-0.42157099637255,0.14521936039779,-0.696527998855719,-0.134080024462434,site,1,mean_point_height_site,structure,6,significant,-34.3984587974392,-12.5479921196111,-50.168755488229,Vegetation Height,"Vegetation
+Structure"

@@ -21,34 +21,34 @@ n <- n_distinct(dt_sp$species) #number of species
 #number of breakpoints using Sturges rule
 k <- ceiling(log2(n) + 1)
 
+k = 5
+
 glimpse(dt_traits)
 
 trait_data <- dt_traits %>%
   mutate(leaf_area = ifelse(leaf_type == "a", 0, leaf_area)) %>% # absent leaves have an area of 0... 
   mutate(
-    growth_form = as.factor(growth_form),
+    growth_form = as.factor(growth_form_simple),
     spines = as.factor(spines), 
-    biomass_density = as.factor(biomass_density),
-    leaf_type = as.factor(leaf_type), 
-    
+    biomass_density_ordinal = factor(biomass_density_ordinal,
+                                     levels = sort(unique(biomass_density_ordinal)),
+                                     ordered = TRUE),    leaf_type = as.factor(leaf_type), 
     plant_height_max = as.numeric(plant_height_max), 
     leaf_area = as.numeric(leaf_area)) %>%
-  mutate(height_bin = as.factor(cut_number(plant_height_max, n = k)),
-         leaf_area_bin = as.factor(cut_number(leaf_area, n = k))) %>%
   dplyr::select(species,
-                height_bin, leaf_area_bin,
-                growth_form, spines, biomass_density, leaf_type) %>% 
+                plant_height_max, leaf_area,
+                growth_form, spines, biomass_density_ordinal, leaf_type) %>% 
   unique() %>%
   filter(complete.cases(.))
 
-summary(trait_data)
-unique(trait_data$leaf_area_bin)
+#summary(trait_data)
+#unique(trait_data$leaf_area)
 
 
 ### build trait data frame for functions 
 sp_tr <-  trait_data %>% dplyr::select(species, growth_form,
-                                       leaf_area_bin, height_bin,
-                                       spines, biomass_density, leaf_type) %>% 
+                                       leaf_area, plant_height_max,
+                                       spines, biomass_density_ordinal, leaf_type) %>% 
   filter(complete.cases(.)) %>% 
   remove_rownames %>% 
   column_to_rownames(var="species") 
@@ -56,8 +56,8 @@ sp_tr <-  trait_data %>% dplyr::select(species, growth_form,
 
 ### build trait categories 
 tr_cat <- data.table(
-  trait_name = c("growth_form","leaf_area_bin", "height_bin", "spines", "biomass_density", "leaf_type"), 
-  trait_type = c("N", "N", "N", "N","N", "N"), 
+  trait_name = c("growth_form","leaf_area", "plant_height_max", "spines", "biomass_density_ordinal", "leaf_type"), 
+  trait_type = c("N", "Q", "Q", "N","O", "N"), 
   fuzzy_name = NA
 )
 
@@ -103,6 +103,7 @@ dt_sfd <- alpha_fd_res$asb_fdfe %>%
 
 summary(dt_sfd)
 hist(dt_sfd$fred)
+quantile(dt_sfd$fred, c(seq(0, 1, 0.1)))
 ## distance based functional diversity metrics. 
 
 
@@ -124,9 +125,12 @@ fspaces_quality <- mFD::quality.fspaces(
   sp_dist = fdist,
 )
 
-quality.fspaces.plot(fspaces_quality = fspaces_quality,
+p <- quality.fspaces.plot(fspaces_quality = fspaces_quality,
                      quality_metric = "mad",
-                     fspaces_plot = c("pcoa_3d", "pcoa_4d", "pcoa_5d", "pcoa_6d", "pcoa_7d"))
+                     fspaces_plot = c("pcoa_3d", "pcoa_4d", "pcoa_5d", "pcoa_6d", "pcoa_7d", "pcoa_8d"))
+p
+#ggsave(plot = p, "builds/plots/exploratory/fspaces_quality.png", dpi = 600, height = 8, width = 12)
+
 
 round(fspaces_quality$"quality_fspaces", 3) %>% arrange(mad)
 ### lowest number is the best one

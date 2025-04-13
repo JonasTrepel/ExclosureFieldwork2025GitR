@@ -1,157 +1,289 @@
-effect,component,term,estimate,std.error,statistic,p.value,scale,formula,response_name,response_tier,n,ci_ub,ci_lb,sig
-fixed,cond,addo_jack,0.0388884989716908,0.136127302998754,0.285677436598055,0.775125187791826,plot,setup_id + 0 + (1 | cluster_id),plant_richness_plot,taxonomic_diversity,107,0.305698012849249,-0.227921014905867,non-significant
-fixed,cond,addo_nyathi_full,-0.00304476973896714,0.136127302998757,-0.0223670760522961,0.982155143282243,plot,setup_id + 0 + (1 | cluster_id),plant_richness_plot,taxonomic_diversity,107,0.263764744138596,-0.26985428361653,non-significant
-fixed,cond,knp_nkuhlu_full,0.602148750887479,0.136127302998753,4.42342379245546,9.7148909858219e-06,plot,setup_id + 0 + (1 | cluster_id),plant_richness_plot,taxonomic_diversity,107,0.868958264765036,0.335339237009923,significant
-fixed,cond,knp_roan,0.206973771317186,0.139539989461397,1.48325775368103,0.138005942021556,plot,setup_id + 0 + (1 | cluster_id),plant_richness_plot,taxonomic_diversity,107,0.480472150661524,-0.0665246080271518,non-significant
-fixed,cond,knp_satara,0.429155302680406,0.136127302998767,3.15260269781657,0.00161821888329878,plot,setup_id + 0 + (1 | cluster_id),plant_richness_plot,taxonomic_diversity,107,0.695964816557989,0.162345788802823,significant
-fixed,cond,pnr,0.642494514480192,0.136127302998753,4.71980638950936,2.3606922497215e-06,plot,setup_id + 0 + (1 | cluster_id),plant_richness_plot,taxonomic_diversity,107,0.909304028357748,0.375685000602636,significant
-fixed,cond,addo_jack,0.110836544481104,0.147954476252426,0.749125996647813,0.453781267499801,cluster,setup_id + 0,plant_richness_cluster,taxonomic_diversity,36,0.400827317935858,-0.179154228973651,non-significant
-fixed,cond,addo_nyathi_full,-0.000417188433189196,0.147954476252426,-0.00281970808694851,0.997750201432719,cluster,setup_id + 0,plant_richness_cluster,taxonomic_diversity,36,0.289573585021565,-0.290407961887943,non-significant
-fixed,cond,knp_nkuhlu_full,0.565128030998286,0.147954476252427,3.81960752599412,0.000133664182971654,cluster,setup_id + 0,plant_richness_cluster,taxonomic_diversity,36,0.855118804453042,0.27513725754353,significant
-fixed,cond,knp_roan,-0.084726486090425,0.147954476252426,-0.572652401174216,0.566880071977846,cluster,setup_id + 0,plant_richness_cluster,taxonomic_diversity,36,0.205264287364329,-0.374717259545179,non-significant
-fixed,cond,knp_satara,0.255888323333569,0.147954476252425,1.72950714175756,0.0837183694144194,cluster,setup_id + 0,plant_richness_cluster,taxonomic_diversity,36,0.545879096788323,-0.0341024501211842,non-significant
-fixed,cond,pnr,0.608587277905007,0.147954476252426,4.11334143663686,3.89972934254624e-05,cluster,setup_id + 0,plant_richness_cluster,taxonomic_diversity,36,0.898578051359761,0.318596504450253,significant
-fixed,cond,addo_jack,-0.205515568694735,0.131852037498841,-1.55868329828837,0.119071356709284,plot,setup_id + 0 + (1 | cluster_id),woody_richness_plot,taxonomic_diversity,78,0.0529144248029932,-0.463945562192463,non-significant
-fixed,cond,addo_nyathi_full,-0.201373316737322,0.135909969384948,-1.48166700094647,0.138428921652763,plot,setup_id + 0 + (1 | cluster_id),woody_richness_plot,taxonomic_diversity,78,0.0650102232571757,-0.46775685673182,non-significant
-fixed,cond,knp_nkuhlu_full,0.0614236698970556,0.150778573359084,0.407376648608906,0.683731374989844,plot,setup_id + 0 + (1 | cluster_id),woody_richness_plot,taxonomic_diversity,78,0.356949673680859,-0.234102333886748,non-significant
-fixed,cond,knp_roan,-0.626759008578829,0.150778573367709,-4.15681747465756,3.22711612554919e-05,plot,setup_id + 0 + (1 | cluster_id),woody_richness_plot,taxonomic_diversity,78,-0.33123300477812,-0.922285012379538,significant
-fixed,cond,knp_satara,2.07609722840236e-09,0.192205721924263,1.08014330042704e-08,0.999999991381703,plot,setup_id + 0 + (1 | cluster_id),woody_richness_plot,taxonomic_diversity,78,0.376723217047652,-0.376723212895458,non-significant
-fixed,cond,pnr,0.215193056137727,0.16391359041011,1.31284450300501,0.189235350586096,plot,setup_id + 0 + (1 | cluster_id),woody_richness_plot,taxonomic_diversity,78,0.536463693341543,-0.106077581066088,non-significant
-fixed,cond,addo_jack,-0.141464237190642,0.224663116365377,-0.629672727233848,0.528908729731806,cluster,setup_id + 0,woody_richness_cluster,taxonomic_diversity,32,0.298875470885496,-0.581803945266781,non-significant
-fixed,cond,addo_nyathi_full,-0.157410311051367,0.205088427787876,-0.767524100453765,0.442769969686172,cluster,setup_id + 0,woody_richness_cluster,taxonomic_diversity,32,0.244563007412871,-0.559383629515604,non-significant
-fixed,cond,knp_nkuhlu_full,0.139520313329987,0.224663116365377,0.621020110408692,0.534586391425537,cluster,setup_id + 0,woody_richness_cluster,taxonomic_diversity,32,0.579860021406126,-0.300819394746151,non-significant
-fixed,cond,knp_roan,-0.653533184000614,0.224663116365377,-2.90894738118807,0.00362647891374169,cluster,setup_id + 0,woody_richness_cluster,taxonomic_diversity,32,-0.213193475924475,-1.09387289207675,significant
-fixed,cond,knp_satara,-0.151537130703336,0.224663116365379,-0.674508273342404,0.499988227629634,cluster,setup_id + 0,woody_richness_cluster,taxonomic_diversity,32,0.288802577372808,-0.591876838779479,non-significant
-fixed,cond,pnr,0.404760793788404,0.205088427787875,1.9735915778098,0.0484282021759529,cluster,setup_id + 0,woody_richness_cluster,taxonomic_diversity,32,0.806734112252639,0.00278747532416923,significant
-fixed,cond,addo_jack,0.165950283122343,0.215372940377867,0.770525223972831,0.440988398340445,plot,setup_id + 0 + (1 | cluster_id),forb_richness_plot,taxonomic_diversity,81,0.588081246262963,-0.256180680018276,non-significant
-fixed,cond,addo_nyathi_full,0.0602804146911022,0.221647323218619,0.27196545311601,0.785648582861193,plot,setup_id + 0 + (1 | cluster_id),forb_richness_plot,taxonomic_diversity,81,0.494709168199595,-0.37414833881739,non-significant
-fixed,cond,knp_nkuhlu_full,0.766210840032636,0.209783671408277,3.6523855021178,0.000259815452622594,plot,setup_id + 0 + (1 | cluster_id),forb_richness_plot,taxonomic_diversity,81,1.17738683599286,0.355034844072413,significant
-fixed,cond,knp_roan,0.240655438007557,0.227781104823322,1.05652063718903,0.290730417440543,plot,setup_id + 0 + (1 | cluster_id),forb_richness_plot,taxonomic_diversity,81,0.687106403461267,-0.205795527446154,non-significant
-fixed,cond,knp_satara,0.368731746482851,0.236100008267529,1.56176083681045,0.118344340961479,plot,setup_id + 0 + (1 | cluster_id),forb_richness_plot,taxonomic_diversity,81,0.831487762687208,-0.0940242697215056,non-significant
-fixed,cond,pnr,0.629748577567346,0.342546822751669,1.83843064871714,0.065998972350321,plot,setup_id + 0 + (1 | cluster_id),forb_richness_plot,taxonomic_diversity,81,1.30114035016062,-0.0416431950259242,non-significant
-fixed,cond,addo_jack,0.266565145427655,0.242420674172847,1.09959740990404,0.271507570991609,cluster,setup_id + 0,forb_richness_cluster,taxonomic_diversity,31,0.741709666806435,-0.208579375951126,non-significant
-fixed,cond,addo_nyathi_full,0.134034934815974,0.242420674172861,0.552902244304454,0.58033035056589,cluster,setup_id + 0,forb_richness_cluster,taxonomic_diversity,31,0.609179456194782,-0.341109586562834,non-significant
-fixed,cond,knp_nkuhlu_full,0.625673485548698,0.242420674172817,2.58094111685651,0.0098531386233757,cluster,setup_id + 0,forb_richness_cluster,taxonomic_diversity,31,1.10081800692742,0.150528964169976,significant
-fixed,cond,knp_roan,0.389181521001851,0.265558543300145,1.46552061991838,0.142778930822506,cluster,setup_id + 0,forb_richness_cluster,taxonomic_diversity,31,0.909676265870134,-0.131313223866433,non-significant
-fixed,cond,knp_satara,0.68390904076524,0.265558543300122,2.57536071807834,0.0100135594319299,cluster,setup_id + 0,forb_richness_cluster,taxonomic_diversity,31,1.20440378563348,0.163414295897002,significant
-fixed,cond,pnr,0.5579917229617,0.342834605214829,1.62758284745511,0.103613368569145,cluster,setup_id + 0,forb_richness_cluster,taxonomic_diversity,31,1.22994754918277,-0.113964103259366,non-significant
-fixed,cond,addo_jack,0.231049060555276,0.394065913112866,0.586320848535561,0.557659923262689,plot,setup_id + 0 + (1 | cluster_id),graminoid_richness_plot,taxonomic_diversity,66,1.00341825025649,-0.541320129145942,non-significant
-fixed,cond,addo_nyathi_full,-0.138629436415182,0.305242143799678,-0.454162176590402,0.64971210425792,plot,setup_id + 0 + (1 | cluster_id),graminoid_richness_plot,taxonomic_diversity,66,0.459645165432186,-0.736904038262551,non-significant
-fixed,cond,knp_nkuhlu_full,0.738307102589601,0.176231633973944,4.18941302387719,2.79676951395658e-05,plot,setup_id + 0 + (1 | cluster_id),graminoid_richness_plot,taxonomic_diversity,66,1.08372110517853,0.39289310000067,significant
-fixed,cond,knp_roan,0.342445031034846,0.165540795079954,2.06864435361356,0.0385794725780418,plot,setup_id + 0 + (1 | cluster_id),graminoid_richness_plot,taxonomic_diversity,66,0.666904989391555,0.0179850726781367,significant
-fixed,cond,knp_satara,0.361296469565839,0.17063554586588,2.11735759822176,0.0342295099556545,plot,setup_id + 0 + (1 | cluster_id),graminoid_richness_plot,taxonomic_diversity,66,0.695742139462964,0.0268507996687137,significant
-fixed,cond,pnr,0.259026716436831,0.215838789848074,1.20009344297731,0.230103051831799,plot,setup_id + 0 + (1 | cluster_id),graminoid_richness_plot,taxonomic_diversity,66,0.682070744539057,-0.164017311665395,non-significant
-fixed,cond,addo_jack,0.895879411601597,0.417152952737426,2.14760414788554,0.0317452156370605,cluster,setup_id + 0,graminoid_richness_cluster,taxonomic_diversity,23,1.71349919896695,0.0782596242362414,significant
-fixed,cond,addo_nyathi_full,0.274653514303275,0.294971681672652,0.931118244116986,0.351792402271752,cluster,setup_id + 0,graminoid_richness_cluster,taxonomic_diversity,23,0.852798010381673,-0.303490981775124,non-significant
-fixed,cond,knp_nkuhlu_full,0.923518548702273,0.263830692662957,3.50042119580858,0.000464523559106584,cluster,setup_id + 0,graminoid_richness_cluster,taxonomic_diversity,23,1.44062670632167,0.406410391082877,significant
-fixed,cond,knp_roan,0.218867660479074,0.294971681672651,0.74199550017132,0.458090061952808,cluster,setup_id + 0,graminoid_richness_cluster,taxonomic_diversity,23,0.797012156557471,-0.359276835599322,non-significant
-fixed,cond,knp_satara,0.321887649031142,0.263830692662964,1.22005383749018,0.22244446651009,cluster,setup_id + 0,graminoid_richness_cluster,taxonomic_diversity,23,0.838995806650551,-0.195220508588268,non-significant
-fixed,cond,pnr,1.35519884477307e-07,0.340603959634009,3.97881118654426e-07,0.999999682536798,cluster,setup_id + 0,graminoid_richness_cluster,taxonomic_diversity,23,0.667583896402542,-0.667583625362774,non-significant
-fixed,cond,addo_jack,0.0495031732088885,0.146529821865204,0.33783684835451,0.735486139812846,plot,setup_id + 0 + (1 | cluster_id),berger_parker_plot,dominance,108,0.336701624064689,-0.237695277646912,non-significant
-fixed,cond,addo_nyathi_full,-0.181446023440664,0.146529821865202,-1.23828734063147,0.215609536097528,plot,setup_id + 0 + (1 | cluster_id),berger_parker_plot,dominance,108,0.105752427415132,-0.46864447429646,non-significant
-fixed,cond,knp_nkuhlu_full,-0.342990873878195,0.146529821865203,-2.340758144057,0.019244629230463,plot,setup_id + 0 + (1 | cluster_id),berger_parker_plot,dominance,108,-0.0557924230223976,-0.630189324733993,significant
-fixed,cond,knp_roan,-0.402075187818322,0.146529821865202,-2.74398196012416,0.00606988734604337,plot,setup_id + 0 + (1 | cluster_id),berger_parker_plot,dominance,108,-0.114876736962525,-0.689273638674118,significant
-fixed,cond,knp_satara,-0.0498735618990646,0.146529821865202,-0.340364584247874,0.733581985914418,plot,setup_id + 0 + (1 | cluster_id),berger_parker_plot,dominance,108,0.237324888956732,-0.337072012754861,non-significant
-fixed,cond,pnr,-0.281397439737856,0.146529821865203,-1.9204107133681,0.0548060413705275,plot,setup_id + 0 + (1 | cluster_id),berger_parker_plot,dominance,108,0.0058010111179429,-0.568595890593654,non-significant
-fixed,cond,addo_jack,-0.0446186096321666,0.174665103065742,-0.25545234193331,0.798373748344348,cluster,setup_id + 0,berger_parker_cluster,dominance,36,0.297724992376687,-0.38696221164102,non-significant
-fixed,cond,addo_nyathi_full,-0.260528683233918,0.174665103065743,-1.49158978331153,0.135806718176306,cluster,setup_id + 0,berger_parker_cluster,dominance,36,0.0818149187749382,-0.602872285242773,non-significant
-fixed,cond,knp_nkuhlu_full,-0.196476339002726,0.174665103065741,-1.12487460605554,0.260642174118266,cluster,setup_id + 0,berger_parker_cluster,dominance,36,0.145867263006126,-0.538819941011577,non-significant
-fixed,cond,knp_roan,-0.316853484377984,0.174665103065741,-1.81406290562074,0.0696680416290732,cluster,setup_id + 0,berger_parker_cluster,dominance,36,0.0254901176308687,-0.659197086386838,non-significant
-fixed,cond,knp_satara,-0.200067433458177,0.174665103065743,-1.14543449118667,0.252029217451582,cluster,setup_id + 0,berger_parker_cluster,dominance,36,0.142276168550679,-0.542411035467033,non-significant
-fixed,cond,pnr,-0.302316553073952,0.174665103065741,-1.73083545463667,0.0834811163539004,cluster,setup_id + 0,berger_parker_cluster,dominance,36,0.0400270489348999,-0.644660155082804,non-significant
-fixed,cond,addo_jack,-0.0639922259399391,0.192796232024912,-0.331916372368058,0.739952407217768,plot,setup_id + 0 + (1 | cluster_id),functional_dispersion_plot,functional_diversity,105,0.313888388828888,-0.441872840708766,non-significant
-fixed,cond,addo_nyathi_full,0.0744559424409659,0.192796232024911,0.386189821548719,0.699356091377994,plot,setup_id + 0 + (1 | cluster_id),functional_dispersion_plot,functional_diversity,105,0.452336557209792,-0.30342467232786,non-significant
-fixed,cond,knp_nkuhlu_full,-0.12057026144011,0.192796232024913,-0.625376648567122,0.531723884480204,plot,setup_id + 0 + (1 | cluster_id),functional_dispersion_plot,functional_diversity,105,0.257310353328721,-0.49845087620894,non-significant
-fixed,cond,knp_roan,0.424612177859131,0.192796232024909,2.20238836308933,0.0276378871777205,plot,setup_id + 0 + (1 | cluster_id),functional_dispersion_plot,functional_diversity,105,0.802492792627953,0.0467315630903089,significant
-fixed,cond,knp_satara,-0.208005164477025,0.203045213783286,-1.02442781389091,0.305633250231791,plot,setup_id + 0 + (1 | cluster_id),functional_dispersion_plot,functional_diversity,105,0.189963454538216,-0.605973783492266,non-significant
-fixed,cond,pnr,1.05656958190365,0.197628491638403,5.34624118791957,8.97995311722467e-08,plot,setup_id + 0 + (1 | cluster_id),functional_dispersion_plot,functional_diversity,105,1.44392142551492,0.66921773829238,significant
-fixed,cond,addo_jack,-0.0603314817915958,0.184819318997825,-0.32643493179577,0.744095311961335,cluster,setup_id + 0,functional_dispersion_cluster,functional_diversity,36,0.301914383444142,-0.422577347027333,non-significant
-fixed,cond,addo_nyathi_full,0.0571138642483933,0.184819318997825,0.309025401446616,0.75730220431856,cluster,setup_id + 0,functional_dispersion_cluster,functional_diversity,36,0.419359729484131,-0.305132000987345,non-significant
-fixed,cond,knp_nkuhlu_full,-0.0878356000412886,0.184819318997825,-0.475251183250612,0.634607949396876,cluster,setup_id + 0,functional_dispersion_cluster,functional_diversity,36,0.274410265194448,-0.450081465277026,non-significant
-fixed,cond,knp_roan,-0.0797033604167633,0.184819318997824,-0.431250157445401,0.666286487284546,cluster,setup_id + 0,functional_dispersion_cluster,functional_diversity,36,0.282542504818971,-0.441949225652498,non-significant
-fixed,cond,knp_satara,-0.176532439531148,0.184819318997825,-0.955162265981649,0.339495644770253,cluster,setup_id + 0,functional_dispersion_cluster,functional_diversity,36,0.185713425704589,-0.538778304766885,non-significant
-fixed,cond,pnr,0.691135288063465,0.184819318997825,3.7395186380467,0.000184372978164089,cluster,setup_id + 0,functional_dispersion_cluster,functional_diversity,36,1.0533811532992,0.328889422827728,significant
-fixed,cond,addo_jack,-0.087872429784823,0.0393298933052535,-2.23424022798163,0.0254672708366267,plot,setup_id + 0 + (1 | cluster_id),functional_specialization_plot,functional_diversity,105,-0.0107858389065261,-0.16495902066312,significant
-fixed,cond,addo_nyathi_full,-0.0104715030713078,0.039329893305278,-0.266247939958244,0.790048264243017,plot,setup_id + 0 + (1 | cluster_id),functional_specialization_plot,functional_diversity,105,0.0666150878070372,-0.0875580939496527,non-significant
-fixed,cond,knp_nkuhlu_full,-0.151456039914666,0.0393298933052582,-3.85091408052249,0.000117677781435029,plot,setup_id + 0 + (1 | cluster_id),functional_specialization_plot,functional_diversity,105,-0.07436944903636,-0.228542630792972,significant
-fixed,cond,knp_roan,-0.0801919547978385,0.0393298933052643,-2.03895683559113,0.0414543357016906,plot,setup_id + 0 + (1 | cluster_id),functional_specialization_plot,functional_diversity,105,-0.00310536391952043,-0.157278545676157,significant
-fixed,cond,knp_satara,0.0138541811549448,0.0410619342436035,0.337397188178074,0.735817504027538,plot,setup_id + 0 + (1 | cluster_id),functional_specialization_plot,functional_diversity,105,0.0943355722724076,-0.066627209962518,non-significant
-fixed,cond,pnr,0.0762423453600484,0.0401617124111966,1.89838382834475,0.0576455383524959,plot,setup_id + 0 + (1 | cluster_id),functional_specialization_plot,functional_diversity,105,0.154959301685994,-0.00247461096589695,non-significant
-fixed,cond,addo_jack,-0.0936780018443027,0.0467956290628607,-2.00185367138595,0.0453004715695862,cluster,setup_id + 0,functional_specialization_cluster,functional_diversity,36,-0.00195856888109572,-0.18539743480751,significant
-fixed,cond,addo_nyathi_full,-0.0205306918622896,0.0467956290628607,-0.438730972816087,0.660856481747072,cluster,setup_id + 0,functional_specialization_cluster,functional_diversity,36,0.0711887411009173,-0.112250124825497,non-significant
-fixed,cond,knp_nkuhlu_full,-0.11006508670466,0.0467956290628606,-2.35203776311692,0.018670879318944,cluster,setup_id + 0,functional_specialization_cluster,functional_diversity,36,-0.0183456537414532,-0.201784519667867,significant
-fixed,cond,knp_roan,-0.0914148384766657,0.0467956290628607,-1.95349096288177,0.050761447088921,cluster,setup_id + 0,functional_specialization_cluster,functional_diversity,36,0.000304594486541299,-0.183134271439873,non-significant
-fixed,cond,knp_satara,0.0257294080479192,0.0467956290628607,0.549825027746862,0.58243939066892,cluster,setup_id + 0,functional_specialization_cluster,functional_diversity,36,0.117448841011126,-0.0659900249152877,non-significant
-fixed,cond,pnr,0.0821886863224795,0.0467956290628607,1.75633254576138,0.0790316432092975,cluster,setup_id + 0,functional_specialization_cluster,functional_diversity,36,0.173908119285686,-0.00953074664072745,non-significant
-fixed,cond,addo_jack,0.032620296310069,0.0961579869321401,0.339236472713282,0.734431595307428,plot,setup_id + 0 + (1 | cluster_id),functional_diversity_plot,functional_diversity,108,0.221089950697063,-0.155849358076925,non-significant
-fixed,cond,addo_nyathi_full,0.169708711931069,0.096157986932089,1.76489460049663,0.0775814813393132,plot,setup_id + 0 + (1 | cluster_id),functional_diversity_plot,functional_diversity,108,0.358178366317964,-0.0187609424558251,non-significant
-fixed,cond,knp_nkuhlu_full,0.0435417077811274,0.0961579869321254,0.452814260887782,0.650682493779297,plot,setup_id + 0 + (1 | cluster_id),functional_diversity_plot,functional_diversity,108,0.232011362168093,-0.144927946605838,non-significant
-fixed,cond,knp_roan,0.134016382047977,0.0961579869321167,1.39371035442523,0.163405088174578,plot,setup_id + 0 + (1 | cluster_id),functional_diversity_plot,functional_diversity,108,0.322486036434926,-0.0544532723389714,non-significant
-fixed,cond,knp_satara,-0.0106478098338907,0.0961579869321066,-0.11073245367968,0.911828509912828,plot,setup_id + 0 + (1 | cluster_id),functional_diversity_plot,functional_diversity,108,0.177821844553038,-0.19911746422082,non-significant
-fixed,cond,pnr,0.402231663751644,0.0961579869320864,4.18302916465721,2.87650473868324e-05,plot,setup_id + 0 + (1 | cluster_id),functional_diversity_plot,functional_diversity,108,0.590701318138534,0.213762009364755,significant
-fixed,cond,addo_jack,0.074643442154925,0.11287084367615,0.661317305017162,0.508408845966545,cluster,setup_id + 0,functional_diversity_cluster,functional_diversity,36,0.295870295760179,-0.146583411450329,non-significant
-fixed,cond,addo_nyathi_full,0.19771479276798,0.112870843676151,1.75169057241447,0.0798270288519474,cluster,setup_id + 0,functional_diversity_cluster,functional_diversity,36,0.418941646373236,-0.0235120608372749,non-significant
-fixed,cond,knp_nkuhlu_full,-0.0506855912434875,0.11287084367615,-0.449058318274959,0.653389587665774,cluster,setup_id + 0,functional_diversity_cluster,functional_diversity,36,0.170541262361766,-0.271912444848741,non-significant
-fixed,cond,knp_roan,-0.062364074283698,0.11287084367615,-0.552525986805178,0.580588035059602,cluster,setup_id + 0,functional_diversity_cluster,functional_diversity,36,0.158862779321557,-0.283590927888953,non-significant
-fixed,cond,knp_satara,-0.0337959045578924,0.11287084367615,-0.299421032546366,0.764618816217106,cluster,setup_id + 0,functional_diversity_cluster,functional_diversity,36,0.187430949047362,-0.255022758163147,non-significant
-fixed,cond,pnr,0.404355916950748,0.112870843676151,3.58246561982763,0.000340366423182352,cluster,setup_id + 0,functional_diversity_cluster,functional_diversity,36,0.625582770556003,0.183129063345493,significant
-fixed,cond,addo_jack,-0.154310267310964,0.193525849638881,-0.797362562153357,0.425240495550751,plot,setup_id + 0 + (1 | cluster_id),functional_nearerst_neighbour_distance_plot,functional_diversity,105,0.225000397981244,-0.533620932603171,non-significant
-fixed,cond,addo_nyathi_full,0.023948197730147,0.193525849638878,0.123746764449476,0.901515783519923,plot,setup_id + 0 + (1 | cluster_id),functional_nearerst_neighbour_distance_plot,functional_diversity,105,0.403258863022347,-0.355362467562053,non-significant
-fixed,cond,knp_nkuhlu_full,-0.633499859228517,0.193525849638877,-3.27346377969993,0.00106238005433383,plot,setup_id + 0 + (1 | cluster_id),functional_nearerst_neighbour_distance_plot,functional_diversity,105,-0.254189193936319,-1.01281052452072,significant
-fixed,cond,knp_roan,-0.476165255927413,0.193525849638877,-2.4604736618697,0.0138753755963447,plot,setup_id + 0 + (1 | cluster_id),functional_nearerst_neighbour_distance_plot,functional_diversity,105,-0.0968545906352139,-0.855475921219612,significant
-fixed,cond,knp_satara,-0.997246077290939,0.20526516089272,-4.85833091672162,1.18379439707491e-06,plot,setup_id + 0 + (1 | cluster_id),functional_nearerst_neighbour_distance_plot,functional_diversity,105,-0.594926361941208,-1.39956579264067,significant
-fixed,cond,pnr,-0.261989765836968,0.199136456394413,-1.31562934572898,0.18829847901034,plot,setup_id + 0 + (1 | cluster_id),functional_nearerst_neighbour_distance_plot,functional_diversity,105,0.128317688696081,-0.652297220370016,non-significant
-fixed,cond,addo_jack,-0.279927024140194,0.293988461760036,-0.952170103766456,0.341010720300173,cluster,setup_id + 0,functional_nearerst_neighbour_distance_cluster,functional_diversity,36,0.296290360909476,-0.856144409189865,non-significant
-fixed,cond,addo_nyathi_full,-0.0541134927197964,0.293988461760037,-0.184066722876919,0.853961111703751,cluster,setup_id + 0,functional_nearerst_neighbour_distance_cluster,functional_diversity,36,0.522103892329875,-0.630330877769468,non-significant
-fixed,cond,knp_nkuhlu_full,-0.522773888458961,0.29398846176004,-1.77821226496182,0.0753689993073595,cluster,setup_id + 0,functional_nearerst_neighbour_distance_cluster,functional_diversity,36,0.0534434965907177,-1.09899127350864,non-significant
-fixed,cond,knp_roan,-0.366415163295114,0.293988461760037,-1.24635899348388,0.212632628709386,cluster,setup_id + 0,functional_nearerst_neighbour_distance_cluster,functional_diversity,36,0.209802221754559,-0.942632548344787,non-significant
-fixed,cond,knp_satara,-0.783737938515416,0.293988461760032,-2.66587992543443,0.00767871134047403,cluster,setup_id + 0,functional_nearerst_neighbour_distance_cluster,functional_diversity,36,-0.207520553465754,-1.35995532356508,significant
-fixed,cond,pnr,-0.0564472887718855,0.293988461760035,-0.192005116234663,0.847738197815608,cluster,setup_id + 0,functional_nearerst_neighbour_distance_cluster,functional_diversity,36,0.519770096277783,-0.632664673821554,non-significant
-fixed,cond,addo_jack,-0.0209782454801408,0.143827576179203,-0.145856907537695,0.884034350497441,plot,setup_id + 0 + (1 | cluster_id),plant_evenness_plot,dominance,105,0.260923803831097,-0.302880294791379,non-significant
-fixed,cond,addo_nyathi_full,0.0488142050664457,0.143827576179203,0.339393921271573,0.734312997258463,plot,setup_id + 0 + (1 | cluster_id),plant_evenness_plot,dominance,105,0.330716254377684,-0.233087844244793,non-significant
-fixed,cond,knp_nkuhlu_full,0.153823937152614,0.143827576179202,1.06950239473519,0.284843350358835,plot,setup_id + 0 + (1 | cluster_id),plant_evenness_plot,dominance,105,0.435725986463849,-0.128078112158621,non-significant
-fixed,cond,knp_roan,0.572473772686329,0.143827576179203,3.98027824631524,6.88346506289904e-05,plot,setup_id + 0 + (1 | cluster_id),plant_evenness_plot,dominance,105,0.854375821997567,0.290571723375091,significant
-fixed,cond,knp_satara,0.0337256899069494,0.152552181630487,0.221076418222848,0.82503293151592,plot,setup_id + 0 + (1 | cluster_id),plant_evenness_plot,dominance,105,0.332727965902704,-0.265276586088805,non-significant
-fixed,cond,pnr,0.620558420929078,0.147997354903481,4.1930372426844,2.7524423405753e-05,plot,setup_id + 0 + (1 | cluster_id),plant_evenness_plot,dominance,105,0.910633236539901,0.330483605318255,significant
-fixed,cond,addo_jack,-0.00672853120280501,0.131364893095643,-0.0512201627409397,0.959150085387351,cluster,setup_id + 0,plant_evenness_cluster,dominance,36,0.250746659264656,-0.264203721670266,non-significant
-fixed,cond,addo_nyathi_full,0.094908124057894,0.131364893095643,0.72247707756131,0.470001213451873,cluster,setup_id + 0,plant_evenness_cluster,dominance,36,0.352383314525354,-0.162567066409566,non-significant
-fixed,cond,knp_nkuhlu_full,0.120399769438524,0.131364893095642,0.916529268979537,0.35938936325722,cluster,setup_id + 0,plant_evenness_cluster,dominance,36,0.377874959905982,-0.137075421028935,non-significant
-fixed,cond,knp_roan,0.348845668114281,0.131364893095641,2.65554715490311,0.00791798625215679,cluster,setup_id + 0,plant_evenness_cluster,dominance,36,0.606320858581738,0.0913704776468243,significant
-fixed,cond,knp_satara,0.116226112298597,0.131364893095643,0.884757788475312,0.376287280412741,cluster,setup_id + 0,plant_evenness_cluster,dominance,36,0.373701302766057,-0.141249078168863,non-significant
-fixed,cond,pnr,0.381644054465869,0.131364893095643,2.90522106380434,0.00366993797386244,cluster,setup_id + 0,plant_evenness_cluster,dominance,36,0.63911924493333,0.124168863998408,significant
-fixed,cond,addo_jack,-0.00597098166655388,0.178993558806949,-0.0333586398658836,0.973388591897211,plot,setup_id + 0 + (1 | cluster_id),shannon_diversity_plot,taxonomic_diversity,105,0.344856393595067,-0.356798356928175,non-significant
-fixed,cond,addo_nyathi_full,0.0573258942231441,0.178993558806949,0.320267916930867,0.748765241871114,plot,setup_id + 0 + (1 | cluster_id),shannon_diversity_plot,taxonomic_diversity,105,0.408153269484764,-0.293501481038475,non-significant
-fixed,cond,knp_nkuhlu_full,0.438722774952939,0.178993558806951,2.45105342268831,0.0142438811265782,plot,setup_id + 0 + (1 | cluster_id),shannon_diversity_plot,taxonomic_diversity,105,0.789550150214563,0.087895399691315,significant
-fixed,cond,knp_roan,0.700205408403101,0.178993558806949,3.91190282527594,9.15717595560091e-05,plot,setup_id + 0 + (1 | cluster_id),shannon_diversity_plot,taxonomic_diversity,105,1.05103278366472,0.34937803314148,significant
-fixed,cond,knp_satara,0.190498493833925,0.18985134042301,1.00340873764427,0.315663689999492,plot,setup_id + 0 + (1 | cluster_id),shannon_diversity_plot,taxonomic_diversity,105,0.562607121063024,-0.181610133395175,non-significant
-fixed,cond,pnr,1.0048316525777,0.184182852301827,5.45561999947231,4.88022603105935e-08,plot,setup_id + 0 + (1 | cluster_id),shannon_diversity_plot,taxonomic_diversity,105,1.36583004308929,0.643833262066122,significant
-fixed,cond,addo_jack,0.0302448347220902,0.143287715528634,0.211077653171505,0.832826677569109,cluster,setup_id + 0,shannon_diversity_cluster,taxonomic_diversity,36,0.311088757158212,-0.250599087714032,non-significant
-fixed,cond,addo_nyathi_full,0.0988581704985868,0.143287715528634,0.689927745263213,0.490239626834513,cluster,setup_id + 0,shannon_diversity_cluster,taxonomic_diversity,36,0.379702092934708,-0.181985751937535,non-significant
-fixed,cond,knp_nkuhlu_full,0.312405801047854,0.143287715528635,2.1802692568256,0.0292375085256837,cluster,setup_id + 0,shannon_diversity_cluster,taxonomic_diversity,36,0.593249723483978,0.0315618786117298,significant
-fixed,cond,knp_roan,0.308854806359998,0.143287715528635,2.15548698798451,0.0311237457767086,cluster,setup_id + 0,shannon_diversity_cluster,taxonomic_diversity,36,0.589698728796123,0.0280108839238741,significant
-fixed,cond,knp_satara,0.225607746417428,0.143287715528633,1.57450864217557,0.115369905159714,cluster,setup_id + 0,shannon_diversity_cluster,taxonomic_diversity,36,0.506451668853549,-0.055236176018693,non-significant
-fixed,cond,pnr,0.665543167419575,0.143287715528633,4.6448026961989,3.40401617278877e-06,cluster,setup_id + 0,shannon_diversity_cluster,taxonomic_diversity,36,0.946387089855696,0.384699244983455,significant
-fixed,cond,addo_jack,-0.287053076101642,0.0555089890279558,-5.17128993210586,2.32483525017276e-07,plot,setup_id + 0 + (1 | cluster_id),point_return_fraction_plot,structure,107,-0.178255457606849,-0.395850694596435,significant
-fixed,cond,addo_nyathi_full,-0.171930999985865,0.0539450407927821,-3.18715117199188,0.0014368165600748,plot,setup_id + 0 + (1 | cluster_id),point_return_fraction_plot,structure,107,-0.0661987200320123,-0.277663279939718,significant
-fixed,cond,knp_nkuhlu_full,-0.126169094906366,0.0539450407927814,-2.33884511073073,0.0193434510960765,plot,setup_id + 0 + (1 | cluster_id),point_return_fraction_plot,structure,107,-0.0204368149525148,-0.231901374860218,significant
-fixed,cond,knp_roan,-0.0726025393064483,0.0539450407927816,-1.34586123653767,0.178347272102959,plot,setup_id + 0 + (1 | cluster_id),point_return_fraction_plot,structure,107,0.0331297406474037,-0.1783348192603,non-significant
-fixed,cond,knp_satara,-0.0247456461707035,0.0539450407927816,-0.458719574719734,0.64643555536802,plot,setup_id + 0 + (1 | cluster_id),point_return_fraction_plot,structure,107,0.0809866337831485,-0.130477926124555,non-significant
-fixed,cond,pnr,-0.0905877029508243,0.0539450407927814,-1.67925914262996,0.0931015500279646,plot,setup_id + 0 + (1 | cluster_id),point_return_fraction_plot,structure,107,0.0151445770030273,-0.196319982904676,non-significant
-fixed,cond,addo_jack,-0.274889188654253,0.0507916727304077,-5.41209166536632,6.22927847560036e-08,cluster,setup_id + 0,point_return_fraction_cluster,structure,36,-0.175337510102654,-0.374440867205852,significant
-fixed,cond,addo_nyathi_full,-0.170656899804075,0.0507916727304075,-3.35993856138365,0.000779598073957623,cluster,setup_id + 0,point_return_fraction_cluster,structure,36,-0.071105221252476,-0.270208578355673,significant
-fixed,cond,knp_nkuhlu_full,-0.121761124909151,0.0507916727304078,-2.39726550364732,0.0165179499898907,cluster,setup_id + 0,point_return_fraction_cluster,structure,36,-0.0222094463575517,-0.22131280346075,significant
-fixed,cond,knp_roan,-0.0658066310914246,0.0507916727304078,-1.29561850503946,0.19510695052515,cluster,setup_id + 0,point_return_fraction_cluster,structure,36,0.0337450474601747,-0.165358309643024,non-significant
-fixed,cond,knp_satara,-0.0299308750600543,0.050791672730408,-0.589287051421233,0.555668729557416,cluster,setup_id + 0,point_return_fraction_cluster,structure,36,0.0696208034915453,-0.129482553611654,non-significant
-fixed,cond,pnr,-0.0783235610123016,0.0507916727304078,-1.54205515986897,0.123060190042516,cluster,setup_id + 0,point_return_fraction_cluster,structure,36,0.0212281175392977,-0.177875239563901,non-significant
-fixed,cond,addo_jack,-0.349853047509519,0.110527146301724,-3.1653133118489,0.0015491603864694,plot,setup_id + 0 + (1 | cluster_id),mean_point_height_plot,structure,107,-0.133219840758139,-0.566486254260899,significant
-fixed,cond,addo_nyathi_full,-0.247213931040568,0.107940232465735,-2.29028533099597,0.0220047816075366,plot,setup_id + 0 + (1 | cluster_id),mean_point_height_plot,structure,107,-0.035651075407727,-0.458776786673409,significant
-fixed,cond,knp_nkuhlu_full,-0.564570628324774,0.107940232465734,-5.23040033755717,1.69143344668601e-07,plot,setup_id + 0 + (1 | cluster_id),mean_point_height_plot,structure,107,-0.353007772691936,-0.776133483957613,significant
-fixed,cond,knp_roan,-0.696913082898141,0.107940232465734,-6.45647194728232,1.07172036822176e-10,plot,setup_id + 0 + (1 | cluster_id),mean_point_height_plot,structure,107,-0.485350227265303,-0.908475938530979,significant
-fixed,cond,knp_satara,-0.336934338742226,0.107940232465734,-3.12148983789883,0.00179938458080504,plot,setup_id + 0 + (1 | cluster_id),mean_point_height_plot,structure,107,-0.125371483109388,-0.548497194375065,significant
-fixed,cond,pnr,-0.174284631147173,0.107940232465735,-1.61464013154223,0.106388649370291,plot,setup_id + 0 + (1 | cluster_id),mean_point_height_plot,structure,107,0.0372782244856668,-0.385847486780012,non-significant
-fixed,cond,addo_jack,-0.328792450927852,0.107003399224418,-3.07272902833934,0.00212110997120825,cluster,setup_id + 0,mean_point_height_cluster,structure,36,-0.119065788447993,-0.538519113407711,significant
-fixed,cond,addo_nyathi_full,-0.24190651920916,0.107003399224418,-2.26073677063109,0.0237755620574522,cluster,setup_id + 0,mean_point_height_cluster,structure,36,-0.0321798567293009,-0.45163318168902,significant
-fixed,cond,knp_nkuhlu_full,-0.579772840742987,0.107003399224418,-5.41826563403868,6.01799592831097e-08,cluster,setup_id + 0,mean_point_height_cluster,structure,36,-0.370046178263127,-0.789499503222847,significant
-fixed,cond,knp_roan,-0.738377940566284,0.107003399224418,-6.90050919800859,5.18164660892293e-12,cluster,setup_id + 0,mean_point_height_cluster,structure,36,-0.528651278086424,-0.948104603046144,significant
-fixed,cond,knp_satara,-0.340826523944325,0.107003399224418,-3.18519342763597,0.00144657284219453,cluster,setup_id + 0,mean_point_height_cluster,structure,36,-0.131099861464465,-0.550553186424185,significant
-fixed,cond,pnr,-0.1839530543794,0.107003399224418,-1.71913280991752,0.0855901917547774,cluster,setup_id + 0,mean_point_height_cluster,structure,36,0.0257736081004598,-0.393679716859259,non-significant
+effect,component,term,estimate,std.error,statistic,p.value,scale,formula,response_name,response_tier,n,ci_ub,ci_lb,sig,percent_change,ci_ub_percent_change,ci_lb_percent_change,clean_response,clean_response_tier,clean_setup
+fixed,cond,addo_jack,0.0388884989716908,0.136127302998754,0.285677436598055,0.775125187791826,plot,setup_id + 0 + (1 | cluster_id),plant_richness_plot,taxonomic_diversity,107,0.305698012849249,-0.227921014905867,non-significant,3.96545546352476,35.7572275255575,-20.3812855731508,Plant Richness,"Taxonomic
+Diversity",Jack's (AENP)
+fixed,cond,addo_nyathi_full,-0.00304476973896714,0.136127302998757,-0.0223670760522961,0.982155143282243,plot,setup_id + 0 + (1 | cluster_id),plant_richness_plot,taxonomic_diversity,107,0.263764744138596,-0.26985428361653,non-significant,-0.304013912849188,30.182189904094,-23.6509260659104,Plant Richness,"Taxonomic
+Diversity",Nyathi (AENP)
+fixed,cond,knp_nkuhlu_full,0.602148750887479,0.136127302998753,4.42342379245546,9.7148909858219e-06,plot,setup_id + 0 + (1 | cluster_id),plant_richness_plot,taxonomic_diversity,107,0.868958264765036,0.335339237009923,significant,82.6038289274483,138.442561908833,39.8414698786609,Plant Richness,"Taxonomic
+Diversity",Nkuhlu (KNP)
+fixed,cond,knp_roan,0.206973771317186,0.139539989461397,1.48325775368103,0.138005942021556,plot,setup_id + 0 + (1 | cluster_id),plant_richness_plot,taxonomic_diversity,107,0.480472150661524,-0.0665246080271518,non-significant,22.9950311381087,61.6837612952015,-6.43601086788121,Plant Richness,"Taxonomic
+Diversity",Nwashitsumbe (KNP)
+fixed,cond,knp_satara,0.429155302680406,0.136127302998767,3.15260269781657,0.00161821888329878,plot,setup_id + 0 + (1 | cluster_id),plant_richness_plot,taxonomic_diversity,107,0.695964816557989,0.162345788802823,significant,53.5959554511274,100.564321853043,17.6266910932981,Plant Richness,"Taxonomic
+Diversity",Satara (KNP)
+fixed,cond,pnr,0.642494514480192,0.136127302998753,4.71980638950936,2.3606922497215e-06,plot,setup_id + 0 + (1 | cluster_id),plant_richness_plot,taxonomic_diversity,107,0.909304028357748,0.375685000602636,significant,90.1217583752482,148.259411688557,45.5988426051775,Plant Richness,"Taxonomic
+Diversity",PNR
+fixed,cond,addo_jack,0.110836544481104,0.147954476252426,0.749125996647813,0.453781267499801,cluster,setup_id + 0,plant_richness_cluster,taxonomic_diversity,36,0.400827317935858,-0.179154228973651,non-significant,11.7212277416448,49.3059421655021,-16.4023042414155,Plant Richness,"Taxonomic
+Diversity",Jack's (AENP)
+fixed,cond,addo_nyathi_full,-0.000417188433189196,0.147954476252426,-0.00281970808694851,0.997750201432719,cluster,setup_id + 0,plant_richness_cluster,taxonomic_diversity,36,0.289573585021565,-0.290407961887943,non-significant,-0.0417101422195199,33.5857736810845,-25.2041633179772,Plant Richness,"Taxonomic
+Diversity",Nyathi (AENP)
+fixed,cond,knp_nkuhlu_full,0.565128030998286,0.147954476252427,3.81960752599412,0.000133664182971654,cluster,setup_id + 0,plant_richness_cluster,taxonomic_diversity,36,0.855118804453042,0.27513725754353,significant,75.9673060998863,135.165375091698,31.6711391036081,Plant Richness,"Taxonomic
+Diversity",Nkuhlu (KNP)
+fixed,cond,knp_roan,-0.084726486090425,0.147954476252426,-0.572652401174216,0.566880071977846,cluster,setup_id + 0,plant_richness_cluster,taxonomic_diversity,36,0.205264287364329,-0.374717259545179,non-significant,-8.12364553526237,22.7849527200991,-31.2516369251463,Plant Richness,"Taxonomic
+Diversity",Nwashitsumbe (KNP)
+fixed,cond,knp_satara,0.255888323333569,0.147954476252425,1.72950714175756,0.0837183694144194,cluster,setup_id + 0,plant_richness_cluster,taxonomic_diversity,36,0.545879096788323,-0.0341024501211842,non-significant,29.1608477356057,72.6125146660122,-3.35275156578695,Plant Richness,"Taxonomic
+Diversity",Satara (KNP)
+fixed,cond,pnr,0.608587277905007,0.147954476252426,4.11334143663686,3.89972934254624e-05,cluster,setup_id + 0,plant_richness_cluster,taxonomic_diversity,36,0.898578051359761,0.318596504450253,significant,83.7833216367229,145.610816726175,37.5196327345934,Plant Richness,"Taxonomic
+Diversity",PNR
+fixed,cond,addo_jack,-0.205515568694735,0.131852037498841,-1.55868329828837,0.119071356709284,plot,setup_id + 0 + (1 | cluster_id),woody_richness_plot,taxonomic_diversity,78,0.0529144248029932,-0.463945562192463,non-significant,-18.5772581989641,5.43394159554893,-37.1202216091858,Woody Richness,"Taxonomic
+Diversity",Jack's (AENP)
+fixed,cond,addo_nyathi_full,-0.201373316737322,0.135909969384948,-1.48166700094647,0.138428921652763,plot,setup_id + 0 + (1 | cluster_id),woody_richness_plot,taxonomic_diversity,78,0.0650102232571757,-0.46775685673182,non-significant,-18.2392851859254,6.71699342811134,-37.3594188500861,Woody Richness,"Taxonomic
+Diversity",Nyathi (AENP)
+fixed,cond,knp_nkuhlu_full,0.0614236698970556,0.150778573359084,0.407376648608906,0.683731374989844,plot,setup_id + 0 + (1 | cluster_id),woody_richness_plot,taxonomic_diversity,78,0.356949673680859,-0.234102333886748,non-significant,6.33493278673709,42.8963953548284,-20.8719163091343,Woody Richness,"Taxonomic
+Diversity",Nkuhlu (KNP)
+fixed,cond,knp_roan,-0.626759008578829,0.150778573367709,-4.15681747465756,3.22711612554919e-05,plot,setup_id + 0 + (1 | cluster_id),woody_richness_plot,taxonomic_diversity,78,-0.33123300477812,-0.922285012379538,significant,-46.5679273331825,-28.1962156700881,-60.2390540259765,Woody Richness,"Taxonomic
+Diversity",Nwashitsumbe (KNP)
+fixed,cond,knp_satara,2.07609722840236e-09,0.192205721924263,1.08014330042704e-08,0.999999991381703,plot,setup_id + 0 + (1 | cluster_id),woody_richness_plot,taxonomic_diversity,78,0.376723217047652,-0.376723212895458,non-significant,2.0760972940792e-07,45.7500842151237,-31.389404710311,Woody Richness,"Taxonomic
+Diversity",Satara (KNP)
+fixed,cond,pnr,0.215193056137727,0.16391359041011,1.31284450300501,0.189235350586096,plot,setup_id + 0 + (1 | cluster_id),woody_richness_plot,taxonomic_diversity,78,0.536463693341543,-0.106077581066088,non-significant,24.0101283021936,70.9949252787147,-10.0645127540471,Woody Richness,"Taxonomic
+Diversity",PNR
+fixed,cond,addo_jack,-0.141464237190642,0.224663116365377,-0.629672727233848,0.528908729731806,cluster,setup_id + 0,woody_richness_cluster,taxonomic_diversity,32,0.298875470885496,-0.581803945266781,non-significant,-13.1913779768233,34.8341705219173,-44.1110748974584,Woody Richness,"Taxonomic
+Diversity",Jack's (AENP)
+fixed,cond,addo_nyathi_full,-0.157410311051367,0.205088427787876,-0.767524100453765,0.442769969686172,cluster,setup_id + 0,woody_richness_cluster,taxonomic_diversity,32,0.244563007412871,-0.559383629515604,non-significant,-14.5646563766216,27.7063124132984,-42.843875121676,Woody Richness,"Taxonomic
+Diversity",Nyathi (AENP)
+fixed,cond,knp_nkuhlu_full,0.139520313329987,0.224663116365377,0.621020110408692,0.534586391425537,cluster,setup_id + 0,woody_richness_cluster,taxonomic_diversity,32,0.579860021406126,-0.300819394746151,non-significant,14.9722160166492,78.578844109894,-25.9788553248527,Woody Richness,"Taxonomic
+Diversity",Nkuhlu (KNP)
+fixed,cond,knp_roan,-0.653533184000614,0.224663116365377,-2.90894738118807,0.00362647891374169,cluster,setup_id + 0,woody_richness_cluster,taxonomic_diversity,32,-0.213193475924475,-1.09387289207675,significant,-47.9795452408904,-19.2000206414428,-66.5083118234983,Woody Richness,"Taxonomic
+Diversity",Nwashitsumbe (KNP)
+fixed,cond,knp_satara,-0.151537130703336,0.224663116365379,-0.674508273342404,0.499988227629634,cluster,setup_id + 0,woody_richness_cluster,taxonomic_diversity,32,0.288802577372808,-0.591876838779479,non-significant,-14.0614027925073,33.4828177228271,-44.6712122504987,Woody Richness,"Taxonomic
+Diversity",Satara (KNP)
+fixed,cond,pnr,0.404760793788404,0.205088427787875,1.9735915778098,0.0484282021759529,cluster,setup_id + 0,woody_richness_cluster,taxonomic_diversity,32,0.806734112252639,0.00278747532416923,significant,49.8943900477026,124.057854660452,0.279136394581681,Woody Richness,"Taxonomic
+Diversity",PNR
+fixed,cond,addo_jack,0.165950283122343,0.215372940377867,0.770525223972831,0.440988398340445,plot,setup_id + 0 + (1 | cluster_id),forb_richness_plot,taxonomic_diversity,81,0.588081246262963,-0.256180680018276,non-significant,18.051440877384,80.0530324557549,-22.5997890557546,Forb Richness,"Taxonomic
+Diversity",Jack's (AENP)
+fixed,cond,addo_nyathi_full,0.0602804146911022,0.221647323218619,0.27196545311601,0.785648582861193,plot,setup_id + 0 + (1 | cluster_id),forb_richness_plot,taxonomic_diversity,81,0.494709168199595,-0.37414833881739,non-significant,6.21343428638401,64.0021199373135,-31.2125134283626,Forb Richness,"Taxonomic
+Diversity",Nyathi (AENP)
+fixed,cond,knp_nkuhlu_full,0.766210840032636,0.209783671408277,3.6523855021178,0.000259815452622594,plot,setup_id + 0 + (1 | cluster_id),forb_richness_plot,taxonomic_diversity,81,1.17738683599286,0.355034844072413,significant,115.15980390664,224.58810911369,42.6230349089251,Forb Richness,"Taxonomic
+Diversity",Nkuhlu (KNP)
+fixed,cond,knp_roan,0.240655438007557,0.227781104823322,1.05652063718903,0.290730417440543,plot,setup_id + 0 + (1 | cluster_id),forb_richness_plot,taxonomic_diversity,81,0.687106403461267,-0.205795527446154,non-significant,27.2082648454938,98.7954863423457,-18.6000500175624,Forb Richness,"Taxonomic
+Diversity",Nwashitsumbe (KNP)
+fixed,cond,knp_satara,0.368731746482851,0.236100008267529,1.56176083681045,0.118344340961479,plot,setup_id + 0 + (1 | cluster_id),forb_richness_plot,taxonomic_diversity,81,0.831487762687208,-0.0940242697215056,non-significant,44.5899683970984,129.673319363418,-8.9739329800279,Forb Richness,"Taxonomic
+Diversity",Satara (KNP)
+fixed,cond,pnr,0.629748577567346,0.342546822751669,1.83843064871714,0.065998972350321,plot,setup_id + 0 + (1 | cluster_id),forb_richness_plot,taxonomic_diversity,81,1.30114035016062,-0.0416431950259242,non-significant,87.7138565184879,267.348333734457,-4.07880288763012,Forb Richness,"Taxonomic
+Diversity",PNR
+fixed,cond,addo_jack,0.266565145427655,0.242420674172847,1.09959740990404,0.271507570991609,cluster,setup_id + 0,forb_richness_cluster,taxonomic_diversity,31,0.741709666806435,-0.208579375951126,non-significant,30.5472632138146,109.952193078679,-18.8263400219385,Forb Richness,"Taxonomic
+Diversity",Jack's (AENP)
+fixed,cond,addo_nyathi_full,0.134034934815974,0.242420674172861,0.552902244304454,0.58033035056589,cluster,setup_id + 0,forb_richness_cluster,taxonomic_diversity,31,0.609179456194782,-0.341109586562834,non-significant,14.3432764560117,83.8921863603004,-28.901901002584,Forb Richness,"Taxonomic
+Diversity",Nyathi (AENP)
+fixed,cond,knp_nkuhlu_full,0.625673485548698,0.242420674172817,2.58094111685651,0.0098531386233757,cluster,setup_id + 0,forb_richness_cluster,taxonomic_diversity,31,1.10081800692742,0.150528964169976,significant,86.9504617883202,200.662445793607,16.2448973985209,Forb Richness,"Taxonomic
+Diversity",Nkuhlu (KNP)
+fixed,cond,knp_roan,0.389181521001851,0.265558543300145,1.46552061991838,0.142778930822506,cluster,setup_id + 0,forb_richness_cluster,taxonomic_diversity,31,0.909676265870134,-0.131313223866433,non-significant,47.5772410707764,148.351840356032,-12.3056948124884,Forb Richness,"Taxonomic
+Diversity",Nwashitsumbe (KNP)
+fixed,cond,knp_satara,0.68390904076524,0.265558543300122,2.57536071807834,0.0100135594319299,cluster,setup_id + 0,forb_richness_cluster,taxonomic_diversity,31,1.20440378563348,0.163414295897002,significant,98.1608801439071,233.47702473111,17.7524432187507,Forb Richness,"Taxonomic
+Diversity",Satara (KNP)
+fixed,cond,pnr,0.5579917229617,0.342834605214829,1.62758284745511,0.103613368569145,cluster,setup_id + 0,forb_richness_cluster,taxonomic_diversity,31,1.22994754918277,-0.113964103259366,non-significant,74.7160192935764,242.105009471052,-10.7710014390293,Forb Richness,"Taxonomic
+Diversity",PNR
+fixed,cond,addo_jack,0.231049060555276,0.394065913112866,0.586320848535561,0.557659923262689,plot,setup_id + 0 + (1 | cluster_id),graminoid_richness_plot,taxonomic_diversity,66,1.00341825025649,-0.541320129145942,non-significant,25.9921050359315,172.758949492013,-41.8020543012466,Graminoid Richness,"Taxonomic
+Diversity",Jack's (AENP)
+fixed,cond,addo_nyathi_full,-0.138629436415182,0.305242143799678,-0.454162176590402,0.64971210425792,plot,setup_id + 0 + (1 | cluster_id),graminoid_richness_plot,taxonomic_diversity,66,0.459645165432186,-0.736904038262551,non-significant,-12.9449436967821,58.3512000498291,-52.1406669127126,Graminoid Richness,"Taxonomic
+Diversity",Nyathi (AENP)
+fixed,cond,knp_nkuhlu_full,0.738307102589601,0.176231633973944,4.18941302387719,2.79676951395658e-05,plot,setup_id + 0 + (1 | cluster_id),graminoid_richness_plot,taxonomic_diversity,66,1.08372110517853,0.39289310000067,significant,109.239031236795,195.565742563787,48.1260034168672,Graminoid Richness,"Taxonomic
+Diversity",Nkuhlu (KNP)
+fixed,cond,knp_roan,0.342445031034846,0.165540795079954,2.06864435361356,0.0385794725780418,plot,setup_id + 0 + (1 | cluster_id),graminoid_richness_plot,taxonomic_diversity,66,0.666904989391555,0.0179850726781367,significant,40.8386933962111,94.8198285656519,1.81477780567714,Graminoid Richness,"Taxonomic
+Diversity",Nwashitsumbe (KNP)
+fixed,cond,knp_satara,0.361296469565839,0.17063554586588,2.11735759822176,0.0342295099556545,plot,setup_id + 0 + (1 | cluster_id),graminoid_richness_plot,taxonomic_diversity,66,0.695742139462964,0.0268507996687137,significant,43.5188887638812,100.519665744618,2.72145305813787,Graminoid Richness,"Taxonomic
+Diversity",Satara (KNP)
+fixed,cond,pnr,0.259026716436831,0.215838789848074,1.20009344297731,0.230103051831799,plot,setup_id + 0 + (1 | cluster_id),graminoid_richness_plot,taxonomic_diversity,66,0.682070744539057,-0.164017311665395,non-significant,29.5668420009146,97.7969363664883,-15.1272671130502,Graminoid Richness,"Taxonomic
+Diversity",PNR
+fixed,cond,addo_jack,0.895879411601597,0.417152952737426,2.14760414788554,0.0317452156370605,cluster,setup_id + 0,graminoid_richness_cluster,taxonomic_diversity,23,1.71349919896695,0.0782596242362414,significant,144.948895156767,454.834230282105,8.14033807541752,Graminoid Richness,"Taxonomic
+Diversity",Jack's (AENP)
+fixed,cond,addo_nyathi_full,0.274653514303275,0.294971681672652,0.931118244116986,0.351792402271752,cluster,setup_id + 0,graminoid_richness_cluster,taxonomic_diversity,23,0.852798010381673,-0.303490981775124,non-significant,31.6074594836646,134.620237504114,-26.1763453315031,Graminoid Richness,"Taxonomic
+Diversity",Nyathi (AENP)
+fixed,cond,knp_nkuhlu_full,0.923518548702273,0.263830692662957,3.50042119580858,0.000464523559106584,cluster,setup_id + 0,graminoid_richness_cluster,taxonomic_diversity,23,1.44062670632167,0.406410391082877,significant,151.813500135462,322.334178278205,50.1418594843213,Graminoid Richness,"Taxonomic
+Diversity",Nkuhlu (KNP)
+fixed,cond,knp_roan,0.218867660479074,0.294971681672651,0.74199550017132,0.458090061952808,cluster,setup_id + 0,graminoid_richness_cluster,taxonomic_diversity,23,0.797012156557471,-0.359276835599322,non-significant,24.4666547213091,121.890128467077,-30.1818956772015,Graminoid Richness,"Taxonomic
+Diversity",Nwashitsumbe (KNP)
+fixed,cond,knp_satara,0.321887649031142,0.263830692662964,1.22005383749018,0.22244446651009,cluster,setup_id + 0,graminoid_richness_cluster,taxonomic_diversity,23,0.838995806650551,-0.195220508588268,non-significant,37.9729753274392,131.404206399447,-17.7346764049506,Graminoid Richness,"Taxonomic
+Diversity",Satara (KNP)
+fixed,cond,pnr,1.35519884477307e-07,0.340603959634009,3.97881118654426e-07,0.999999682536798,cluster,setup_id + 0,graminoid_richness_cluster,taxonomic_diversity,23,0.667583896402542,-0.667583625362774,non-significant,1.35519893751379e-05,94.952138020971,-48.7053447481435,Graminoid Richness,"Taxonomic
+Diversity",PNR
+fixed,cond,addo_jack,0.0495031732088885,0.146529821865204,0.33783684835451,0.735486139812846,plot,setup_id + 0 + (1 | cluster_id),berger_parker_plot,dominance,108,0.336701624064689,-0.237695277646912,non-significant,5.07489264553671,40.0321179256703,-21.1557089329211,Plant Dominance,Dominance,Jack's (AENP)
+fixed,cond,addo_nyathi_full,-0.181446023440664,0.146529821865202,-1.23828734063147,0.215609536097528,plot,setup_id + 0 + (1 | cluster_id),berger_parker_plot,dominance,108,0.105752427415132,-0.46864447429646,non-significant,-16.593673604625,11.1546653960836,-37.4149950613145,Plant Dominance,Dominance,Nyathi (AENP)
+fixed,cond,knp_nkuhlu_full,-0.342990873878195,0.146529821865203,-2.340758144057,0.019244629230463,plot,setup_id + 0 + (1 | cluster_id),berger_parker_plot,dominance,108,-0.0557924230223976,-0.630189324733993,significant,-29.0355312165484,-5.42645715813708,-46.7509022249686,Plant Dominance,Dominance,Nkuhlu (KNP)
+fixed,cond,knp_roan,-0.402075187818322,0.146529821865202,-2.74398196012416,0.00606988734604337,plot,setup_id + 0 + (1 | cluster_id),berger_parker_plot,dominance,108,-0.114876736962525,-0.689273638674118,significant,-33.1069551621525,-10.8523976822881,-49.8059473127383,Plant Dominance,Dominance,Nwashitsumbe (KNP)
+fixed,cond,knp_satara,-0.0498735618990646,0.146529821865202,-0.340364584247874,0.733581985914418,plot,setup_id + 0 + (1 | cluster_id),berger_parker_plot,dominance,108,0.237324888956732,-0.337072012754861,non-significant,-4.86502962535188,26.7852962296002,-28.6142568788498,Plant Dominance,Dominance,Satara (KNP)
+fixed,cond,pnr,-0.281397439737856,0.146529821865203,-1.9204107133681,0.0548060413705275,plot,setup_id + 0 + (1 | cluster_id),berger_parker_plot,dominance,108,0.0058010111179429,-0.568595890593654,non-significant,-24.5271683159905,0.581786956585462,-43.3679943978179,Plant Dominance,Dominance,PNR
+fixed,cond,addo_jack,-0.0446186096321666,0.174665103065742,-0.25545234193331,0.798373748344348,cluster,setup_id + 0,berger_parker_cluster,dominance,36,0.297724992376687,-0.38696221164102,non-significant,-4.36378403977822,34.6791359055761,-32.0883242850424,Plant Dominance,Dominance,Jack's (AENP)
+fixed,cond,addo_nyathi_full,-0.260528683233918,0.174665103065743,-1.49158978331153,0.135806718176306,cluster,setup_id + 0,berger_parker_cluster,dominance,36,0.0818149187749382,-0.602872285242773,non-significant,-22.9355948504563,8.52549309285453,-45.2762445781134,Plant Dominance,Dominance,Nyathi (AENP)
+fixed,cond,knp_nkuhlu_full,-0.196476339002726,0.174665103065741,-1.12487460605554,0.260642174118266,cluster,setup_id + 0,berger_parker_cluster,dominance,36,0.145867263006126,-0.538819941011577,non-significant,-17.83792285679,15.7042595501404,-41.6563664403262,Plant Dominance,Dominance,Nkuhlu (KNP)
+fixed,cond,knp_roan,-0.316853484377984,0.174665103065741,-1.81406290562074,0.0696680416290732,cluster,setup_id + 0,berger_parker_cluster,dominance,36,0.0254901176308687,-0.659197086386838,non-significant,-27.1562525222821,2.58177687105012,-48.2733511891914,Plant Dominance,Dominance,Nwashitsumbe (KNP)
+fixed,cond,knp_satara,-0.200067433458177,0.174665103065743,-1.14543449118667,0.252029217451582,cluster,setup_id + 0,berger_parker_cluster,dominance,36,0.142276168550679,-0.542411035467033,non-significant,-18.132445490656,15.2894997916598,-41.8655081906665,Plant Dominance,Dominance,Satara (KNP)
+fixed,cond,pnr,-0.302316553073952,0.174665103065741,-1.73083545463667,0.0834811163539004,cluster,setup_id + 0,berger_parker_cluster,dominance,36,0.0400270489348999,-0.644660155082804,non-significant,-26.0895937808508,4.08389273960179,-47.515912369396,Plant Dominance,Dominance,PNR
+fixed,cond,addo_jack,-0.0639922259399391,0.192796232024912,-0.331916372368058,0.739952407217768,plot,setup_id + 0 + (1 | cluster_id),functional_dispersion_plot,functional_diversity,105,0.313888388828888,-0.441872840708766,non-significant,-6.1987708333722,36.8736961686605,-35.7168627759698,Plant Functional Dispersion,"Functional
+Diversity",Jack's (AENP)
+fixed,cond,addo_nyathi_full,0.0744559424409659,0.192796232024911,0.386189821548719,0.699356091377994,plot,setup_id + 0 + (1 | cluster_id),functional_dispersion_plot,functional_diversity,105,0.452336557209792,-0.30342467232786,non-significant,7.72978793617678,57.1980921070545,-26.1714499634643,Plant Functional Dispersion,"Functional
+Diversity",Nyathi (AENP)
+fixed,cond,knp_nkuhlu_full,-0.12057026144011,0.192796232024913,-0.625376648567122,0.531723884480204,plot,setup_id + 0 + (1 | cluster_id),functional_dispersion_plot,functional_diversity,105,0.257310353328721,-0.49845087620894,non-significant,-11.3585195623332,29.3446489897601,-39.2529021065006,Plant Functional Dispersion,"Functional
+Diversity",Nkuhlu (KNP)
+fixed,cond,knp_roan,0.424612177859131,0.192796232024909,2.20238836308933,0.0276378871777205,plot,setup_id + 0 + (1 | cluster_id),functional_dispersion_plot,functional_diversity,105,0.802492792627953,0.0467315630903089,significant,52.8997325647101,123.109566103395,4.78406922061643,Plant Functional Dispersion,"Functional
+Diversity",Nwashitsumbe (KNP)
+fixed,cond,knp_satara,-0.208005164477025,0.203045213783286,-1.02442781389091,0.305633250231791,plot,setup_id + 0 + (1 | cluster_id),functional_dispersion_plot,functional_diversity,105,0.189963454538216,-0.605973783492266,non-significant,-18.779715790181,20.9205405879803,-45.4457072797812,Plant Functional Dispersion,"Functional
+Diversity",Satara (KNP)
+fixed,cond,pnr,1.05656958190365,0.197628491638403,5.34624118791957,8.97995311722467e-08,plot,setup_id + 0 + (1 | cluster_id),functional_dispersion_plot,functional_diversity,105,1.44392142551492,0.66921773829238,significant,187.64864936631,323.72794557648,95.2709193388045,Plant Functional Dispersion,"Functional
+Diversity",PNR
+fixed,cond,addo_jack,-0.0603314817915958,0.184819318997825,-0.32643493179577,0.744095311961335,cluster,setup_id + 0,functional_dispersion_cluster,functional_diversity,36,0.301914383444142,-0.422577347027333,non-significant,-5.85475924756944,35.2445430032791,-34.4644437438173,Plant Functional Dispersion,"Functional
+Diversity",Jack's (AENP)
+fixed,cond,addo_nyathi_full,0.0571138642483933,0.184819318997825,0.309025401446616,0.75730220431856,cluster,setup_id + 0,functional_dispersion_cluster,functional_diversity,36,0.419359729484131,-0.305132000987345,non-significant,5.87763603066902,52.0987400402996,-26.2973920199954,Plant Functional Dispersion,"Functional
+Diversity",Nyathi (AENP)
+fixed,cond,knp_nkuhlu_full,-0.0878356000412886,0.184819318997825,-0.475251183250612,0.634607949396876,cluster,setup_id + 0,functional_dispersion_cluster,functional_diversity,36,0.274410265194448,-0.450081465277026,non-significant,-8.40885598503801,31.5754499797298,-36.2423790816457,Plant Functional Dispersion,"Functional
+Diversity",Nkuhlu (KNP)
+fixed,cond,knp_roan,-0.0797033604167633,0.184819318997824,-0.431250157445401,0.666286487284546,cluster,setup_id + 0,functional_dispersion_cluster,functional_diversity,36,0.282542504818971,-0.441949225652498,non-significant,-7.66097801462459,32.6498156462507,-35.7217728522592,Plant Functional Dispersion,"Functional
+Diversity",Nwashitsumbe (KNP)
+fixed,cond,knp_satara,-0.176532439531148,0.184819318997825,-0.955162265981649,0.339495644770253,cluster,setup_id + 0,functional_dispersion_cluster,functional_diversity,36,0.185713425704589,-0.538778304766885,non-significant,-16.1828411179197,20.4077153368746,-41.6539371799507,Plant Functional Dispersion,"Functional
+Diversity",Satara (KNP)
+fixed,cond,pnr,0.691135288063465,0.184819318997825,3.7395186380467,0.000184372978164089,cluster,setup_id + 0,functional_dispersion_cluster,functional_diversity,36,1.0533811532992,0.328889422827728,significant,99.5980260005302,186.732962761067,38.9424208492776,Plant Functional Dispersion,"Functional
+Diversity",PNR
+fixed,cond,addo_jack,-0.087872429784823,0.0393298933052535,-2.23424022798163,0.0254672708366267,plot,setup_id + 0 + (1 | cluster_id),functional_specialization_plot,functional_diversity,105,-0.0107858389065261,-0.16495902066312,significant,-8.41222920126438,-1.07278803105859,-15.20715490784,Plant Functional Specialization,"Functional
+Diversity",Jack's (AENP)
+fixed,cond,addo_nyathi_full,-0.0104715030713078,0.039329893305278,-0.266247939958244,0.790048264243017,plot,setup_id + 0 + (1 | cluster_id),functional_specialization_plot,functional_diversity,105,0.0666150878070372,-0.0875580939496527,non-significant,-1.04168677539501,6.88839725090256,-8.38343535760762,Plant Functional Specialization,"Functional
+Diversity",Nyathi (AENP)
+fixed,cond,knp_nkuhlu_full,-0.151456039914666,0.0393298933052582,-3.85091408052249,0.000117677781435029,plot,setup_id + 0 + (1 | cluster_id),functional_specialization_plot,functional_diversity,105,-0.07436944903636,-0.228542630792972,significant,-14.0544336813211,-7.1671339650499,-20.4307624515494,Plant Functional Specialization,"Functional
+Diversity",Nkuhlu (KNP)
+fixed,cond,knp_roan,-0.0801919547978385,0.0393298933052643,-2.03895683559113,0.0414543357016906,plot,setup_id + 0 + (1 | cluster_id),functional_specialization_plot,functional_diversity,105,-0.00310536391952043,-0.157278545676157,significant,-7.70608332192345,-0.31005472640967,-14.5533982148112,Plant Functional Specialization,"Functional
+Diversity",Nwashitsumbe (KNP)
+fixed,cond,knp_satara,0.0138541811549448,0.0410619342436035,0.337397188178074,0.735817504027538,plot,setup_id + 0 + (1 | cluster_id),functional_specialization_plot,functional_diversity,105,0.0943355722724076,-0.066627209962518,non-significant,1.395059505337,9.89284539681259,-6.4456102217822,Plant Functional Specialization,"Functional
+Diversity",Satara (KNP)
+fixed,cond,pnr,0.0762423453600484,0.0401617124111966,1.89838382834475,0.0576455383524959,plot,setup_id + 0 + (1 | cluster_id),functional_specialization_plot,functional_diversity,105,0.154959301685994,-0.00247461096589695,non-significant,7.92240874177794,16.7610440361786,-0.247155164024793,Plant Functional Specialization,"Functional
+Diversity",PNR
+fixed,cond,addo_jack,-0.0936780018443027,0.0467956290628607,-2.00185367138595,0.0453004715695862,cluster,setup_id + 0,functional_specialization_cluster,functional_diversity,36,-0.00195856888109572,-0.18539743480751,significant,-8.94240811932247,-0.195665213662766,-16.9225960289342,Plant Functional Specialization,"Functional
+Diversity",Jack's (AENP)
+fixed,cond,addo_nyathi_full,-0.0205306918622896,0.0467956290628607,-0.438730972816087,0.660856481747072,cluster,setup_id + 0,functional_specialization_cluster,functional_diversity,36,0.0711887411009173,-0.112250124825497,non-significant,-2.0321372148445,7.37838738942562,-10.6179337199078,Plant Functional Specialization,"Functional
+Diversity",Nyathi (AENP)
+fixed,cond,knp_nkuhlu_full,-0.11006508670466,0.0467956290628606,-2.35203776311692,0.018670879318944,cluster,setup_id + 0,functional_specialization_cluster,functional_diversity,36,-0.0183456537414532,-0.201784519667867,significant,-10.42241696978,-1.81783966114173,-18.272898520036,Plant Functional Specialization,"Functional
+Diversity",Nkuhlu (KNP)
+fixed,cond,knp_roan,-0.0914148384766657,0.0467956290628607,-1.95349096288177,0.050761447088921,cluster,setup_id + 0,functional_specialization_cluster,functional_diversity,36,0.000304594486541299,-0.183134271439873,non-significant,-8.73609654269067,0.0304640880152141,-16.7343653735683,Plant Functional Specialization,"Functional
+Diversity",Nwashitsumbe (KNP)
+fixed,cond,knp_satara,0.0257294080479192,0.0467956290628607,0.549825027746862,0.58243939066892,cluster,setup_id + 0,functional_specialization_cluster,functional_diversity,36,0.117448841011126,-0.0659900249152877,non-significant,2.60632664436498,12.4624093840497,-6.38597976771344,Plant Functional Specialization,"Functional
+Diversity",Satara (KNP)
+fixed,cond,pnr,0.0821886863224795,0.0467956290628607,1.75633254576138,0.0790316432092975,cluster,setup_id + 0,functional_specialization_cluster,functional_diversity,36,0.173908119285686,-0.00953074664072745,non-significant,8.56606398182207,18.9946227688012,-0.948547301959513,Plant Functional Specialization,"Functional
+Diversity",PNR
+fixed,cond,addo_jack,0.032620296310069,0.0961579869321401,0.339236472713282,0.734431595307428,plot,setup_id + 0 + (1 | cluster_id),functional_diversity_plot,functional_diversity,108,0.221089950697063,-0.155849358076925,non-significant,3.31581707844151,24.7435633222386,-14.4311916839155,Plant Functional Diversity,"Functional
+Diversity",Jack's (AENP)
+fixed,cond,addo_nyathi_full,0.169708711931069,0.096157986932089,1.76489460049663,0.0775814813393132,plot,setup_id + 0 + (1 | cluster_id),functional_diversity_plot,functional_diversity,108,0.358178366317964,-0.0187609424558251,non-significant,18.4959636440059,43.0720790121755,-1.85860513897579,Plant Functional Diversity,"Functional
+Diversity",Nyathi (AENP)
+fixed,cond,knp_nkuhlu_full,0.0435417077811274,0.0961579869321254,0.452814260887782,0.650682493779297,plot,setup_id + 0 + (1 | cluster_id),functional_diversity_plot,functional_diversity,108,0.232011362168093,-0.144927946605838,non-significant,4.45035573293173,26.1134057964079,-13.4915376851496,Plant Functional Diversity,"Functional
+Diversity",Nkuhlu (KNP)
+fixed,cond,knp_roan,0.134016382047977,0.0961579869321167,1.39371035442523,0.163405088174578,plot,setup_id + 0 + (1 | cluster_id),functional_diversity_plot,functional_diversity,108,0.322486036434926,-0.0544532723389714,non-significant,14.3411550914103,38.0555613246838,-5.2997240952119,Plant Functional Diversity,"Functional
+Diversity",Nwashitsumbe (KNP)
+fixed,cond,knp_satara,-0.0106478098338907,0.0961579869321066,-0.11073245367968,0.911828509912828,plot,setup_id + 0 + (1 | cluster_id),functional_diversity_plot,functional_diversity,108,0.177821844553038,-0.19911746422082,non-significant,-1.05913225730691,19.4612475556026,-18.0546368802928,Plant Functional Diversity,"Functional
+Diversity",Satara (KNP)
+fixed,cond,pnr,0.402231663751644,0.0961579869320864,4.18302916465721,2.87650473868324e-05,plot,setup_id + 0 + (1 | cluster_id),functional_diversity_plot,functional_diversity,108,0.590701318138534,0.213762009364755,significant,49.5157666392306,80.5254028942274,23.8327909275737,Plant Functional Diversity,"Functional
+Diversity",PNR
+fixed,cond,addo_jack,0.074643442154925,0.11287084367615,0.661317305017162,0.508408845966545,cluster,setup_id + 0,functional_diversity_cluster,functional_diversity,36,0.295870295760179,-0.146583411450329,non-significant,7.74998913439995,34.4295784661049,-13.6346309276669,Plant Functional Diversity,"Functional
+Diversity",Jack's (AENP)
+fixed,cond,addo_nyathi_full,0.19771479276798,0.112870843676151,1.75169057241447,0.0798270288519474,cluster,setup_id + 0,functional_diversity_cluster,functional_diversity,36,0.418941646373236,-0.0235120608372749,non-significant,21.8614786503782,52.0351634169826,-2.32378059720767,Plant Functional Diversity,"Functional
+Diversity",Nyathi (AENP)
+fixed,cond,knp_nkuhlu_full,-0.0506855912434875,0.11287084367615,-0.449058318274959,0.653389587665774,cluster,setup_id + 0,functional_diversity_cluster,functional_diversity,36,0.170541262361766,-0.271912444848741,non-significant,-4.94225065586226,18.5946585881318,-23.8079031724859,Plant Functional Diversity,"Functional
+Diversity",Nkuhlu (KNP)
+fixed,cond,knp_roan,-0.062364074283698,0.11287084367615,-0.552525986805178,0.580588035059602,cluster,setup_id + 0,functional_diversity_cluster,functional_diversity,36,0.158862779321557,-0.283590927888953,non-significant,-6.04592381144605,17.2177088709082,-24.6925356460757,Plant Functional Diversity,"Functional
+Diversity",Nwashitsumbe (KNP)
+fixed,cond,knp_satara,-0.0337959045578924,0.11287084367615,-0.299421032546366,0.764618816217106,cluster,setup_id + 0,functional_diversity_cluster,functional_diversity,36,0.187430949047362,-0.255022758163147,non-significant,-3.32312023913125,20.6146960948765,-22.5101137514329,Plant Functional Diversity,"Functional
+Diversity",Satara (KNP)
+fixed,cond,pnr,0.404355916950748,0.112870843676151,3.58246561982763,0.000340366423182352,cluster,setup_id + 0,functional_diversity_cluster,functional_diversity,36,0.625582770556003,0.183129063345493,significant,49.8337135651577,86.933503347749,20.0969399207275,Plant Functional Diversity,"Functional
+Diversity",PNR
+fixed,cond,addo_jack,-0.154310267310964,0.193525849638881,-0.797362562153357,0.425240495550751,plot,setup_id + 0 + (1 | cluster_id),functional_nearerst_neighbour_distance_plot,functional_diversity,105,0.225000397981244,-0.533620932603171,non-significant,-14.2993921214543,25.2323214592916,-41.3522475254944,Plant Functional Distance,"Functional
+Diversity",Jack's (AENP)
+fixed,cond,addo_nyathi_full,0.023948197730147,0.193525849638878,0.123746764449476,0.901515783519923,plot,setup_id + 0 + (1 | cluster_id),functional_nearerst_neighbour_distance_plot,functional_diversity,105,0.403258863022347,-0.355362467562053,non-significant,2.42372587014714,49.6694280326054,-29.9080663364487,Plant Functional Distance,"Functional
+Diversity",Nyathi (AENP)
+fixed,cond,knp_nkuhlu_full,-0.633499859228517,0.193525849638877,-3.27346377969993,0.00106238005433383,plot,setup_id + 0 + (1 | cluster_id),functional_nearerst_neighbour_distance_plot,functional_diversity,105,-0.254189193936319,-1.01281052452072,significant,-46.9268937262537,-22.4454940257109,-63.6803229656549,Plant Functional Distance,"Functional
+Diversity",Nkuhlu (KNP)
+fixed,cond,knp_roan,-0.476165255927413,0.193525849638877,-2.4604736618697,0.0138753755963447,plot,setup_id + 0 + (1 | cluster_id),functional_nearerst_neighbour_distance_plot,functional_diversity,105,-0.0968545906352139,-0.855475921219612,significant,-37.8839176742728,-9.23120171292735,-57.491916205681,Plant Functional Distance,"Functional
+Diversity",Nwashitsumbe (KNP)
+fixed,cond,knp_satara,-0.997246077290939,0.20526516089272,-4.85833091672162,1.18379439707491e-06,plot,setup_id + 0 + (1 | cluster_id),functional_nearerst_neighbour_distance_plot,functional_diversity,105,-0.594926361941208,-1.39956579264067,significant,-63.11060509844,-44.8396816640039,-75.329593859229,Plant Functional Distance,"Functional
+Diversity",Satara (KNP)
+fixed,cond,pnr,-0.261989765836968,0.199136456394413,-1.31562934572898,0.18829847901034,plot,setup_id + 0 + (1 | cluster_id),functional_nearerst_neighbour_distance_plot,functional_diversity,105,0.128317688696081,-0.652297220370016,non-significant,-23.0481100950854,13.6914130098524,-47.9152101010043,Plant Functional Distance,"Functional
+Diversity",PNR
+fixed,cond,addo_jack,-0.279927024140194,0.293988461760036,-0.952170103766456,0.341010720300173,cluster,setup_id + 0,functional_nearerst_neighbour_distance_cluster,functional_diversity,36,0.296290360909476,-0.856144409189865,non-significant,-24.4161102563412,34.4860595090815,-57.5203228525273,Plant Functional Distance,"Functional
+Diversity",Jack's (AENP)
+fixed,cond,addo_nyathi_full,-0.0541134927197964,0.293988461760037,-0.184066722876919,0.853961111703751,cluster,setup_id + 0,functional_nearerst_neighbour_distance_cluster,functional_diversity,36,0.522103892329875,-0.630330877769468,non-significant,-5.2675414043276,68.5570180014195,-46.7584392629371,Plant Functional Distance,"Functional
+Diversity",Nyathi (AENP)
+fixed,cond,knp_nkuhlu_full,-0.522773888458961,0.29398846176004,-1.77821226496182,0.0753689993073595,cluster,setup_id + 0,functional_nearerst_neighbour_distance_cluster,functional_diversity,36,0.0534434965907177,-1.09899127350864,non-significant,-40.7126300573384,5.48973847849248,-66.6792971011616,Plant Functional Distance,"Functional
+Diversity",Nkuhlu (KNP)
+fixed,cond,knp_roan,-0.366415163295114,0.293988461760037,-1.24635899348388,0.212632628709386,cluster,setup_id + 0,functional_nearerst_neighbour_distance_cluster,functional_diversity,36,0.209802221754559,-0.942632548344787,non-significant,-30.6785055940369,23.3434089401436,-61.0399158903741,Plant Functional Distance,"Functional
+Diversity",Nwashitsumbe (KNP)
+fixed,cond,knp_satara,-0.783737938515416,0.293988461760032,-2.66587992543443,0.00767871134047403,cluster,setup_id + 0,functional_nearerst_neighbour_distance_cluster,functional_diversity,36,-0.207520553465754,-1.35995532356508,significant,-54.3304283699967,-18.7403460073697,-74.3327756101796,Plant Functional Distance,"Functional
+Diversity",Satara (KNP)
+fixed,cond,pnr,-0.0564472887718855,0.293988461760035,-0.192005116234663,0.847738197815608,cluster,setup_id + 0,functional_nearerst_neighbour_distance_cluster,functional_diversity,36,0.519770096277783,-0.632664673821554,non-significant,-5.48836985768614,68.1640989730335,-46.8825493270718,Plant Functional Distance,"Functional
+Diversity",PNR
+fixed,cond,addo_jack,-0.0209782454801408,0.143827576179203,-0.145856907537695,0.884034350497441,plot,setup_id + 0 + (1 | cluster_id),plant_evenness_plot,dominance,105,0.260923803831097,-0.302880294791379,non-significant,-2.07597327604153,29.8128749227786,-26.131248417857,Plant Evenness,Dominance,Jack's (AENP)
+fixed,cond,addo_nyathi_full,0.0488142050664457,0.143827576179203,0.339393921271573,0.734312997258463,plot,setup_id + 0 + (1 | cluster_id),plant_evenness_plot,dominance,105,0.330716254377684,-0.233087844244793,non-significant,5.00252432452983,39.1964772357679,-20.7916009551831,Plant Evenness,Dominance,Nyathi (AENP)
+fixed,cond,knp_nkuhlu_full,0.153823937152614,0.143827576179202,1.06950239473519,0.284843350358835,plot,setup_id + 0 + (1 | cluster_id),plant_evenness_plot,dominance,105,0.435725986463849,-0.128078112158621,non-significant,16.6285529149918,54.608508845912,-12.0215345417924,Plant Evenness,Dominance,Nkuhlu (KNP)
+fixed,cond,knp_roan,0.572473772686329,0.143827576179203,3.98027824631524,6.88346506289904e-05,plot,setup_id + 0 + (1 | cluster_id),plant_evenness_plot,dominance,105,0.854375821997567,0.290571723375091,significant,77.2646757132387,134.990716236136,33.7191773318556,Plant Evenness,Dominance,Nwashitsumbe (KNP)
+fixed,cond,knp_satara,0.0337256899069494,0.152552181630487,0.221076418222848,0.82503293151592,plot,setup_id + 0 + (1 | cluster_id),plant_evenness_plot,dominance,105,0.332727965902704,-0.265276586088805,non-significant,3.43008486490093,39.4767822451418,-23.3006219174286,Plant Evenness,Dominance,Satara (KNP)
+fixed,cond,pnr,0.620558420929078,0.147997354903481,4.1930372426844,2.7524423405753e-05,plot,setup_id + 0 + (1 | cluster_id),plant_evenness_plot,dominance,105,0.910633236539901,0.330483605318255,significant,85.9966396062939,148.589619538741,39.1640970730164,Plant Evenness,Dominance,PNR
+fixed,cond,addo_jack,-0.00672853120280501,0.131364893095643,-0.0512201627409397,0.959150085387351,cluster,setup_id + 0,plant_evenness_cluster,dominance,36,0.250746659264656,-0.264203721670266,non-significant,-0.670594532172431,28.4984504172386,-23.2182897260177,Plant Evenness,Dominance,Jack's (AENP)
+fixed,cond,addo_nyathi_full,0.094908124057894,0.131364893095643,0.72247707756131,0.470001213451873,cluster,setup_id + 0,plant_evenness_cluster,dominance,36,0.352383314525354,-0.162567066409566,non-significant,9.95578275738649,42.245366638332,-15.0040915390244,Plant Evenness,Dominance,Nyathi (AENP)
+fixed,cond,knp_nkuhlu_full,0.120399769438524,0.131364893095642,0.916529268979537,0.35938936325722,cluster,setup_id + 0,plant_evenness_cluster,dominance,36,0.377874959905982,-0.137075421028935,non-significant,12.7947680470471,45.9180475404326,-12.809553627958,Plant Evenness,Dominance,Nkuhlu (KNP)
+fixed,cond,knp_roan,0.348845668114281,0.131364893095641,2.65554715490311,0.00791798625215679,cluster,setup_id + 0,plant_evenness_cluster,dominance,36,0.606320858581738,0.0913704776468243,significant,41.7430418751303,83.3672632247788,9.56748531163107,Plant Evenness,Dominance,Nwashitsumbe (KNP)
+fixed,cond,knp_satara,0.116226112298597,0.131364893095643,0.884757788475312,0.376287280412741,cluster,setup_id + 0,plant_evenness_cluster,dominance,36,0.373701302766057,-0.141249078168863,non-significant,12.3249824020958,45.3103047766442,-13.1726983091494,Plant Evenness,Dominance,Satara (KNP)
+fixed,cond,pnr,0.381644054465869,0.131364893095643,2.90522106380434,0.00366993797386244,cluster,setup_id + 0,plant_evenness_cluster,dominance,36,0.63911924493333,0.124168863998408,significant,46.4690642242841,89.4811279523823,13.2207043866066,Plant Evenness,Dominance,PNR
+fixed,cond,addo_jack,-0.00597098166655388,0.178993558806949,-0.0333586398658836,0.973388591897211,plot,setup_id + 0 + (1 | cluster_id),shannon_diversity_plot,taxonomic_diversity,105,0.344856393595067,-0.356798356928175,non-significant,-0.595319078281509,41.1787163430389,-30.0086383762061,Shannon Diversity,"Taxonomic
+Diversity",Jack's (AENP)
+fixed,cond,addo_nyathi_full,0.0573258942231441,0.178993558806949,0.320267916930867,0.748765241871114,plot,setup_id + 0 + (1 | cluster_id),shannon_diversity_plot,taxonomic_diversity,105,0.408153269484764,-0.293501481038475,non-significant,5.9000876432866,50.403766658316,-25.435188147027,Shannon Diversity,"Taxonomic
+Diversity",Nyathi (AENP)
+fixed,cond,knp_nkuhlu_full,0.438722774952939,0.178993558806951,2.45105342268831,0.0142438811265782,plot,setup_id + 0 + (1 | cluster_id),shannon_diversity_plot,taxonomic_diversity,105,0.789550150214563,0.087895399691315,significant,55.0725327890694,120.24054517579,9.18739057071882,Shannon Diversity,"Taxonomic
+Diversity",Nkuhlu (KNP)
+fixed,cond,knp_roan,0.700205408403101,0.178993558806949,3.91190282527594,9.15717595560091e-05,plot,setup_id + 0 + (1 | cluster_id),shannon_diversity_plot,taxonomic_diversity,105,1.05103278366472,0.34937803314148,significant,101.416639168401,186.060397802767,41.8185210029148,Shannon Diversity,"Taxonomic
+Diversity",Nwashitsumbe (KNP)
+fixed,cond,knp_satara,0.190498493833925,0.18985134042301,1.00340873764427,0.315663689999492,plot,setup_id + 0 + (1 | cluster_id),shannon_diversity_plot,taxonomic_diversity,105,0.562607121063024,-0.181610133395175,non-significant,20.9852551397234,75.5242670350735,-16.6073602899643,Shannon Diversity,"Taxonomic
+Diversity",Satara (KNP)
+fixed,cond,pnr,1.0048316525777,0.184182852301827,5.45561999947231,4.88022603105935e-08,plot,setup_id + 0 + (1 | cluster_id),shannon_diversity_plot,taxonomic_diversity,105,1.36583004308929,0.643833262066122,significant,173.144740198872,291.897462013573,90.3764538687547,Shannon Diversity,"Taxonomic
+Diversity",PNR
+fixed,cond,addo_jack,0.0302448347220902,0.143287715528634,0.211077653171505,0.832826677569109,cluster,setup_id + 0,shannon_diversity_cluster,taxonomic_diversity,36,0.311088757158212,-0.250599087714032,non-significant,3.07068558902892,36.4910361374943,-22.1665647179145,Shannon Diversity,"Taxonomic
+Diversity",Jack's (AENP)
+fixed,cond,addo_nyathi_full,0.0988581704985868,0.143287715528634,0.689927745263213,0.490239626834513,cluster,setup_id + 0,shannon_diversity_cluster,taxonomic_diversity,36,0.379702092934708,-0.181985751937535,non-significant,10.3909721490046,46.1849029404992,-16.6386782295682,Shannon Diversity,"Taxonomic
+Diversity",Nyathi (AENP)
+fixed,cond,knp_nkuhlu_full,0.312405801047854,0.143287715528635,2.1802692568256,0.0292375085256837,cluster,setup_id + 0,shannon_diversity_cluster,taxonomic_diversity,36,0.593249723483978,0.0315618786117298,significant,36.6709192536073,80.9860414935895,3.20652363838592,Shannon Diversity,"Taxonomic
+Diversity",Nkuhlu (KNP)
+fixed,cond,knp_roan,0.308854806359998,0.143287715528635,2.15548698798451,0.0311237457767086,cluster,setup_id + 0,shannon_diversity_cluster,taxonomic_diversity,36,0.589698728796123,0.0280108839238741,significant,36.1864622066195,80.3445007496856,2.84068774626787,Shannon Diversity,"Taxonomic
+Diversity",Nwashitsumbe (KNP)
+fixed,cond,knp_satara,0.225607746417428,0.143287715528633,1.57450864217557,0.115369905159714,cluster,setup_id + 0,shannon_diversity_cluster,taxonomic_diversity,36,0.506451668853549,-0.055236176018693,non-significant,25.3084042159225,65.9392661494795,-5.37383627455395,Shannon Diversity,"Taxonomic
+Diversity",Satara (KNP)
+fixed,cond,pnr,0.665543167419575,0.143287715528633,4.6448026961989,3.40401617278877e-06,cluster,setup_id + 0,shannon_diversity_cluster,taxonomic_diversity,36,0.946387089855696,0.384699244983455,significant,94.5546992129977,157.638457814111,46.917239402086,Shannon Diversity,"Taxonomic
+Diversity",PNR
+fixed,cond,addo_jack,-0.287053076101642,0.0555089890279558,-5.17128993210586,2.32483525017276e-07,plot,setup_id + 0 + (1 | cluster_id),point_return_fraction_plot,structure,107,-0.178255457606849,-0.395850694596435,significant,-24.9528104342631,-16.3271352513291,-32.6892813024534,Vegetation Density,"Vegetation
+Structure",Jack's (AENP)
+fixed,cond,addo_nyathi_full,-0.171930999985865,0.0539450407927821,-3.18715117199188,0.0014368165600748,plot,setup_id + 0 + (1 | cluster_id),point_return_fraction_plot,structure,107,-0.0661987200320123,-0.277663279939718,significant,-15.7962728252272,-6.40551451811846,-24.2448138518146,Vegetation Density,"Vegetation
+Structure",Nyathi (AENP)
+fixed,cond,knp_nkuhlu_full,-0.126169094906366,0.0539450407927814,-2.33884511073073,0.0193434510960765,plot,setup_id + 0 + (1 | cluster_id),point_return_fraction_plot,structure,107,-0.0204368149525148,-0.231901374860218,significant,-11.8534217193217,-2.02293986292624,-20.6975668414478,Vegetation Density,"Vegetation
+Structure",Nkuhlu (KNP)
+fixed,cond,knp_roan,-0.0726025393064483,0.0539450407927816,-1.34586123653767,0.178347272102959,plot,setup_id + 0 + (1 | cluster_id),point_return_fraction_plot,structure,107,0.0331297406474037,-0.1783348192603,non-significant,-7.00296167470029,3.36846414564571,-16.3337754047343,Vegetation Density,"Vegetation
+Structure",Nwashitsumbe (KNP)
+fixed,cond,knp_satara,-0.0247456461707035,0.0539450407927816,-0.458719574719734,0.64643555536802,plot,setup_id + 0 + (1 | cluster_id),point_return_fraction_plot,structure,107,0.0809866337831485,-0.130477926124555,non-significant,-2.44419826088551,8.43564027270734,-12.232413355733,Vegetation Density,"Vegetation
+Structure",Satara (KNP)
+fixed,cond,pnr,-0.0905877029508243,0.0539450407927814,-1.67925914262996,0.0931015500279646,plot,setup_id + 0 + (1 | cluster_id),point_return_fraction_plot,structure,107,0.0151445770030273,-0.196319982904676,non-significant,-8.66057769806008,1.52598372300516,-17.8250753106303,Vegetation Density,"Vegetation
+Structure",PNR
+fixed,cond,addo_jack,-0.274889188654253,0.0507916727304077,-5.41209166536632,6.22927847560036e-08,cluster,setup_id + 0,point_return_fraction_cluster,structure,36,-0.175337510102654,-0.374440867205852,significant,-24.0343702902241,-16.0826256648862,-31.2326327780718,Vegetation Density,"Vegetation
+Structure",Jack's (AENP)
+fixed,cond,addo_nyathi_full,-0.170656899804075,0.0507916727304075,-3.35993856138365,0.000779598073957623,cluster,setup_id + 0,point_return_fraction_cluster,structure,36,-0.071105221252476,-0.270208578355673,significant,-15.6889204668191,-6.86361123031664,-23.6779713498599,Vegetation Density,"Vegetation
+Structure",Nyathi (AENP)
+fixed,cond,knp_nkuhlu_full,-0.121761124909151,0.0507916727304078,-2.39726550364732,0.0165179499898907,cluster,setup_id + 0,point_return_fraction_cluster,structure,36,-0.0222094463575517,-0.22131280346075,significant,-11.4640166344559,-2.19646323477178,-19.8534060243643,Vegetation Density,"Vegetation
+Structure",Nkuhlu (KNP)
+fixed,cond,knp_roan,-0.0658066310914246,0.0507916727304078,-1.29561850503946,0.19510695052515,cluster,setup_id + 0,point_return_fraction_cluster,structure,36,0.0337450474601747,-0.165358309643024,non-significant,-6.36880996020562,3.43208703765234,-15.2410049980262,Vegetation Density,"Vegetation
+Structure",Nwashitsumbe (KNP)
+fixed,cond,knp_satara,-0.0299308750600543,0.050791672730408,-0.589287051421233,0.555668729557416,cluster,setup_id + 0,point_return_fraction_cluster,structure,36,0.0696208034915453,-0.129482553611654,non-significant,-2.94873821436921,7.21015669948217,-12.1450084194445,Vegetation Density,"Vegetation
+Structure",Satara (KNP)
+fixed,cond,pnr,-0.0783235610123016,0.0507916727304078,-1.54205515986897,0.123060190042516,cluster,setup_id + 0,point_return_fraction_cluster,structure,36,0.0212281175392977,-0.177875239563901,non-significant,-7.53348074698154,2.14550368720237,-16.2953152695643,Vegetation Density,"Vegetation
+Structure",PNR
+fixed,cond,addo_jack,-0.349853047509519,0.110527146301724,-3.1653133118489,0.0015491603864694,plot,setup_id + 0 + (1 | cluster_id),mean_point_height_plot,structure,107,-0.133219840758139,-0.566486254260899,significant,-29.5208347002236,-12.4727349646757,-43.2483953503117,Vegetation Height,"Vegetation
+Structure",Jack's (AENP)
+fixed,cond,addo_nyathi_full,-0.247213931040568,0.107940232465735,-2.29028533099597,0.0220047816075366,plot,setup_id + 0 + (1 | cluster_id),mean_point_height_plot,structure,107,-0.035651075407727,-0.458776786673409,significant,-21.9026398836261,-3.50230610672606,-36.7943687453063,Vegetation Height,"Vegetation
+Structure",Nyathi (AENP)
+fixed,cond,knp_nkuhlu_full,-0.564570628324774,0.107940232465734,-5.23040033755717,1.69143344668601e-07,plot,setup_id + 0 + (1 | cluster_id),mean_point_height_plot,structure,107,-0.353007772691936,-0.776133483957613,significant,-43.1395763095167,-29.7428267517621,-53.9818123504939,Vegetation Height,"Vegetation
+Structure",Nkuhlu (KNP)
+fixed,cond,knp_roan,-0.696913082898141,0.107940232465734,-6.45647194728232,1.07172036822176e-10,plot,setup_id + 0 + (1 | cluster_id),mean_point_height_plot,structure,107,-0.485350227265303,-0.908475938530979,significant,-50.1879410110481,-38.4518399425157,-59.6861836584325,Vegetation Height,"Vegetation
+Structure",Nwashitsumbe (KNP)
+fixed,cond,knp_satara,-0.336934338742226,0.107940232465734,-3.12148983789883,0.00179938458080504,plot,setup_id + 0 + (1 | cluster_id),mean_point_height_plot,structure,107,-0.125371483109388,-0.548497194375065,significant,-28.6044282405909,-11.7830869224187,-42.2182494373823,Vegetation Height,"Vegetation
+Structure",Satara (KNP)
+fixed,cond,pnr,-0.174284631147173,0.107940232465735,-1.61464013154223,0.106388649370291,plot,setup_id + 0 + (1 | cluster_id),mean_point_height_plot,structure,107,0.0372782244856668,-0.385847486780012,non-significant,-15.9942242976464,3.7981772612204,-32.0125792421726,Vegetation Height,"Vegetation
+Structure",PNR
+fixed,cond,addo_jack,-0.328792450927852,0.107003399224418,-3.07272902833934,0.00212110997120825,cluster,setup_id + 0,mean_point_height_cluster,structure,36,-0.119065788447993,-0.538519113407711,significant,-28.0207606511555,-11.2250604814151,-41.6388124246077,Vegetation Height,"Vegetation
+Structure",Jack's (AENP)
+fixed,cond,addo_nyathi_full,-0.24190651920916,0.107003399224418,-2.26073677063109,0.0237755620574522,cluster,setup_id + 0,mean_point_height_cluster,structure,36,-0.0321798567293009,-0.45163318168902,significant,-21.4870431345564,-3.16675946830607,-36.3412361095422,Vegetation Height,"Vegetation
+Structure",Nyathi (AENP)
+fixed,cond,knp_nkuhlu_full,-0.579772840742987,0.107003399224418,-5.41826563403868,6.01799592831097e-08,cluster,setup_id + 0,mean_point_height_cluster,structure,36,-0.370046178263127,-0.789499503222847,significant,-43.9974432890803,-30.9297565537856,-54.5928000007408,Vegetation Height,"Vegetation
+Structure",Nkuhlu (KNP)
+fixed,cond,knp_roan,-0.738377940566284,0.107003399224418,-6.90050919800859,5.18164660892293e-12,cluster,setup_id + 0,mean_point_height_cluster,structure,36,-0.528651278086424,-0.948104603046144,significant,-52.2111549350153,-41.0600630308668,-61.252525365931,Vegetation Height,"Vegetation
+Structure",Nwashitsumbe (KNP)
+fixed,cond,knp_satara,-0.340826523944325,0.107003399224418,-3.18519342763597,0.00144657284219453,cluster,setup_id + 0,mean_point_height_cluster,structure,36,-0.131099861464465,-0.550553186424185,significant,-28.8817729398941,-12.2869821486763,-42.3369262160616,Vegetation Height,"Vegetation
+Structure",Satara (KNP)
+fixed,cond,pnr,-0.1839530543794,0.107003399224418,-1.71913280991752,0.0855901917547774,cluster,setup_id + 0,mean_point_height_cluster,structure,36,0.0257736081004598,-0.393679716859259,non-significant,-16.8025139513956,2.61086194962328,-32.5429924932704,Vegetation Height,"Vegetation
+Structure",PNR
