@@ -1,5 +1,5 @@
 effect,component,group,term,estimate,std.error,ci_lb,ci_ub,scale,formula,response_name,response_tier,n,sig,percent_change,ci_ub_percent_change,ci_lb_percent_change,clean_response,clean_response_tier
-fixed,cond,,Intercept,0.274471329433988,0.134998934009193,0.00186562920025247,0.525780758609911,plot,1 + (1 | exclosure_id/cluster_id),plant_richness_plot,taxonomic_diversity,107,significant,31.5834847798419,69.1779204052122,0.186737056915676,Plant Richness,"Taxonomic
+fixed,cond,,Intercept,0.279161385357259,0.133264147400712,-0.00731231927456176,0.529104595598848,plot,1 + (1 | exclosure_id/cluster_id),plant_richness_plot,taxonomic_diversity,107,non-significant,32.2020681434274,69.74117580076,-0.728564931399045,Plant Richness,"Taxonomic
 Diversity"
 fixed,cond,,Intercept,0.149142424842178,0.133791145820852,-0.133756018157014,0.410073403066912,site,1,plant_richness_site,taxonomic_diversity,6,non-significant,16.0838309648983,50.6928394219033,-12.5196525267807,Plant Richness,"Taxonomic
 Diversity"
@@ -25,9 +25,9 @@ fixed,cond,,Intercept,-0.0348311915600484,0.0376477151130278,-0.113241732660067,
 Diversity"
 fixed,cond,,Intercept,-0.036347072680513,0.0527310086858077,-0.137200838863501,0.0708652631041149,site,1,functional_specialization_site,functional_diversity,6,non-significant,-3.56944487159706,7.34365846109792,-12.8204881792287,Plant Functional Specialization,"Functional
 Diversity"
-fixed,cond,,Intercept,0.134110210664492,0.0735096371828474,-0.0100711697360869,0.285556467448326,plot,1 + (1 | exclosure_id/cluster_id),functional_diversity_plot,functional_diversity,108,non-significant,14.3518840671378,33.0502203326747,-1.0020625328906,Plant Functional Diversity,"Functional
+fixed,cond,,Intercept,0.137526437341624,0.0705825290644151,0.00228764516990514,0.281041040845004,plot,1 + (1 | exclosure_id/cluster_id),functional_diversity_plot,functional_diversity,108,significant,14.7432040623935,32.4507961745769,0.229026382658848,Plant Functional Diversity,"Functional
 Diversity"
-fixed,cond,,Intercept,0.114673088731819,0.173421272484151,-0.203698310976472,0.459593547142301,site,1,functional_diversity_site,functional_diversity,6,non-significant,12.1506744445046,58.3430264426369,-18.4291575652318,Plant Functional Diversity,"Functional
+fixed,cond,,Intercept,0.133025333012236,0.130366358980117,-0.14315813749359,0.395720542866184,site,1,functional_diversity_site,functional_diversity,6,non-significant,14.2278935330607,48.5454138785717,-13.3382986583434,Plant Functional Diversity,"Functional
 Diversity"
 fixed,cond,,Intercept,-0.359524972298026,0.167704087526574,-0.688684920160695,-0.00801818927065654,plot,1 + (1 | exclosure_id/cluster_id),functional_nearerst_neighbour_distance_plot,functional_diversity,105,significant,-30.1992179618817,-0.798612933583265,-49.7763884445849,Plant Functional Distance,"Functional
 Diversity"
@@ -41,9 +41,9 @@ fixed,cond,,Intercept,0.219822405890259,0.108099154954845,0.00751405764588833,0.
 Diversity"
 fixed,cond,,Intercept,-0.131566228904794,0.0499380785465122,-0.229103903638938,-0.0325638015606323,plot,1 + (1 | exclosure_id/cluster_id),point_return_fraction_plot,structure,107,significant,-12.327879107049,-3.20393095415271,-20.4754099730667,Vegetation Density,"Vegetation
 Structure"
-fixed,cond,,Intercept,-0.142712306333462,0.0539445069172708,-0.251285643412527,-0.0337802891454504,site,1,point_return_fraction_site,structure,6,significant,-13.2996535575407,-3.32161057799322,-22.2199833669036,Vegetation Density,"Vegetation
+fixed,cond,,Intercept,-0.133146107015474,0.0553013892936132,-0.248312120288989,-0.0246200475804437,site,1,point_return_fraction_site,structure,6,significant,-12.4662810139053,-2.43194462021152,-21.9883584885959,Vegetation Density,"Vegetation
 Structure"
 fixed,cond,,Intercept,-0.375499889764331,0.0934580409714194,-0.557395247261905,-0.17455349581761,plot,1 + (1 | exclosure_id/cluster_id),mean_point_height_plot,structure,107,significant,-31.3054204225655,-16.0168074468039,-42.7301138342964,Vegetation Height,"Vegetation
 Structure"
-fixed,cond,,Intercept,-0.42157099637255,0.14521936039779,-0.696527998855719,-0.134080024462434,site,1,mean_point_height_site,structure,6,significant,-34.3984587974392,-12.5479921196111,-50.168755488229,Vegetation Height,"Vegetation
+fixed,cond,,Intercept,-0.399797361733059,0.151984198114187,-0.708428268512895,-0.0920768678325872,site,1,mean_point_height_site,structure,6,significant,-32.9544107708576,-8.79649593062545,-50.7582462291025,Vegetation Height,"Vegetation
 Structure"

@@ -187,7 +187,7 @@ fd_hill_res <- alpha.fd.hill(asb_sp_w = weight_mat, sp_dist = fdist)
 dt_dbfd <- fd_hill_res$asb_FD_Hill %>% 
   as.data.frame() %>% 
   rownames_to_column(var = "plot_id")
-hist(dt_dbfd$FD_q1)
+hist(dt_dbfd$FD_q2)
 
 
 ## the q argument defines the importance of species weight compared to trait based distances (higher q, species weight is considered more important)
@@ -225,7 +225,7 @@ dt_afdi <- alpha_fd_indices$functional_diversity_indices %>%
 dt_fd_plot <- dt_dbfd %>% 
   left_join(dt_afdi) %>% 
   as.data.table() %>% 
-  rename(functional_diversity_plot = FD_q1, 
+  rename(functional_diversity_plot = FD_q2, #q2 is recommended by Chao et al 2019 https://esajournals.onlinelibrary.wiley.com/doi/pdfdirect/10.1002/ecm.1343?casa_token=-QbN1gFpfe0AAAAA:7tp9ejf7BHdDGdlWJ5vaJUaj6PQwUTltt7fHDI927IXq-iom2DP7bZpkstN9bzFGDXw3mAuUUE10Txp_
          
          functional_dispersion_plot = fdis, #Functional Dispersion: the biomass weighted deviation of species traits values from the center of the functional space filled by the assemblage i.e. the biomass-weighted mean distance to the biomass-weighted mean trait values of the assemblage.
          functional_pairwise_distance_plot = fmpd, #Functional Mean Pairwise Distance: the mean weighted distance between all species pairs. 
@@ -327,7 +327,7 @@ dt_fd_cluster <- dt_dbfd_cluster %>%
   left_join(dt_afdi_cluster) %>% 
   as.data.table() %>% 
   rename(
-         functional_diversity_cluster = FD_q1, 
+         functional_diversity_cluster = FD_q2, 
          
          functional_dispersion_cluster = fdis, #Functional Dispersion: the biomass weighted deviation of species traits values from the center of the functional space filled by the assemblage i.e. the biomass-weighted mean distance to the biomass-weighted mean trait values of the assemblage.
          functional_pairwise_distance_cluster = fmpd, #Functional Mean Pairwise Distance: the mean weighted distance between all species pairs. 
@@ -421,7 +421,7 @@ dt_fd_site <- dt_dbfd_site %>%
   left_join(dt_afdi_site) %>% 
   as.data.table() %>% 
   rename(
-         functional_diversity_site = FD_q1, 
+         functional_diversity_site = FD_q2, 
          
          functional_dispersion_site = fdis, #Functional Dispersion: the biomass weighted deviation of species traits values from the center of the functional space filled by the assemblage i.e. the biomass-weighted mean distance to the biomass-weighted mean trait values of the assemblage.
          functional_pairwise_distance_site = fmpd, #Functional Mean Pairwise Distance: the mean weighted distance between all species pairs. 

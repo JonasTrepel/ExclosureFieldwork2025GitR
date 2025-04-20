@@ -22,7 +22,7 @@ dt_fun <- fread("data/processed/fragments/functional_diversity_metrics.csv")
 
 dt_lid <- fread("data/processed/fragments/lidar_metrics_750cm_radius.csv") %>% 
   dplyr::select(mean_3d, adjusted_mean_3d, sd_3d, point_fraction, sd_height, mean_height, plot_id) %>% 
-  left_join(dt_sp %>% dplyr::select(plot_id, site_id, cluster_id)) %>% 
+  left_join(dt_sp %>% dplyr::select(plot_id, site_id, cluster_id) %>% unique()) %>% 
   rename(mean_point_distance_plot = mean_3d, 
          sd_point_distance_plot = sd_3d, 
          adjusted_mean_point_distance_plot = adjusted_mean_3d, 
@@ -44,8 +44,7 @@ dt_lid <- fread("data/processed/fragments/lidar_metrics_750cm_radius.csv") %>%
          point_return_fraction_site = mean(point_return_fraction_cluster, na.rm = T), 
          mean_point_height_site = mean(mean_point_height_cluster, na.rm = T), 
          sd_point_height_site = mean(sd_point_height_cluster, na.rm = T)) %>% 
-  ungroup()
-
+  ungroup() 
 # environmental
 dt_env <- fread("data/processed/fragments/plot_environmental.csv")
 
@@ -61,6 +60,13 @@ dt_comb <- dt_tax %>%
          evi = mean(evi_plot, na.rm = T),
          mat = mean(mat_plot, na.rm = T),
          map = mean(map_plot, na.rm = T)) %>% 
+  ungroup() %>% 
+  group_by(pair_id) %>% 
+  mutate(npp_pair = mean(npp_plot, na.rm = T),
+         ndvi_pair = mean(ndvi_plot, na.rm = T),
+         evi_pair = mean(evi_plot, na.rm = T),
+         mat_pair = mean(mat_plot, na.rm = T),
+         map_pair = mean(map_plot, na.rm = T)) %>% 
   ungroup()
 glimpse(dt_comb)
 
@@ -154,7 +160,7 @@ dt_in <- dt_comb %>%
     names_to = "response_name", values_to = "response_value_in") %>% 
   unique() %>%
   dplyr::select(response_name, response_value_in, pair_id, cluster_number, setup_id, exclosure_id, 
-                mat, map, npp, ndvi, evi) %>% unique()
+                mat, map, npp, ndvi, evi, mat_pair, map_pair, npp_pair, ndvi_pair, evi_pair) %>% unique()
 
 
 dt_rr <- dt_in %>% left_join(dt_out) %>% 
@@ -199,3 +205,4 @@ dt_rr %>%
   geom_jitter(aes(x = ln_rr, y = response_name, color = setup_id), alpha = 0.5, height = 0.1) +
   theme_minimal() +
   theme(legend.position = "none")
+

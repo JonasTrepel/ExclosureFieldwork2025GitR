@@ -67,6 +67,7 @@ for(i in 1:nrow(files)){
   
 }
 
+fwrite(points, "data/processed/fragments/lidar_points_100000_per_plot.csv")
 setDT(points)
 
 dt_all <- fread("data/processed/clean/all_vars.csv")

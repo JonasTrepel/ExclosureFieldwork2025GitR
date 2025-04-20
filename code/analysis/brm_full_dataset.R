@@ -193,7 +193,14 @@ estimates <- estimates %>%
 
 rts <- estimates %>% dplyr::select(response_name, response_tier, clean_response_tier, clean_response)
 
-fwrite(estimates, "builds/model_outputs/brm_estimates_full_dataset.csv")
+fwrite(estimates %>%
+         mutate(estimate_ci = paste0(round(estimate, 2), " (", round(ci_lb, 2), "; ", round(ci_ub, 2), ")"), 
+                percent_change_ci = paste0(round(percent_change, 2),
+                                           " (", round(ci_lb_percent_change, 2), "; ", round(ci_ub_percent_change, 2), ")")) %>% 
+         arrange(scale, desc(response_tier)) %>% 
+         dplyr::select(scale, clean_response, estimate_ci, percent_change_ci), "builds/model_outputs/table_brm_estimates_full_dataset.csv")
+
+fwrite(estimates, "builds/model_outputs/raw_brm_estimates_full_dataset.csv")
 
 estimates$estimate
 exp(estimates$estimate)
@@ -290,4 +297,6 @@ p_site
 
 p_comb <- grid.arrange(p_plot, p_site, ncol = 2, widths = c(1.2, 1))
 
-ggsave(plot = p_comb, "builds/plots/preliminary/brm_estimates.png", dpi = 600, height = 6, width = 11)
+ggsave(plot = p_comb, "builds/plots/supplement/brm_estimates.png", dpi = 600, height = 6, width = 11)
+  
+

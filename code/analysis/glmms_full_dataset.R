@@ -71,7 +71,7 @@ guide <- dt %>%
     grepl("functional_nearerst_neighbour_distance", response_name) ~ "functional_diversity",
     grepl("point_return_fraction", response_name) ~ "structure",
     grepl("mean_point_height", response_name) ~ "structure"
-  ))
+  )) %>% filter(!grepl("cluster", response_name))
 
 table(guide$response_tier)
 
@@ -192,7 +192,16 @@ estimates <- estimates %>%
 
 rts <- estimates %>% dplyr::select(response_name, response_tier, clean_response_tier, clean_response)
 
-fwrite(estimates, "builds/model_outputs/glmm_estimates_full_dataset.csv")
+fwrite(estimates %>%
+         mutate(estimate_ci = paste0(round(estimate, 2), " (", round(ci_lb, 2), "; ", round(ci_ub, 2), ")"), 
+                percent_change_ci = paste0(round(percent_change, 2),
+                                           " (", round(ci_lb_percent_change, 2), "; ", round(ci_ub_percent_change, 2), ")"),
+                p = round(p.value, 3), 
+                z = round(statistic, 2)) %>% 
+         arrange(scale, desc(response_tier)) %>% 
+         dplyr::select(scale, clean_response, estimate_ci, p, z, percent_change_ci), "builds/model_outputs/table_glmm_estimates_full_dataset.csv")
+
+fwrite(estimates, "builds/model_outputs/raw_glmm_estimates_full_dataset.csv")
 
 estimates$estimate
 exp(estimates$estimate)
@@ -217,7 +226,7 @@ p_plot <- estimates %>%
   geom_vline(xintercept = 0, linetype = "dashed", color = "grey25") +
   geom_text(data = ann_text,
             aes(x = ln_rr, y = Inf, label = label),
-            fontface = "italic", size = 2.5, vjust = 1.5, color = "grey50") +
+            fontface = "italic", size = 2.5, vjust = 1.5, color = "grey20") +
   geom_jitter(data = dt %>%
                filter(response_name %in% unique(estimates[scale == "plot", ]$response_name)) %>%
                left_join(rts) %>% 
@@ -289,5 +298,5 @@ p_site
 
 p_comb <- grid.arrange(p_plot, p_site, ncol = 2, widths = c(1.2, 1))
 
-ggsave(plot = p_comb, "builds/plots/preliminary/glmm_estimates.png", dpi = 600, height = 6, width = 11)
+ggsave(plot = p_comb, "builds/plots/main/glmm_estimates.png", dpi = 600, height = 6, width = 11)
 

@@ -59,7 +59,7 @@ guide <- dt %>%
     grepl("functional_nearerst_neighbour_distance", response_name) ~ "functional_diversity",
     grepl("point_return_fraction", response_name) ~ "structure",
     grepl("mean_point_height", response_name) ~ "structure"
-  ))
+  )) %>% filter(!grepl("cluster", response_name))
 
 table(guide$response_tier)
 
@@ -167,8 +167,16 @@ rts <- estimates %>%
   dplyr::select(response_name, response_tier, clean_response_tier, clean_response, biome_clean, biome = term)
 
 
-fwrite(estimates, "builds/model_outputs/glmm_estimates_biomes_separately.csv")
+fwrite(estimates %>%
+         mutate(estimate_ci = paste0(round(estimate, 2), " (", round(ci_lb, 2), "; ", round(ci_ub, 2), ")"), 
+                percent_change_ci = paste0(round(percent_change, 2),
+                                           " (", round(ci_lb_percent_change, 2), "; ", round(ci_ub_percent_change, 2), ")"),
+                p = round(p.value, 3), 
+                z = round(statistic, 2)) %>% 
+         arrange(clean_response, desc(response_tier)) %>% 
+         dplyr::select(Biome = biome_clean, clean_response, estimate_ci, p, z, percent_change_ci), "builds/model_outputs/table_glmm_estimates_biomes_separately.csv")
 
+fwrite(estimates, "builds/model_outputs/raw_glmm_estimates_biomes.csv")
 
 dt %>% dplyr::select(npp, setup_id) %>% arrange(npp) %>% unique() 
 
@@ -204,4 +212,4 @@ p_plot <- estimates %>%
   )
 p_plot
 
-ggsave(plot = p_plot, "builds/plots/preliminary/glmm_estimates_biomes_seperate.png", dpi = 600, height = 6, width = 12)
+ggsave(plot = p_plot, "builds/plots/main/glmm_estimates_biomes.png", dpi = 600, height = 6, width = 12)

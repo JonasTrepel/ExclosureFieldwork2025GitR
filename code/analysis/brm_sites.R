@@ -112,15 +112,15 @@ for(response in unique(guide$response_name)){
   tidy_m <- broom.mixed::tidy(m)
   
   tmp_est <- tidy_m %>% 
-    # rename(ci_ub = conf.high, 
-    #        ci_lb = conf.low) %>% 
+    rename(ci_ub = conf.high,
+           ci_lb = conf.low) %>%
     mutate(scale = sca, 
            formula = form, 
            response_name = response, 
            response_tier = tier, 
            n = n,
-           ci_ub = estimate + 1.96*std.error, 
-           ci_lb = estimate - 1.96*std.error,
+           # ci_ub = estimate + 1.96*std.error, 
+           # ci_lb = estimate - 1.96*std.error,
            sig = ifelse(ci_lb > 0 | ci_ub < 0, "significant", "non-significant"), 
            term = gsub("setup_id", "", term)) %>% 
     filter(!effect == "ran_pars") %>% 
@@ -170,14 +170,14 @@ estimates <- estimates %>%
                                                                  "Vegetation\nStructure",
                                                                  "Functional\nDiversity")), 
     clean_setup = case_when(
-      term == "knp_roan" ~ "Nwashitsumbe (KNP)", 
+      term == "knp_roan" ~ "Nwaswitshumbe (KNP)", 
       term == "knp_satara" ~ "Satara (KNP)",
       term == "knp_nkuhlu_full" ~ "Nkuhlu (KNP)", 
       term == "pnr" ~ "PNR", 
       term == "addo_jack" ~ "Jack's (AENP)", 
       term == "addo_nyathi_full" ~ "Nyathi (AENP)"
     ), 
-    clean_setup = factor(clean_setup, levels = c("Nwashitsumbe (KNP)", "Satara (KNP)", "Nkuhlu (KNP)", 
+    clean_setup = factor(clean_setup, levels = c("Nwaswitshumbe (KNP)", "Satara (KNP)", "Nkuhlu (KNP)", 
                                                  "PNR", "Jack's (AENP)", "Nyathi (AENP)")))
 
 
@@ -185,8 +185,14 @@ rts <- estimates %>%
   dplyr::select(response_name, response_tier, clean_response_tier, clean_response, clean_setup, setup_id = term)
 
 
-fwrite(estimates, "builds/model_outputs/brm_estimates_sites_separately.csv")
+fwrite(estimates %>%
+         mutate(estimate_ci = paste0(round(estimate, 2), " (", round(ci_lb, 2), "; ", round(ci_ub, 2), ")"), 
+                percent_change_ci = paste0(round(percent_change, 2),
+                                           " (", round(ci_lb_percent_change, 2), "; ", round(ci_ub_percent_change, 2), ")")) %>% 
+         arrange(response_name, desc(response_tier)) %>% 
+         dplyr::select(Site = clean_setup, clean_response, estimate_ci, percent_change_ci), "builds/model_outputs/table_brm_estimates_sites_separately.csv")
 
+fwrite(estimates, "builds/model_outputs/raw_brm_estimates_sites.csv")
 
 dt %>% dplyr::select(npp, setup_id) %>% arrange(npp) %>% unique() 
 
@@ -204,7 +210,7 @@ p_plot <- estimates %>%
   scale_color_manual(values = c("grey50", "orange2")) +
   scale_fill_scico(palette = "bamako", direction = -1) +
   geom_pointrange(aes(x = estimate, xmin = ci_lb, xmax = ci_ub, y = clean_response, color = sig), linewidth = 1.3, alpha = 0.9) +
-  labs(title = "Site-Specific Estimates", y = "Response", x = "Log-Response Ratio", fill = "NPP", color = "") +
+  labs(title = "Site-Specific Estimates", y = "Response", x = "Log-Response Ratio", fill = expression(NPP~(kg~C~ha^{-1}~yr^{-1})), color = "") +
   theme_minimal() +
   scale_y_discrete(limits = rev) +
   theme(legend.position = "bottom", 
@@ -222,4 +228,4 @@ p_plot <- estimates %>%
   )
 p_plot
 
-ggsave(plot = p_plot, "builds/plots/preliminary/brm_estimates_setups_seperate.png", dpi = 600, height = 6, width = 12)
+ggsave(plot = p_plot, "builds/plots/supplement/brm_estimates_sites.png", dpi = 600, height = 6, width = 12.5)

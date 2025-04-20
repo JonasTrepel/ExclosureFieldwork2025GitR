@@ -107,18 +107,18 @@ for(response in unique(guide$response_name)){
     m <- brm(as.formula(paste0("ln_rr ~ ", form)), prior = prior, data = dt_mod)
   }
   
-  tidy_m <- broom.mixed::tidy(m)
-  
+  tidy_m <- broom.mixed::tidy(m) # output is is the same as from posterior_summary(m)
+
   tmp_est <- tidy_m %>% 
-    # rename(ci_ub = conf.high, 
-    #        ci_lb = conf.low) %>% 
+    rename(ci_ub = conf.high,
+           ci_lb = conf.low) %>%
     mutate(scale = sca, 
            formula = form, 
            response_name = response, 
            response_tier = tier, 
            n = n,
-           ci_ub = estimate + 1.96*std.error, 
-           ci_lb = estimate - 1.96*std.error,
+           # ci_ub = estimate + 1.96*std.error, 
+           # ci_lb = estimate - 1.96*std.error,
            sig = ifelse(ci_lb > 0 | ci_ub < 0, "significant", "non-significant"), 
            term = gsub("setup_id", "", term)) %>% 
     filter(!effect == "ran_pars") %>% 
@@ -175,7 +175,14 @@ rts <- estimates %>%
   dplyr::select(response_name, response_tier, clean_response_tier, clean_response, biome_clean, biome = term)
 
 
-fwrite(estimates, "builds/model_outputs/brm_estimates_biomes_separately.csv")
+fwrite(estimates %>%
+         mutate(estimate_ci = paste0(round(estimate, 2), " (", round(ci_lb, 2), "; ", round(ci_ub, 2), ")"), 
+                percent_change_ci = paste0(round(percent_change, 2),
+                                           " (", round(ci_lb_percent_change, 2), "; ", round(ci_ub_percent_change, 2), ")")) %>% 
+         arrange(clean_response, desc(response_tier)) %>% 
+         dplyr::select(Biome = biome_clean, clean_response, estimate_ci, percent_change_ci) , "builds/model_outputs/table_brm_estimates_biomes_separately.csv")
+
+fwrite(estimates, "builds/model_outputs/raw_brm_estimates_biomes.csv")
 
 
 dt %>% dplyr::select(npp, setup_id) %>% arrange(npp) %>% unique() 
@@ -212,4 +219,4 @@ p_plot <- estimates %>%
   )
 p_plot
 
-ggsave(plot = p_plot, "builds/plots/preliminary/brm_estimates_biomes_seperate.png", dpi = 600, height = 6, width = 12)
+ggsave(plot = p_plot, "builds/plots/supplement/brm_estimates_biomes.png", dpi = 600, height = 6, width = 12)
