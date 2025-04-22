@@ -106,7 +106,7 @@ ggsave(plot = p_box, "builds/plots/supplement/response_boxplots.png", dpi = 600,
 
 # 2. Correlations ----------------------------------------------------
 
-#Plot
+#Raw Data 
 dt_co_p <- fread("data/processed/clean/all_vars.csv") %>% 
   dplyr::select(plant_richness_plot,
                 woody_richness_plot, 
@@ -145,54 +145,58 @@ p_corr <- round(cor(dt_co_p), 1)
 p_plot_corr <- ggcorrplot(p_corr, hc.order = TRUE, type = "lower",
            lab = TRUE, 
            colors = c("#6D9EC1", "white", "#E46726")) +
-  labs(title = "a)", subtitle = "Plot-Scale") +
+  labs(title = "a)", subtitle = "Raw Data Correlations") +
   theme(plot.subtitle = element_text(size = 12, hjust = 0.5))
 p_plot_corr
 
-#Site
-dt_co_s <- fread("data/processed/clean/all_vars.csv") %>% 
-  dplyr::select(plant_richness_site,
-                woody_richness_site, 
-                forb_richness_site, 
-                graminoid_richness_site,
+#Effect Sizes 
+dt_co_p_es <- fread("data/processed/clean/long_data_with_lnrr.csv") %>% 
+  dplyr::select(c(response_name, ln_rr, pair_id, cluster_id, exclosure_id, setup_id)) %>% 
+  pivot_wider(names_from = "response_name", values_from = "ln_rr", id_cols = c(pair_id, cluster_id, exclosure_id, setup_id)) %>%
+  mutate(across(where(is.numeric), ~ ifelse(is.infinite(.), NA, .))) %>% 
+  as.data.table() %>%
+  dplyr::select(plant_richness_plot,
+                woody_richness_plot, 
+                forb_richness_plot, 
+                graminoid_richness_plot,
                 
-                berger_parker_site, 
+                berger_parker_plot, 
                 
-                functional_dispersion_site,
-                functional_specialization_site,
-                functional_diversity_site, 
-                functional_nearerst_neighbour_distance_site, 
+                functional_dispersion_plot,
+                functional_specialization_plot,
+                functional_diversity_plot, 
+                functional_nearerst_neighbour_distance_plot, 
                 
-                plant_evenness_site, 
-                shannon_diversity_site,
+                plant_evenness_plot, 
+                shannon_diversity_plot,
                 
-                point_return_fraction_site, 
-                mean_point_height_site) %>% 
+                point_return_fraction_plot, 
+                mean_point_height_plot) %>% 
   rename(
-    "Plant Richness" = plant_richness_site,
-    "Woody Richness" = woody_richness_site,
-    "Forb Richness" = forb_richness_site,
-    "Graminoid Richness" = graminoid_richness_site,
-    "Shannon Diversity" = shannon_diversity_site,
-    "Plant Dominance" = berger_parker_site,
-    "Plant Evenness" = plant_evenness_site,
-    "Vegetation Density" = point_return_fraction_site,
-    "Vegetation Height" = mean_point_height_site,
-    "Plant Functional Distance" = functional_nearerst_neighbour_distance_site,
-    "Plant Functional Diversity" = functional_diversity_site,
-    "Plant Functional Specialization" = functional_specialization_site,
-    "Plant Functional Dispersion" = functional_dispersion_site
+    "Plant Richness" = plant_richness_plot,
+    "Woody Richness" = woody_richness_plot,
+    "Forb Richness" = forb_richness_plot,
+    "Graminoid Richness" = graminoid_richness_plot,
+    "Shannon Diversity" = shannon_diversity_plot,
+    "Plant Dominance" = berger_parker_plot,
+    "Plant Evenness" = plant_evenness_plot,
+    "Vegetation Density" = point_return_fraction_plot,
+    "Vegetation Height" = mean_point_height_plot,
+    "Plant Functional Distance" = functional_nearerst_neighbour_distance_plot,
+    "Plant Functional Diversity" = functional_diversity_plot,
+    "Plant Functional Specialization" = functional_specialization_plot,
+    "Plant Functional Dispersion" = functional_dispersion_plot
   ) %>% filter(complete.cases(.))
 
-s_corr <- round(cor(dt_co_s), 1)
-p_site_corr <- ggcorrplot(s_corr, hc.order = TRUE, type = "lower",
+p_corr_es <- round(cor(dt_co_p_es), 1)
+p_plot_corr_es <- ggcorrplot(p_corr_es, hc.order = TRUE, type = "lower",
                           lab = TRUE, 
                           colors = c("#6D9EC1", "white", "#E46726")) +
-  labs(title = "a)", subtitle = "Site-Scale") +
+  labs(title = "b)", subtitle = "Effect-Size Correlations") +
   theme(plot.subtitle = element_text(size = 12, hjust = 0.5))
-p_site_corr
+p_plot_corr_es
 
-corr_plot <- grid.arrange(p_plot_corr, p_site_corr, ncol = 1)
+corr_plot <- grid.arrange(p_plot_corr, p_plot_corr_es, ncol = 1)
 ggsave(plot = corr_plot, "builds/plots/supplement/corr_plots.png", dpi = 600, height = 12, width = 10)
 
 
