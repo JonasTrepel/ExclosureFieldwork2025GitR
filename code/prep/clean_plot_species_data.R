@@ -6,8 +6,9 @@ library(gridExtra)
 
 plot_meta <-  fread("data/raw/plot_level_data_2025.csv")
 
-plot_species <- fread("data/raw/plot_species_2025.csv") 
-summary(plot_species)
+plot_species <- fread("data/raw/plot_species_2025.csv") %>% 
+  mutate(life_form = ifelse(life_form == "Grass", "Graminoid", life_form))
+table(plot_species$life_form)
 
 dt_plot_raw <- plot_species %>% 
   left_join(plot_meta) %>% 
@@ -84,7 +85,8 @@ dt_plot_raw <- plot_species %>%
 dt_woody <- dt_plot_raw %>% 
   filter(life_form %in% c("Shrub", "Tree")) %>% 
   group_by(plot_id) %>% 
-  mutate(woody_richness_plot = n_distinct(species)) %>% 
+  mutate(woody_richness_plot = n_distinct(species), 
+         woody_cover_percent = sum(cover)) %>% 
   ungroup() %>% 
   group_by(cluster_id) %>% 
   mutate(woody_richness_cluster = n_distinct(species)) %>% 
@@ -92,12 +94,13 @@ dt_woody <- dt_plot_raw %>%
   group_by(site_id) %>% 
   mutate(woody_richness_site = n_distinct(species)) %>% 
   ungroup() %>% 
-  dplyr::select(plot_id, cluster_id, woody_richness_plot, woody_richness_cluster, woody_richness_site)  %>% unique()
+  dplyr::select(plot_id, cluster_id, woody_richness_plot, woody_richness_cluster, woody_richness_site, woody_cover_percent)  %>% unique()
 
 dt_forb <- dt_plot_raw %>% 
   filter(life_form %in% c("Forb")) %>% 
   group_by(plot_id) %>% 
-  mutate(forb_richness_plot = n_distinct(species)) %>% 
+  mutate(forb_richness_plot = n_distinct(species), 
+         forb_cover_percent = sum(cover)) %>% 
   ungroup() %>% 
   group_by(cluster_id) %>% 
   mutate(forb_richness_cluster = n_distinct(species)) %>% 
@@ -105,12 +108,13 @@ dt_forb <- dt_plot_raw %>%
   group_by(site_id) %>% 
   mutate(forb_richness_site = n_distinct(species)) %>% 
   ungroup() %>% 
-  dplyr::select(plot_id, cluster_id, forb_richness_plot, forb_richness_cluster, forb_richness_site)  %>% unique()
+  dplyr::select(plot_id, cluster_id, forb_richness_plot, forb_richness_cluster, forb_richness_site, forb_cover_percent)  %>% unique()
 
 dt_graminoid <- dt_plot_raw %>% 
   filter(life_form %in% c("Graminoid")) %>% 
   group_by(plot_id) %>% 
-  mutate(graminoid_richness_plot = n_distinct(species)) %>% 
+  mutate(graminoid_richness_plot = n_distinct(species), 
+         graminoid_cover_percent = sum(cover)) %>% 
   ungroup() %>% 
   group_by(cluster_id) %>% 
   mutate(graminoid_richness_cluster = n_distinct(species)) %>% 
@@ -118,7 +122,7 @@ dt_graminoid <- dt_plot_raw %>%
   group_by(site_id) %>% 
   mutate(graminoid_richness_site = n_distinct(species)) %>% 
   ungroup() %>% 
-  dplyr::select(plot_id, cluster_id, graminoid_richness_plot, graminoid_richness_cluster, graminoid_richness_site) %>% unique()
+  dplyr::select(plot_id, cluster_id, graminoid_richness_plot, graminoid_richness_cluster, graminoid_richness_site, graminoid_cover_percent) %>% unique()
 
 
 dt_plot <- dt_plot_raw %>% 

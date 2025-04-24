@@ -21,7 +21,7 @@ dt_mod <- fread("data/processed/clean/long_data_with_lnrr.csv") %>%
   as.data.table()
 
 
-dt_corr <- dt_wide %>% 
+dt_corr <- dt_mod %>% 
   dplyr::select(berger_parker_plot, plant_evenness_plot, point_return_fraction_plot, mean_point_height_plot) %>% 
   filter(complete.cases(.))
 corr <- cor(dt_corr) 

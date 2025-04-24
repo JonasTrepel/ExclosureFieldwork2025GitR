@@ -51,32 +51,22 @@ m_psem <- psem(
             (1 | exclosure_id/cluster_id), na.action = na.omit,
           data = dt),
   
-  # #Dispersion 
-  # glmmTMB(functional_dispersion_plot ~
-  #           berger_parker_plot +
-  #           mean_point_height_plot +
-  #           point_return_fraction_plot +
-  #           plant_richness_plot +
-  #           (1 | exclosure_id/cluster_id), na.action = na.omit,
-  #         data = dt),
-  # 
-  # #Specialization 
-  # glmmTMB(functional_specialization_plot ~
-  #           berger_parker_plot +
-  #           mean_point_height_plot +
-  #           point_return_fraction_plot +
-  #           plant_richness_plot +
-  #           (1 | exclosure_id/cluster_id), na.action = na.omit,
-  #         data = dt),
+  #Dispersion
+  glmmTMB(functional_dispersion_plot ~
+            berger_parker_plot +
+            mean_point_height_plot +
+            point_return_fraction_plot +
+            plant_richness_plot +
+            (1 | exclosure_id/cluster_id), na.action = na.omit,
+          data = dt),
+
+
   
   # Correlated errors
   functional_diversity_plot %~~% functional_nearerst_neighbour_distance_plot,
-  # functional_diversity_plot %~~% functional_specialization_plot,
-  # functional_diversity_plot %~~% functional_dispersion_plot,
-  # functional_dispersion_plot %~~% functional_specialization_plot,
-  # functional_dispersion_plot %~~% functional_nearerst_neighbour_distance_plot,
-  # functional_specialization_plot %~~% functional_nearerst_neighbour_distance_plot,
-  
+  functional_diversity_plot %~~% functional_dispersion_plot,
+  functional_dispersion_plot %~~% functional_nearerst_neighbour_distance_plot,
+
   data = dt
 )
 s_m <- summary(m_psem)
@@ -172,7 +162,7 @@ p1 <- dt_est %>%
   geom_pointrange(aes(x = estimate, xmin = ci_lb, xmax = ci_ub, y = clean_term, color = significance), 
                   linewidth = 1.3, size = 0.9, alpha = 0.75) +
   scale_color_manual(values = c("Non significant" = "grey", "Significantly positive" = "orange2","Significantly negative" = "orange2")) +
-  facet_wrap(~ Label) +
+  facet_wrap(~ Label, ncol = 4) +
   labs(y = "", color = "") +
   scale_y_discrete(limits = rev) +
   theme_minimal() + 

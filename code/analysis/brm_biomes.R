@@ -25,7 +25,8 @@ guide <- dt %>%
                          "shannon_diversity_plot",
                          
                          "functional_dispersion_plot", "functional_diversity_plot", 
-                         "functional_specialization_plot", "functional_nearerst_neighbour_distance_plot",
+                         "functional_specialization_plot",
+                         "functional_nearerst_neighbour_distance_plot",
                          
                          "point_return_fraction_plot", "mean_point_height_plot"
     ) ~ "biome + 0 + (1 | exclosure_id/cluster_id)",
@@ -59,7 +60,9 @@ guide <- dt %>%
     grepl("functional_nearerst_neighbour_distance", response_name) ~ "functional_diversity",
     grepl("point_return_fraction", response_name) ~ "structure",
     grepl("mean_point_height", response_name) ~ "structure"
-  )) %>% filter(!grepl("cluster", response_name))
+  )) %>% 
+  filter(!grepl("cluster", response_name)) %>%
+  filter(!grepl("functional_specialization", response_name))
 
 table(guide$response_tier)
 
@@ -198,9 +201,10 @@ p_plot <- estimates %>%
                 left_join(rts) %>% 
                 unique(), aes(x = ln_rr, y = clean_response, fill = ln_rr), alpha = 0.25, height = 0.1, shape = 21) +
   facet_grid2(cols = vars(biome_clean), rows = vars(clean_response_tier), scales = "free_y", space = "free_y") +
-  scale_color_manual(values = c("grey50", "orange2")) +
   scale_fill_scico(palette = "bam", midpoint = 0) +
-  geom_pointrange(aes(x = estimate, xmin = ci_lb, xmax = ci_ub, y = clean_response, color = sig), linewidth = 1.3, alpha = 0.9) +
+  scale_color_scico(palette = "bam", midpoint = 0) +
+  geom_pointrange(aes(x = estimate, xmin = ci_lb, xmax = ci_ub, y = clean_response,
+                      fill = estimate), linewidth = 1.1, alpha = 0.9, shape = 23, size = 1.1, color = "black") + 
   labs(title = "Biome-Specific Estimates", y = "Response", x = "Log-Response Ratio", fill = "Log-\nResponse\nRatio", color = "") +
   theme_minimal() +
   scale_y_discrete(limits = rev) +

@@ -65,18 +65,6 @@ fixed,cond,knp_satara,-0.214990811766483,0.22919802262759,-0.669262351507968,0.2
 Diversity",Satara (KNP)
 fixed,cond,pnr,1.05137881580822,0.2254186372227,0.609701407369457,1.49881527529546,plot,setup_id + 0 + (1 | cluster_id),functional_dispersion_plot,functional_diversity,105,significant,186.15940102355,347.638264652472,83.9881941564962,Plant Functional Dispersion,"Functional
 Diversity",PNR
-fixed,cond,addo_jack,-0.0890205158447147,0.0449332847058847,-0.179179606723887,-0.000779322327778647,plot,setup_id + 0 + (1 | cluster_id),functional_specialization_plot,functional_diversity,105,significant,-8.51731950627455,-0.0779018735004078,-16.4044257359392,Plant Functional Specialization,"Functional
-Diversity",Jack's (AENP)
-fixed,cond,addo_nyathi_full,-0.0117425181574051,0.0437446288258514,-0.0956789075733829,0.0744023850698881,plot,setup_id + 0 + (1 | cluster_id),functional_specialization_plot,functional_diversity,105,non-significant,-1.16738438569692,7.72401836645102,-9.12442361793898,Plant Functional Specialization,"Functional
-Diversity",Nyathi (AENP)
-fixed,cond,knp_nkuhlu_full,-0.151784754167355,0.0447612971290048,-0.239466026779723,-0.064890137326734,plot,setup_id + 0 + (1 | cluster_id),functional_specialization_plot,functional_diversity,105,significant,-14.0826805710935,-6.28295822307206,-21.2951988556771,Plant Functional Specialization,"Functional
-Diversity",Nkuhlu (KNP)
-fixed,cond,knp_roan,-0.0800846600131491,0.0443790415629177,-0.166420440888939,0.00843903539057997,plot,setup_id + 0 + (1 | cluster_id),functional_specialization_plot,functional_diversity,105,non-significant,-7.69618013473466,0.847474442900653,-15.3309823826356,Plant Functional Specialization,"Functional
-Diversity",Nwaswitshumbe (KNP)
-fixed,cond,knp_satara,0.0143494742440397,0.0462832020873564,-0.077703989304842,0.10650869708437,plot,setup_id + 0 + (1 | cluster_id),functional_specialization_plot,functional_diversity,105,non-significant,1.44529221650882,11.2387600932432,-7.47617335657945,Plant Functional Specialization,"Functional
-Diversity",Satara (KNP)
-fixed,cond,pnr,0.0765831276665983,0.045406100594524,-0.0150107482707112,0.166780407142028,plot,setup_id + 0 + (1 | cluster_id),functional_specialization_plot,functional_diversity,105,non-significant,7.95919305652322,18.1494789002436,-1.48986485898426,Plant Functional Specialization,"Functional
-Diversity",PNR
 fixed,cond,addo_jack,0.0532334842223,0.121481765440579,-0.181020739779092,0.29215052419688,plot,setup_id + 0 + (1 | cluster_id),functional_diversity_plot,functional_diversity,108,non-significant,5.46758665483076,33.9304600216711,-16.5581947129756,Plant Functional Diversity,"Functional
 Diversity",Jack's (AENP)
 fixed,cond,addo_nyathi_full,0.195883262309831,0.11837659435271,-0.0405273286290014,0.423690133598535,plot,setup_id + 0 + (1 | cluster_id),functional_diversity_plot,functional_diversity,108,non-significant,21.6384899082261,52.7588172189286,-3.97170790628685,Plant Functional Diversity,"Functional

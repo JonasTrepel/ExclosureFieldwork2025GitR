@@ -58,7 +58,9 @@ guide <- dt %>%
     grepl("functional_nearerst_neighbour_distance", response_name) ~ "functional_diversity",
     grepl("point_return_fraction", response_name) ~ "structure",
     grepl("mean_point_height", response_name) ~ "structure"
-  )) %>% filter(!grepl("cluster", response_name))
+  )) %>% 
+  filter(!grepl("cluster", response_name)) %>%
+  filter(!grepl("functional_specialization", response_name))
 
 table(guide$response_tier)
 unique(dt$setup_id)
@@ -205,12 +207,15 @@ p_plot <- estimates %>%
   geom_jitter(data = dt %>%
                 filter(response_name %in% unique(estimates[scale == "plot", ]$response_name)) %>%
                 left_join(rts) %>% 
-                unique(), aes(x = ln_rr, y = clean_response, fill = npp), alpha = 0.25, height = 0.1, shape = 21) +
+                unique(), aes(x = ln_rr, y = clean_response, color = npp), alpha = 0.5, height = 0.1) +
   facet_grid2(cols = vars(clean_setup), rows = vars(clean_response_tier), scales = "free_y", space = "free_y") +
-  scale_color_manual(values = c("grey50", "orange2")) +
-  scale_fill_scico(palette = "bamako", direction = -1) +
-  geom_pointrange(aes(x = estimate, xmin = ci_lb, xmax = ci_ub, y = clean_response, color = sig), linewidth = 1.3, alpha = 0.9) +
-  labs(title = "Site-Specific Estimates", y = "Response", x = "Log-Response Ratio", fill = expression(NPP~(kg~C~ha^{-1}~yr^{-1})), color = "") +
+ #scale_color_manual(values = c("grey50", "orange2")) +
+  scale_fill_scico(palette = "bam", midpoint = 0) +
+  scale_color_scico(palette = "bamako", direction = -1) +
+  geom_pointrange(aes(x = estimate, xmin = ci_lb, xmax = ci_ub, y = clean_response,
+                      fill = estimate), linewidth = 1.1, alpha = 0.9, shape = 23, size = 1.1, color = "black") +
+  labs(title = "Site-Specific Estimates", y = "Response", x = "Log-Response Ratio", 
+       color = expression(NPP~(kg~C~ha^{-1}~yr^{-1})), fill = "Estimate (Log-\nResponse Ratio)") +
   theme_minimal() +
   scale_y_discrete(limits = rev) +
   theme(legend.position = "bottom", 

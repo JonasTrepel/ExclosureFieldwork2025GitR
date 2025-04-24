@@ -58,7 +58,8 @@ guide <- dt %>%
     grepl("functional_nearerst_neighbour_distance", response_name) ~ "functional_diversity",
     grepl("point_return_fraction", response_name) ~ "structure",
     grepl("mean_point_height", response_name) ~ "structure"
-  )) %>% filter(!grepl("cluster", response_name))
+  )) %>% filter(!grepl("cluster", response_name)) %>%
+  filter(!grepl("functional_specialization", response_name))
 
 table(guide$response_tier)
 

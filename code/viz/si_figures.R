@@ -200,7 +200,101 @@ corr_plot <- grid.arrange(p_plot_corr, p_plot_corr_es, ncol = 1)
 ggsave(plot = corr_plot, "builds/plots/supplement/corr_plots.png", dpi = 600, height = 12, width = 10)
 
 
-# 3. LNRR Ridges -------------
+# 3. Cover differences between biomes  
+
+dt_cd <- fread("data/processed/clean/all_vars.csv")%>%
+  mutate(biome = ifelse(setup_id %in% c("addo_nyathi_full", "addo_jack"), "Thicket", "Savanna"), 
+         percent_woody = (woody_richness_plot / plant_richness_plot)*100)
+
+p1 <- dt_cd %>%
+  ggplot() +
+  geom_boxplot(aes(x = biome, y = woody_richness_plot), outlier.shape = NA) +
+  geom_jitter(aes(x = biome, y = woody_richness_plot), width = 0.2, alpha = 0.3) +
+  labs(x = "", y = "Woody Richness") +
+  theme_classic()
+p1
+
+p2 <- dt_cd %>%
+  ggplot() +
+  geom_boxplot(aes(x = biome, y = graminoid_richness_plot), outlier.shape = NA) +
+  geom_jitter(aes(x = biome, y = graminoid_richness_plot), width = 0.2, alpha = 0.3) +
+  labs(x = "", y = "Graminoid Richness") +
+  theme_classic()
+p2
+
+p3 <- dt_cd %>%
+  ggplot() +
+  geom_boxplot(aes(x = biome, y = forb_richness_plot), outlier.shape = NA) +
+  geom_jitter(aes(x = biome, y = forb_richness_plot), width = 0.2, alpha = 0.3) +
+  labs(x = "", y = "Forb Richness") +
+  theme_classic()
+p3
+
+p4 <- dt_cd %>%
+  ggplot() +
+  geom_boxplot(aes(x = biome, y = percent_woody), outlier.shape = NA) +
+  geom_jitter(aes(x = biome, y = percent_woody), width = 0.2, alpha = 0.3) +
+  labs(x = "", y = "% Woody Species") +
+  theme_classic()
+p4
+
+p5 <- dt_cd %>%
+  ggplot() +
+  geom_boxplot(aes(x = biome, y = woody_cover_percent), outlier.shape = NA) +
+  geom_jitter(aes(x = biome, y = woody_cover_percent), width = 0.2, alpha = 0.3) +
+  labs(x = "", y = "Woody Species Cover (%)") +
+  theme_classic()
+p5
+
+p6 <- dt_cd %>%
+  ggplot() +
+  geom_boxplot(aes(x = biome, y = graminoid_cover_percent), outlier.shape = NA) +
+  geom_jitter(aes(x = biome, y = graminoid_cover_percent), width = 0.2, alpha = 0.3) +
+  labs(x = "", y = "Graminoid Cover (%)") +
+  theme_classic()
+p6
+
+p7 <- dt_cd %>%
+  ggplot() +
+  geom_boxplot(aes(x = biome, y = forb_cover_percent), outlier.shape = NA) +
+  geom_jitter(aes(x = biome, y = forb_cover_percent), width = 0.2, alpha = 0.3) +
+  labs(x = "", y = "Forb Cover (%)") +
+  theme_classic()
+p7
+
+library(gridExtra)
+p_biome_diff <- grid.arrange(p1, p2, p3, p4, p5, p6, p7, ncol = 4)
+ggsave(plot = p_biome_diff, "builds/plots/supplement/biome_differences_woody_plants.png", dpi = 600, height = 5, width = 10)
+
+# 4 Life-Form Specific Dominance ------------------
+
+dt_dom <- fread("data/processed/fragments/plot_species_and_data.csv")%>%
+  mutate(biome = ifelse(setup_id %in% c("addo_nyathi_full", "addo_jack"), "Thicket", "Savanna"), 
+         life_form = ifelse(life_form %in% c("Tree", "Shrub"), "Woody", life_form), 
+         percent_woody = (woody_richness_plot / plant_richness_plot)*100)
+
+mean(dt_dom[life_form == "Woody", ]$cover)
+sd(dt_dom[life_form == "Woody", ]$cover)
+
+mean(dt_dom[life_form == "Graminoid", ]$cover)
+sd(dt_dom[life_form == "Graminoid", ]$cover)
+
+mean(dt_dom[life_form == "Forb", ]$cover)
+sd(dt_dom[life_form == "Forb", ]$cover)
+
+
+p_dom <- dt_dom %>% 
+  ggplot() +
+  geom_boxplot(aes(x = life_form, y = cover), outlier.shape = NA) +
+  geom_jitter(aes(x = life_form, y = cover), width = 0.2, alpha = 0.3) +
+  labs(x = "", y = "Percentage Cover") +
+  theme_classic()
+
+p_dom
+
+ggsave(plot = p_dom, "builds/plots/supplement/life_form_cover.png", dpi = 600, height = 3, width = 3)
+
+# 5. LNRR Ridges -------------
 dt_rr <- fread("data/processed/clean/long_data_with_lnrr.csv") %>% 
   filter(response_name %in% c(
     "plant_richness_plot",

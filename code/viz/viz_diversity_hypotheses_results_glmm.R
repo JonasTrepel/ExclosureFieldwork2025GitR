@@ -140,9 +140,13 @@ dt_points <- dt_mod %>%
 
 # 2. Estimate plots --------------------------------------------------------
 
-## 2.1 Taxonomic ----------------------------
 p_est_dom_tax <- dt_res %>%
-  filter(tier == "richness_dominance" & !response == "shannon_diversity_plot") %>%
+  filter(response %in% c("plant_richness_plot", 
+                         "functional_nearerst_neighbour_distance_plot", 
+                         "functional_diversity_plot",
+                         "functional_dispersion_plot"
+                         ) & 
+           grepl("dominance", tier)) %>%
   ggplot() +
   geom_vline(xintercept = 0, linetype = "dashed", color = "grey25") +
   #facet_grid2(rows = vars(clean_response), scales = "free_y", space = "free_y") +
@@ -168,11 +172,15 @@ p_est_dom_tax
 
 
 p_est_eve_tax <- dt_res %>%
-  filter(tier == "richness_evenness"& !response == "shannon_diversity_plot") %>%
-  ggplot() +
+  filter(response %in% c("plant_richness_plot", 
+                         "functional_nearerst_neighbour_distance_plot", 
+                         "functional_diversity_plot",
+                         "functional_dispersion_plot"
+  ) & 
+    grepl("evenness", tier)) %>%  ggplot() +
   geom_vline(xintercept = 0, linetype = "dashed", color = "grey25") +
   #facet_grid2(rows = vars(clean_response), scales = "free_y", space = "free_y") +
-  facet_wrap(~ clean_response, ncol = 1) +
+  facet_wrap(~ clean_response, ncol = 4) +
   scale_color_manual(values = c("grey50", "orange2")) +
   geom_pointrange(aes(x = estimate, xmin = ci_lb, xmax = ci_ub, y = clean_term, color = sig), linewidth = 1.3, alpha = 0.9) +
   labs(y = "", x = "Estimate") +
@@ -192,74 +200,29 @@ p_est_eve_tax <- dt_res %>%
   )
 p_est_eve_tax
 
-## 2.2 Functional ----------------------------
-p_est_dom_fun <- dt_res %>%
-  filter(tier == "fun_div_dominance" & !response == "shannon_diversity_plot") %>%
-  ggplot() +
-  geom_vline(xintercept = 0, linetype = "dashed", color = "grey25") +
-  #facet_grid2(rows = vars(clean_response), scales = "free_y", space = "free_y") +
-  facet_wrap(~ clean_response, ncol = 1) +
-  scale_color_manual(values = c("grey50", "orange2")) +
-  geom_pointrange(aes(x = estimate, xmin = ci_lb, xmax = ci_ub, y = clean_term, color = sig), linewidth = 1.3, alpha = 0.9) +
-  labs(y = "", x = "Estimate") +
-  theme_minimal() +
-  scale_y_discrete(limits = rev) +
-  theme(
-    legend.position = "none",
-    axis.text.y = element_text(size = 12),
-    plot.title = element_text(hjust = .5),
-    panel.grid.major.x = element_blank(),
-    panel.grid.minor.x = element_blank(),
-    panel.grid.minor.y = element_line(linetype = "dashed", color = "seashell3"),
-    panel.grid.major.y = element_line(linetype = "dashed", color = "seashell3"),
-    panel.background = element_rect(fill = "seashell1", color = "seashell1"),
-    strip.text = element_text(size = 10, face = "italic"),
-    strip.background = element_rect(fill = "seashell2", color = "seashell2")
-  )
-p_est_dom_fun
-
-
-p_est_eve_fun <- dt_res %>%
-  filter(tier == "fun_div_evenness"& !response == "shannon_diversity_plot") %>%
-  ggplot() +
-  geom_vline(xintercept = 0, linetype = "dashed", color = "grey25") +
-  #facet_grid2(rows = vars(clean_response), scales = "free_y", space = "free_y") +
-  facet_wrap(~ clean_response, ncol = 1) +
-  scale_color_manual(values = c("grey50", "orange2")) +
-  geom_pointrange(aes(x = estimate, xmin = ci_lb, xmax = ci_ub, y = clean_term, color = sig), linewidth = 1.3, alpha = 0.9) +
-  labs(y = "", x = "Estimate") +
-  theme_minimal() +
-  scale_y_discrete(limits = rev) +
-  theme(
-    legend.position = "none",
-    axis.text.y = element_text(size = 12),
-    plot.title = element_text(hjust = .5),
-    panel.grid.major.x = element_blank(),
-    panel.grid.minor.x = element_blank(),
-    panel.grid.minor.y = element_line(linetype = "dashed", color = "seashell3"),
-    panel.grid.major.y = element_line(linetype = "dashed", color = "seashell3"),
-    panel.background = element_rect(fill = "seashell1", color = "seashell1"),
-    strip.text = element_text(size = 10, face = "italic"),
-    strip.background = element_rect(fill = "seashell2", color = "seashell2")
-  )
-p_est_eve_fun
-
 
 # 3. Prediction plots -----------------------------------
 
-## 3.1 Taxonomic ------------------------------
 p_pred_dom_tax <- dt_pred %>%
-  filter(tier == "richness_dominance" & response != "shannon_diversity_plot") %>%
+  filter(response %in% c("plant_richness_plot", 
+                         "functional_nearerst_neighbour_distance_plot", 
+                         "functional_diversity_plot",
+                         "functional_dispersion_plot"
+  ) & 
+    grepl("dominance", tier)) %>%
   ggplot() +
   geom_hline(yintercept = 0, linetype = "dashed", color = "seashell3") +
   geom_vline(xintercept = 0, linetype = "dashed", color = "seashell3") +
   geom_point(
-    data = dt_points %>% filter(term_name != "plant_evenness_plot" & response_name != "shannon_diversity_plot" & !grepl("functional", response_name)),
+    data = dt_points %>% filter(term_name != "plant_evenness_plot" & response_name %in% c("plant_richness_plot", 
+                                                                                          "functional_nearerst_neighbour_distance_plot", 
+                                                                                          "functional_diversity_plot",
+                                                                                          "functional_dispersion_plot")),
     aes(x = term_value, y = response_value),
     alpha = 0.15, color = "black", size = 1
   ) +
-  geom_ribbon(aes(x = var_value, ymax = conf.high, ymin = conf.low, linetype = sig, fill = sig), alpha = 0.5) +
-  geom_line(aes(x = var_value, y = predicted, linetype = sig, color = sig), linewidth = 1.1) +
+  geom_ribbon(aes(x = var_value, ymax = conf.high, ymin = conf.low, linetype = sig, fill = sig), alpha = 0.25) +
+  geom_line(aes(x = var_value, y = predicted, linetype = sig, color = sig), linewidth = 1.05) +
   scale_linetype_manual(values = c("non-significant" = "dashed", "significant" = "solid")) +
   scale_fill_manual(values = c("grey50", "orange2")) +
   scale_color_manual(values = c("grey50", "orange2")) +
@@ -279,50 +242,15 @@ p_pred_dom_tax <- dt_pred %>%
   )
 p_pred_dom_tax
 
-## 3.2 Functional ------------------------------
-p_pred_dom_fun <- dt_pred %>%
-  filter(tier == "fun_div_dominance" & response != "shannon_diversity_plot") %>%
-  ggplot() +
-  geom_hline(yintercept = 0, linetype = "dashed", color = "seashell3") +
-  geom_vline(xintercept = 0, linetype = "dashed", color = "seashell3") +
-  geom_point(
-    data = dt_points %>% filter(term_name != "plant_evenness_plot" & response_name != "shannon_diversity_plot" & !grepl("richness", response_name)),
-    aes(x = term_value, y = response_value),
-    alpha = 0.15, color = "black", size = 1
-  ) +
-  geom_ribbon(aes(x = var_value, ymax = conf.high, ymin = conf.low, linetype = sig, fill = sig), alpha = 0.5) +
-  geom_line(aes(x = var_value, y = predicted, linetype = sig, color = sig), linewidth = 1.1) +
-  scale_linetype_manual(values = c("non-significant" = "dashed", "significant" = "solid")) +
-  scale_fill_manual(values = c("grey50", "orange2")) +
-  scale_color_manual(values = c("grey50", "orange2")) +
-  facet_grid(rows = vars(clean_response), cols = vars(clean_term), scales = "free") +
-  labs(y = "Response Value", x = "Predictor Value") +
-  theme_minimal() +
-  theme(
-    legend.position = "none",
-    plot.title = element_text(hjust = .5),
-    panel.grid.major.x = element_blank(),
-    panel.grid.minor.x = element_blank(),
-    panel.grid.minor.y = element_line(linetype = "dashed", color = "seashell1"),
-    panel.grid.major.y = element_line(linetype = "dashed", color = "seashell1"),
-    panel.background = element_rect(fill = "seashell1", color = "seashell1"),
-    strip.text = element_text(size = 10, face = "italic"),
-    strip.background = element_rect(fill = "seashell2", color = "seashell2")
-  )
-p_pred_dom_fun
-
 
 # 4. Combine plots -------------------
 
+p_empty <- ggplot() + theme_void()
 # 4.1 Dominance ---------------------------
-p_comb_dom_tax <- grid.arrange(p_est_dom_tax, p_pred_dom_tax, ncol = 2, widths = c(1.25, 2))
-p_comb_dom_fun <- grid.arrange(p_est_dom_fun, p_pred_dom_fun, ncol = 2, widths = c(1.25, 2))
-p_comb_dom <- grid.arrange(p_comb_dom_tax, p_comb_dom_fun)
+p_comb_dom <- grid.arrange(p_est_dom_tax, p_empty, p_pred_dom_tax, ncol = 3, widths = c(1.25,0.1, 2))
 
-ggsave(plot = p_comb_dom, "builds/plots/main/diversity_mechanism.png", dpi = 600, height = 11, width = 10)
+ggsave(plot = p_comb_dom, "builds/plots/main/diversity_mechanism.png", dpi = 600, height = 7, width = 10)
 
 
 # 4.2 Evenness ---------------------------
-
-p_comb_eve <- grid.arrange(p_est_eve_tax, p_est_eve_fun, ncol = 2)
-ggsave(plot = p_comb_eve, "builds/plots/supplement/diversity_mechanism_estimates_evenness.png", dpi = 600, height = 8, width = 8)
+ggsave(plot = p_est_eve_tax, "builds/plots/supplement/diversity_mechanism_estimates_evenness.png", dpi = 600, height = 3, width = 12)

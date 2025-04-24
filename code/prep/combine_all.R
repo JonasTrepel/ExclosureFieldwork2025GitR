@@ -92,6 +92,10 @@ dt_out <- dt_comb %>%
              berger_parker_plot, berger_parker_cluster, berger_parker_site,
              simpson_dominance_plot, simpson_dominance_cluster, simpson_dominance_site,
              
+             graminoid_berger_parker_plot, graminoid_berger_parker_site, 
+             forb_berger_parker_plot, forb_berger_parker_site, 
+             woody_berger_parker_plot, woody_berger_parker_site, 
+             
              functional_diversity_plot, functional_diversity_cluster, functional_diversity_site,
              functional_dispersion_plot, functional_dispersion_cluster, functional_dispersion_site,
              functional_specialization_plot, functional_specialization_cluster, functional_specialization_site,
@@ -136,6 +140,10 @@ dt_in <- dt_comb %>%
              community_dominance_plot, community_dominance_cluster, community_dominance_site,
              berger_parker_plot, berger_parker_cluster, berger_parker_site,
              simpson_dominance_plot, simpson_dominance_cluster, simpson_dominance_site,
+             
+             graminoid_berger_parker_plot, graminoid_berger_parker_site, 
+             forb_berger_parker_plot, forb_berger_parker_site, 
+             woody_berger_parker_plot, woody_berger_parker_site, 
              
              functional_dispersion_plot, functional_dispersion_cluster, functional_dispersion_site,
              functional_specialization_plot, functional_specialization_cluster, functional_specialization_site,

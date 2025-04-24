@@ -21,7 +21,5 @@ Savanna,Plant Functional Diversity,0.13 (0.01; 0.26),0.035,2.1,14.31 (0.92; 29.4
 Thicket,Plant Functional Diversity,0.13 (-0.04; 0.3),0.147,1.45,13.67 (-4.39; 35.15)
 Savanna,Plant Functional Distance,-0.59 (-0.79; -0.38),0,-5.72,-44.3 (-54.42; -31.94)
 Thicket,Plant Functional Distance,-0.07 (-0.34; 0.21),0.645,-0.46,-6.31 (-29.02; 23.67)
-Savanna,Plant Functional Specialization,-0.04 (-0.11; 0.04),0.344,-0.95,-3.53 (-10.44; 3.92)
-Thicket,Plant Functional Specialization,-0.04 (-0.13; 0.05),0.402,-0.84,-3.7 (-11.82; 5.17)
 Savanna,Plant Functional Dispersion,0.29 (-0.09; 0.67),0.138,1.48,33.31 (-8.79; 94.85)
 Thicket,Plant Functional Dispersion,0.03 (-0.42; 0.47),0.909,0.11,2.63 (-34.36; 60.48)

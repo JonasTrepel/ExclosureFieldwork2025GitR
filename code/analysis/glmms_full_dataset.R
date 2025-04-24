@@ -24,7 +24,8 @@ guide <- dt %>%
                          "shannon_diversity_plot",
                          
                          "functional_dispersion_plot", "functional_diversity_plot", 
-                         "functional_specialization_plot", "functional_nearerst_neighbour_distance_plot",
+                         #"functional_specialization_plot", 
+                         "functional_nearerst_neighbour_distance_plot",
                          
                          "point_return_fraction_plot", "mean_point_height_plot"
                          ) ~ "1 + (1 | exclosure_id/cluster_id)",
@@ -37,7 +38,8 @@ guide <- dt %>%
                          "shannon_diversity_cluster",
                          
                          "functional_dispersion_cluster", "functional_diversity_cluster", 
-                         "functional_specialization_cluster", "functional_nearerst_neighbour_distance_cluster",
+                         #"functional_specialization_cluster", 
+                         "functional_nearerst_neighbour_distance_cluster",
                          
                          "point_return_fraction_cluster", "mean_point_height_cluster"
                          ) ~ "1 + (1 | exclosure_id)", 
@@ -50,7 +52,8 @@ guide <- dt %>%
                          "shannon_diversity_site",
                          
                          "functional_dispersion_site", "functional_diversity_site", 
-                         "functional_specialization_site", "functional_nearerst_neighbour_distance_site",
+                         #"functional_specialization_site",
+                         "functional_nearerst_neighbour_distance_site",
                          
                          "point_return_fraction_site", "mean_point_height_site"
                          ) ~ "1")) %>% 
@@ -226,22 +229,23 @@ p_plot <- estimates %>%
   geom_vline(xintercept = 0, linetype = "dashed", color = "grey25") +
   geom_text(data = ann_text,
             aes(x = ln_rr, y = Inf, label = label),
-            fontface = "italic", size = 2.5, vjust = 1.5, color = "grey20") +
+            fontface = "italic", size = 2.5, vjust = 1.5, color = "grey50") +
   geom_jitter(data = dt %>%
-               filter(response_name %in% unique(estimates[scale == "plot", ]$response_name)) %>%
-               left_join(rts) %>% 
-               mutate(setup_id = factor(setup_id, levels = c("knp_roan", 
+                filter(response_name %in% unique(estimates[scale == "plot", ]$response_name)) %>%
+                left_join(rts) %>% 
+                mutate(setup_id = factor(setup_id, levels = c("knp_roan", 
                                                               "knp_satara",
                                                               "knp_nkuhlu_full", 
                                                               "pnr", 
                                                               "addo_jack", 
                                                               "addo_nyathi_full"))) %>%
                 unique(), aes(x = ln_rr, y = clean_response, fill = ln_rr),
-              alpha = 0.5, shape = 21, height = 0.1, color = "grey75") +
+              alpha = 0.5, shape = 21, height = 0.1, color = "grey25") +
   facet_grid2(rows = vars(clean_response_tier), scales = "free_y", space = "free_y") +
   scale_color_manual(values = c("grey50", "orange2")) +
   scale_fill_scico(palette = "bam", midpoint = 0) +
-  geom_pointrange(aes(x = estimate, xmin = ci_lb, xmax = ci_ub, y = clean_response, color = sig), linewidth = 1.3, alpha = 0.9) +
+  geom_pointrange(aes(x = estimate, xmin = ci_lb, xmax = ci_ub, y = clean_response,
+                      color = sig), linewidth = 1.3, alpha = 0.9) + 
   labs(title = "Plot-Scale", y = "Response", x = "Log-Response Ratio") +
   theme_minimal() +
   scale_y_discrete(limits = rev) +
@@ -257,6 +261,16 @@ p_plot <- estimates %>%
         )
 p_plot
 
+
+x_min <- dt %>%
+  filter(response_name %in% unique(estimates[scale == "site", ]$response_name)) %>%
+  dplyr::select(ln_rr) %>% min(na.rm = T)
+
+x_max <- dt %>%
+  filter(response_name %in% unique(estimates[scale == "site", ]$response_name)) %>%
+  dplyr::select(ln_rr) %>% filter(!is.infinite(ln_rr)) %>% max(na.rm = T)
+
+
 p_site <- estimates %>%
   filter(scale == "site") %>% 
   mutate(response_tier = factor(response_tier, levels = c("taxonomic_diversity", 
@@ -265,6 +279,13 @@ p_site <- estimates %>%
                                                           "functional_diversity"))) %>% 
   ggplot() +
   geom_vline(xintercept = 0, linetype = "dashed", color = "grey25") +
+  geom_jitter(data = dt %>%
+                filter(response_name %in% unique(estimates[scale == "plot", ]$response_name)) %>%
+                mutate(response_name = gsub("plot", "site", response_name)) %>% 
+                dplyr::select(response_name, ln_rr, setup_id) %>% 
+                left_join(rts) %>%
+                unique(), aes(x = ln_rr, y = clean_response,  fill = ln_rr),
+              alpha = 0, shape = 21, height = 0.1) +
   geom_jitter(data = dt %>%
                 filter(response_name %in% unique(estimates[scale == "site", ]$response_name)) %>%
                 dplyr::select(response_name, ln_rr, setup_id) %>% 
@@ -275,14 +296,17 @@ p_site <- estimates %>%
                                                               "pnr", 
                                                               "addo_jack", 
                                                               "addo_nyathi_full"))) %>%
-                unique(), aes(x = ln_rr, y = clean_response, fill = ln_rr),
-              alpha = 0.5, shape = 21, height = 0.1, color = "grey75") +
+                unique(), aes(x = ln_rr, y = clean_response, 
+                               fill = ln_rr),
+              alpha = 0.5, shape = 21, height = 0.1, color = "grey25" ) +
   facet_grid2(rows = vars(clean_response_tier), scales = "free_y", space = "free_y") +
   scale_color_manual(values = c("grey50", "orange2")) +
   scale_fill_scico(palette = "bam", midpoint = 0) +
-  geom_pointrange(aes(x = estimate, xmin = ci_lb, xmax = ci_ub, y = clean_response, color = sig), linewidth = 1.3, alpha = 0.9) +
+  geom_pointrange(aes(x = estimate, xmin = ci_lb, xmax = ci_ub, y = clean_response,
+                      color = sig), linewidth = 1.3, alpha = 0.9) + 
   labs(title = "Site-Scale", y = "", x = "Log-Response Ratio", fill = "Log-\nResponse\nRatio", color = "") +
   theme_minimal() +
+  xlim(x_min, x_max) +
   scale_y_discrete(limits = rev) +
   theme(legend.position = "right", 
         plot.title = element_text(hjust = .5), 

@@ -3,56 +3,29 @@ library(data.table)
 library(tidyverse)
 library(gridExtra)
 library(glmmTMB)
-library("brms")
+library(brms)
 library(tidybayes)
 library(broom)
+library("ggh4x")
+library(scico)
 
 dt <- fread("data/processed/clean/long_data_with_lnrr.csv")
 unique(dt$response_name)
 
+
 guide <- dt %>% 
   mutate(formula = case_when(
     #plot level
-    response_name %in% c("plant_richness_plot", "woody_richness_plot", 
-                         "forb_richness_plot", "graminoid_richness_plot", 
-                         
-                         "berger_parker_plot", "plant_evenness_plot", 
-                         
-                         "shannon_diversity_plot",
-                         
-                         "functional_dispersion_plot", "functional_diversity_plot", 
-                        # "functional_specialization_plot", 
-                         "functional_nearerst_neighbour_distance_plot",
-                         
-                         "point_return_fraction_plot", "mean_point_height_plot"
+    response_name %in% c( 
+      "graminoid_berger_parker_plot", 
+      "forb_berger_parker_plot", 
+      "woody_berger_parker_plot"
     ) ~ "1 + (1 | exclosure_id/cluster_id)",
-    #cluster level
-    response_name %in% c("plant_richness_cluster", "woody_richness_cluster", 
-                         "forb_richness_cluster", "graminoid_richness_cluster", 
-                         
-                         "berger_parker_cluster", "plant_evenness_cluster", 
-                         
-                         "shannon_diversity_cluster",
-                         
-                         "functional_dispersion_cluster", "functional_diversity_cluster", 
-                         #"functional_specialization_cluster",
-                         "functional_nearerst_neighbour_distance_cluster",
-                         
-                         "point_return_fraction_cluster", "mean_point_height_cluster"
-    ) ~ "1 + (1 | exclosure_id)", 
     #site_level
-    response_name %in% c("plant_richness_site", "woody_richness_site", 
-                         "forb_richness_site", "graminoid_richness_site", 
-                         
-                         "berger_parker_site", "plant_evenness_site", 
-                         
-                         "shannon_diversity_site",
-                         
-                         "functional_dispersion_site", "functional_diversity_site", 
-                         #"functional_specialization_site", 
-                         "functional_nearerst_neighbour_distance_site",
-                         
-                         "point_return_fraction_site", "mean_point_height_site"
+    response_name %in% c(
+      "graminoid_berger_parker_site", 
+      "forb_berger_parker_site", 
+      "woody_berger_parker_site"
     ) ~ "1")) %>% 
   dplyr::select(formula, response_name, scale) %>% 
   filter(!is.na(formula)) %>% 
@@ -78,8 +51,6 @@ table(guide$response_tier)
 estimates <- data.table()
 dt_points <- data.table()
 
-prior <- set_prior("normal(0, 10)", class = "Intercept") #generic weakly informative prior 
-
 for(response in unique(guide$response_name)){
   
   sca <- unique(guide[guide$response_name == response, ]$scale)
@@ -97,8 +68,8 @@ for(response in unique(guide$response_name)){
       filter(!is.infinite(ln_rr))
     
     n <- nrow(dt_mod)
-    set.seed(161)
-    m <- brm(as.formula(paste0("ln_rr ~ ", form)), prior = prior,  data = dt_mod)
+    
+    m <- glmmTMB(as.formula(paste0("ln_rr ~ ", form)), data = dt_mod)
   }else if(sca == "cluster"){
     
     dt_mod <- dt %>% 
@@ -110,8 +81,7 @@ for(response in unique(guide$response_name)){
     
     n <- nrow(dt_mod)
     
-    set.seed(1910)
-    m <- brm(as.formula(paste0("ln_rr ~ ", form)), prior = prior, data = dt_mod)
+    m <- glmmTMB(as.formula(paste0("ln_rr ~ ", form)), data = dt_mod)
   }else if(sca == "site"){
     
     dt_mod <- dt %>% 
@@ -123,22 +93,21 @@ for(response in unique(guide$response_name)){
     
     n <- nrow(dt_mod)
     
-    set.seed(1312)
-    m <- brm(as.formula(paste0("ln_rr ~ ", form)), prior = prior, data = dt_mod)
+    m <- glmmTMB(as.formula(paste0("ln_rr ~ ", form)), data = dt_mod)
   }
   
   tidy_m <- broom.mixed::tidy(m)
   
   tmp_est <- tidy_m %>% 
-  rename(ci_ub = conf.high, 
-         ci_lb = conf.low) %>% 
+    # rename(ci_ub = conf.high, 
+    #        ci_lb = conf.low) %>% 
     mutate(scale = sca, 
            formula = form, 
            response_name = response, 
            response_tier = tier, 
            n = n,
-          # ci_ub = estimate + 1.96*std.error, 
-          # ci_lb = estimate - 1.96*std.error,
+           ci_ub = estimate + 1.96*std.error, 
+           ci_lb = estimate - 1.96*std.error,
            sig = ifelse(ci_lb > 0 | ci_ub < 0, "significant", "non-significant"), 
            term = ifelse(term == "(Intercept)", "Intercept", term)) %>% 
     filter(!effect == "ran_pars") %>% 
@@ -170,6 +139,9 @@ estimates <- estimates %>%
       clean_response == "graminoid_richness" ~ "Graminoid Richness", 
       clean_response == "shannon_diversity" ~ "Shannon Diversity", 
       clean_response == "berger_parker" ~ "Plant Dominance", 
+      clean_response == "graminoid_berger_parker" ~ "Graminoid Dominance", 
+      clean_response == "forb_berger_parker" ~ "Forb Dominance", 
+      clean_response == "woody_berger_parker" ~ "Woody Dominance", 
       clean_response == "plant_evenness" ~ "Plant Evenness", 
       clean_response == "point_return_fraction" ~ "Vegetation Density", 
       clean_response == "mean_point_height" ~ "Vegetation Height", 
@@ -181,40 +153,32 @@ estimates <- estimates %>%
     clean_response = factor(clean_response, levels = c(
       "Plant Richness", "Shannon Diversity", "Graminoid Richness", "Forb Richness", "Woody Richness",
       "Plant Dominance", "Plant Evenness",
+     "Graminoid Dominance", "Forb Dominance", "Woody Dominance", 
       "Vegetation Density", "Vegetation Height",
       "Plant Functional Diversity", "Plant Functional Distance", "Plant Functional Specialization", "Plant Functional Dispersion"
     )),
     clean_response_tier = case_when(response_tier == "taxonomic_diversity" ~ "Taxonomic\nDiversity", 
-                                    response_tier ==  "dominance" ~ "Dominance", 
+                                    response_tier ==  "dominance" ~ "Life-Form Specific\nDominance", 
                                     response_tier ==  "structure"~ "Vegetation\nStructure",
                                     response_tier ==  "functional_diversity"~ "Functional\nDiversity"),
     clean_response_tier = factor(clean_response_tier, levels = c("Taxonomic\nDiversity", 
-                                                                 "Dominance", 
+                                                                 "Life-Form Specific\nDominance", 
                                                                  "Vegetation\nStructure",
                                                                  "Functional\nDiversity")))
 
 
 rts <- estimates %>% dplyr::select(response_name, response_tier, clean_response_tier, clean_response)
 
-fwrite(estimates %>%
-         mutate(estimate_ci = paste0(round(estimate, 2), " (", round(ci_lb, 2), "; ", round(ci_ub, 2), ")"), 
-                percent_change_ci = paste0(round(percent_change, 2),
-                                           " (", round(ci_lb_percent_change, 2), "; ", round(ci_ub_percent_change, 2), ")")) %>% 
-         arrange(scale, desc(response_tier)) %>% 
-         dplyr::select(scale, clean_response, estimate_ci, percent_change_ci), "builds/model_outputs/table_brm_estimates_full_dataset.csv")
-
-fwrite(estimates, "builds/model_outputs/raw_brm_estimates_full_dataset.csv")
-
 estimates$estimate
 exp(estimates$estimate)
 
 
 ann_text <- tibble::tibble(
-  ln_rr = c(-1.5, 1.5),
+  ln_rr = c(-1, 1),
   label = c("Decrease in herbivore presence", "Increase in herbivore presence"),
   clean_response_name = NA, 
-  clean_response_tier = factor("Taxonomic\nDiversity", levels = c("Taxonomic\nDiversity", 
-                                                                  "Dominance", 
+  clean_response_tier = factor("Life-Form Specific\nDominance", levels = c("Taxonomic\nDiversity", 
+                                                                  "Life-Form Specific\nDominance", 
                                                                   "Vegetation\nStructure",
                                                                   "Functional\nDiversity")))
 
@@ -238,14 +202,13 @@ p_plot <- estimates %>%
                                                               "pnr", 
                                                               "addo_jack", 
                                                               "addo_nyathi_full"))) %>%
-                unique(), aes(x = ln_rr, y = clean_response, fill = ln_rr, color = ln_rr),
+                unique(), aes(x = ln_rr, y = clean_response, fill = ln_rr),
               alpha = 0.5, shape = 21, height = 0.1, color = "grey25") +
   facet_grid2(rows = vars(clean_response_tier), scales = "free_y", space = "free_y") +
- # scale_color_manual(values = c("grey50", "orange2")) +
+  scale_color_manual(values = c("grey50", "orange2")) +
   scale_fill_scico(palette = "bam", midpoint = 0) +
-  scale_color_scico(palette = "bam", midpoint = 0) +
   geom_pointrange(aes(x = estimate, xmin = ci_lb, xmax = ci_ub, y = clean_response,
-                      fill = estimate), linewidth = 1.1, alpha = 0.9, shape = 23, size = 1.1, color = "black") + 
+                      color = sig), linewidth = 1.3, alpha = 0.9) + 
   labs(title = "Plot-Scale", y = "Response", x = "Log-Response Ratio") +
   theme_minimal() +
   scale_y_discrete(limits = rev) +
@@ -256,7 +219,7 @@ p_plot <- estimates %>%
         panel.grid.minor.x = element_blank(), 
         panel.grid.minor.y = element_line(linetype = "dashed", color = "seashell3"), 
         panel.grid.major.y = element_line(linetype = "dashed", color = "seashell3"),
-        panel.background = element_rect(fill = "grey98", color = "grey98"), 
+        panel.background = element_rect(fill = "seashell1", color = "seashell1"), 
         strip.text = element_blank() #element_text(size = 10, face = "italic")
   )
 p_plot
@@ -269,6 +232,7 @@ x_min <- dt %>%
 x_max <- dt %>%
   filter(response_name %in% unique(estimates[scale == "site", ]$response_name)) %>%
   dplyr::select(ln_rr) %>% filter(!is.infinite(ln_rr)) %>% max(na.rm = T)
+
 
 p_site <- estimates %>%
   filter(scale == "site") %>% 
@@ -283,8 +247,7 @@ p_site <- estimates %>%
                 mutate(response_name = gsub("plot", "site", response_name)) %>% 
                 dplyr::select(response_name, ln_rr, setup_id) %>% 
                 left_join(rts) %>%
-                unique(), aes(x = ln_rr, y = clean_response, 
-                              color = ln_rr, fill = ln_rr),
+                unique(), aes(x = ln_rr, y = clean_response,  fill = ln_rr),
               alpha = 0, shape = 21, height = 0.1) +
   geom_jitter(data = dt %>%
                 filter(response_name %in% unique(estimates[scale == "site", ]$response_name)) %>%
@@ -297,14 +260,14 @@ p_site <- estimates %>%
                                                               "addo_jack", 
                                                               "addo_nyathi_full"))) %>%
                 unique(), aes(x = ln_rr, y = clean_response, 
-                              color = ln_rr, fill = ln_rr),
+                              fill = ln_rr),
               alpha = 0.5, shape = 21, height = 0.1, color = "grey25" ) +
   facet_grid2(rows = vars(clean_response_tier), scales = "free_y", space = "free_y") +
+  scale_color_manual(values = c("grey50", "orange2")) +
   scale_fill_scico(palette = "bam", midpoint = 0) +
-  scale_color_scico(palette = "bam", midpoint = 0) +
   geom_pointrange(aes(x = estimate, xmin = ci_lb, xmax = ci_ub, y = clean_response,
-                      fill = estimate), linewidth = 1.1, alpha = 0.9, shape = 23, size = 1.1, color = "black") +
-  labs(title = "Site-Scale", y = "", x = "Log-Response Ratio", fill = "Log-\nResponse\nRatio", color = "Log-\nResponse\nRatio") +
+                      color = sig), linewidth = 1.3, alpha = 0.9) + 
+  labs(title = "Site-Scale", y = "", x = "Log-Response Ratio", fill = "Log-\nResponse\nRatio", color = "") +
   theme_minimal() +
   xlim(x_min, x_max) +
   scale_y_discrete(limits = rev) +
@@ -314,7 +277,7 @@ p_site <- estimates %>%
         panel.grid.minor.x = element_blank(), 
         panel.grid.minor.y = element_line(linetype = "dashed", color = "seashell3"), 
         panel.grid.major.y = element_line(linetype = "dashed", color = "seashell3"),
-        panel.background = element_rect(fill = "grey98", color = "grey98"), 
+        panel.background = element_rect(fill = "seashell1", color = "seashell1"), 
         axis.text.y = element_blank(),
         strip.text = element_text(size = 10, face = "italic"))
 p_site
@@ -322,6 +285,5 @@ p_site
 
 p_comb <- grid.arrange(p_plot, p_site, ncol = 2, widths = c(1.2, 1))
 
-ggsave(plot = p_comb, "builds/plots/supplement/brm_estimates.png", dpi = 600, height = 6, width = 11)
-  
+ggsave(plot = p_comb, "builds/plots/supplement/life_form_dominance_glmm_estimates.png", dpi = 600, height = 2.5, width = 10)
 

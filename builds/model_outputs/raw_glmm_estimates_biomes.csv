@@ -21,10 +21,6 @@ fixed,cond,Savanna,0.287505155497533,0.193654157874504,1.48463197822919,0.137641
 Diversity",Savanna
 fixed,cond,Thicket,0.0259987888952498,0.228061305277512,0.113999123453291,0.909238488297839,plot,biome + 0 + (1 | exclosure_id/cluster_id),functional_dispersion_plot,functional_diversity,105,0.472998947239174,-0.421001369448675,non-significant,2.63397054677967,60.4799693505119,-34.3610797482768,Plant Functional Dispersion,"Functional
 Diversity",Thicket
-fixed,cond,Savanna,-0.035898470952222,0.0379132271628091,-0.946858751909057,0.34371075897593,plot,biome + 0 + (1 | exclosure_id/cluster_id),functional_specialization_plot,functional_diversity,105,0.0384114542868838,-0.110208396191328,non-significant,-3.52617625344358,3.9158711235056,-10.4352533674102,Plant Functional Specialization,"Functional
-Diversity",Savanna
-fixed,cond,Thicket,-0.0376729679538868,0.0449381164080232,-0.838329929359493,0.401845431138143,plot,biome + 0 + (1 | exclosure_id/cluster_id),functional_specialization_plot,functional_diversity,105,0.0504057402058387,-0.125751676113612,non-significant,-3.69721696392539,5.16977258715767,-11.8166200007003,Plant Functional Specialization,"Functional
-Diversity",Thicket
 fixed,cond,Savanna,0.133700249766063,0.0635481046602068,2.10392191051112,0.035385259367356,plot,biome + 0 + (1 | exclosure_id/cluster_id),functional_diversity_plot,functional_diversity,108,0.258254534900068,0.00914596463205775,significant,14.3050138741383,29.466831495847,0.918791676662445,Plant Functional Diversity,"Functional
 Diversity",Savanna
 fixed,cond,Thicket,0.128157073242712,0.0882944711864627,1.45147336543945,0.146648093580903,plot,biome + 0 + (1 | exclosure_id/cluster_id),functional_diversity_plot,functional_diversity,108,0.301214236768179,-0.0449000902827552,non-significant,13.6731538783962,35.1498851271187,-4.39069999572842,Plant Functional Diversity,"Functional

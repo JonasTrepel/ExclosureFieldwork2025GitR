@@ -1,0 +1,96 @@
+﻿species,common_name,count,site,year
+Damaliscus pygargus,Blesbok ,3,addo_nyathi,2021
+Diceros bicornis,Black Rhinoceros ,60,addo_nyathi,2021
+Hyaena brunnea,Brown Hyena,0,addo_nyathi,2021
+Syncerus caffer,Buffalo,240,addo_nyathi,2021
+Equus quagga,Plains zebra,440,addo_nyathi,2021
+Acinonyx jubatus,Cheetah,0,addo_nyathi,2021
+Taurotragus oryx,Eland,154,addo_nyathi,2021
+Loxodonta africana,Elephant,104,addo_nyathi,2021
+Tragelaphus strepsiceros,Greater Kudu,269,addo_nyathi,2021
+Aepyceros melampus,Impala,4,addo_nyathi,2021
+Panthera pardus,Leopard,NA,addo_nyathi,2021
+Panthera leo,Lion,5,addo_nyathi,2021
+Struthio camelus,Ostrich,25,addo_nyathi,2021
+Alcelaphus buselaphus,Red Hartebeest,26,addo_nyathi,2021
+Crocuta crocuta,Spotted Hyena,0,addo_nyathi,2021
+Phacochoerus africanus,Warthog,762,addo_nyathi,2021
+Tragelaphus sylvaticus,Bushbuck,30,addo_nyathi,2021
+Potamochoerus larvatus,Bushpig,0,addo_nyathi,2021
+Sylvicapra grimmia,Common Duiker,28,addo_nyathi,2021
+Canis mesomelas,Jackal,2,addo_nyathi,2021
+Oreotragus oreotragus,Klipspringer,0,addo_nyathi,2021
+Hystrix africaeaustralis,Porcupine,2,addo_nyathi,2021
+Raphicerus campestris,Steenbock ,0,addo_nyathi,2021
+Damaliscus pygargus,Blesbok ,0,addo_main,2021
+Diceros bicornis,Black Rhinoceros ,65,addo_main,2021
+Hyaena brunnea,Brown Hyena,1,addo_main,2021
+Syncerus caffer,Buffalo,180,addo_main,2021
+Equus quagga,Plains zebra,619,addo_main,2021
+Acinonyx jubatus,Cheetah,0,addo_main,2021
+Taurotragus oryx,Eland,62,addo_main,2021
+Loxodonta africana,Elephant,519,addo_main,2021
+Tragelaphus strepsiceros,Greater Kudu,576,addo_main,2021
+Aepyceros melampus,Impala,0,addo_main,2021
+Panthera pardus,Leopard,NA,addo_main,2021
+Panthera leo,Lion,7,addo_main,2021
+Struthio camelus,Ostrich,18,addo_main,2021
+Alcelaphus buselaphus,Red Hartebeest,529,addo_main,2021
+Crocuta crocuta,Spotted Hyena,14,addo_main,2021
+Phacochoerus africanus,Warthog,393,addo_main,2021
+Tragelaphus sylvaticus,Bushbuck,43,addo_main,2021
+Potamochoerus larvatus,Bushpig,2,addo_main,2021
+Sylvicapra grimmia,Common Duiker,28,addo_main,2021
+Canis mesomelas,Jackal,11,addo_main,2021
+Oreotragus oreotragus,Klipspringer,0,addo_main,2021
+Hystrix africaeaustralis,Porcupine,1,addo_main,2021
+Raphicerus campestris,Steenbock ,1,addo_main,2021
+Damaliscus pygargus,Blesbok ,0,knp,2021
+Diceros bicornis,Black Rhinoceros ,205,knp,2021
+Hyaena brunnea,Brown Hyena,0,knp,2021
+Syncerus caffer,Buffalo,38116,knp,2021
+Equus quagga,Plains zebra,33900,knp,2021
+Acinonyx jubatus,Cheetah,415,knp,2021
+Taurotragus oryx,Eland,220,knp,2021
+Loxodonta africana,Elephant,31531,knp,2021
+Tragelaphus strepsiceros,Greater Kudu,6609,knp,2021
+Aepyceros melampus,Impala,143705,knp,2021
+Panthera pardus,Leopard,2245,knp,2021
+Panthera leo,Lion,1803,knp,2021
+Struthio camelus,Ostrich,NA,knp,2021
+Alcelaphus buselaphus,Red Hartebeest,NA,knp,2021
+Crocuta crocuta,Spotted Hyena,7340,knp,2021
+Phacochoerus africanus,Warthog,2492,knp,2021
+Tragelaphus sylvaticus,Bushbuck,500,knp,2021
+Potamochoerus larvatus,Bushpig,NA,knp,2021
+Sylvicapra grimmia,Common Duiker,NA,knp,2021
+Canis mesomelas,Jackal,NA,knp,2021
+Oreotragus oreotragus,Klipspringer,NA,knp,2021
+Hystrix africaeaustralis,Porcupine,NA,knp,2021
+Raphicerus campestris,Steenbock ,NA,knp,2021
+Redunca fulvorufula,Mountain Reedbuck,150,knp,2021
+Hippopotamus amphibius,Hippopotamus,3986,knp,2021
+Alcelaphus buselaphus,Lichtenstein Hartebeest,30,knp,2021
+Giraffa giraffa,Giraffe,9782,knp,2021
+Tragelaphus angasii,Nyala,300,knp,2021
+Redunca arundinum,Common Reedbuck,300,knp,2021
+Hippotragus equinus,Roan antelope,20,knp,2021
+Hippotragus niger,Sable antelope,520,knp,2021
+Damaliscus lunatus,Tsessebe,655,knp,2021
+Ceratotherium simum,White Rhinoceros,2614,knp,2021
+Lycaon pictus,Wild Dog,290,knp,2021
+Kobus ellipsiprymnus,Waterbuck,5403,knp,2021
+Connochaetes taurinus,Blue Wildebeest,13639,knp,2021
+Syncerus caffer,Buffalo,84,pnr,2024
+Hippopotamus amphibius,Hippopotamus,22,pnr,2024
+Giraffa giraffa,Giraffe,60,pnr,2024
+Aepyceros melampus,Impala,1086,pnr,2024
+Tragelaphus strepsiceros,Greater Kudu,138,pnr,2024
+Tragelaphus angasii,Nyala,124,pnr,2024
+Redunca arundinum,Common Reedbuck,17,pnr,2024
+Ceratotherium simum,White Rhinoceros,27,pnr,2024
+Phacochoerus africanus,Warthog,451,pnr,2024
+Kobus ellipsiprymnus,Waterbuck,117,pnr,2024
+Connochaetes taurinus,Blue Wildebeest,53,pnr,2024
+Equus quagga,Plains zebra,42,pnr,2024
+Loxodonta africana,Elephant,2,pnr,2024

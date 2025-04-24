@@ -89,6 +89,85 @@ dt_dominance <- max_cover_plot %>%
   left_join(max_cover_cluster) %>% 
   left_join(max_cover_site)
 
+##### Life-form specific berger-parker --------------------------
+######### Graminoids 
+dt_graminoid_bp_plot <- dt_sp %>% 
+  filter(life_form == "Graminoid") %>% 
+  dplyr::select(plot_id, cluster_id, site_id, cover) %>% 
+  group_by(site_id, cluster_id, plot_id) %>% 
+  summarize(max_cover_plot = max(cover, na.rm = T), 
+            graminoid_berger_parker_plot = max(cover, na.rm = T)/sum(cover, na.rm = T), 
+            graminoid_simpson_dominance_plot = vegan::diversity(cover, index = "simpson")) %>% 
+  ungroup() %>% 
+  dplyr::select(graminoid_berger_parker_plot, plot_id, site_id)
+  
+dt_graminoid_bp_site <- dt_sp %>% 
+  filter(life_form == "Graminoid") %>% 
+  group_by(site_id, species) %>% 
+  summarize(cover = sum(cover, na.rm = T)) %>% 
+  ungroup() %>% 
+  dplyr::select(site_id, cover, species) %>% 
+  group_by(site_id) %>% 
+  summarize(graminoid_berger_parker_site = max(cover, na.rm = T)/sum(cover, na.rm = T), 
+            graminoid_simpson_dominance_site = vegan::diversity(cover, index = "simpson")) %>% 
+  ungroup() %>% 
+  dplyr::select(graminoid_berger_parker_site, site_id)
+
+########### Forbs 
+dt_forb_bp_plot <- dt_sp %>% 
+  filter(life_form == "Forb") %>% 
+  dplyr::select(plot_id, cluster_id, site_id, cover) %>% 
+  group_by(site_id, cluster_id, plot_id) %>% 
+  summarize(max_cover_plot = max(cover, na.rm = T), 
+            forb_berger_parker_plot = max(cover, na.rm = T)/sum(cover, na.rm = T), 
+            forb_simpson_dominance_plot = vegan::diversity(cover, index = "simpson")) %>% 
+  ungroup() %>% 
+  dplyr::select(forb_berger_parker_plot, plot_id, site_id)
+
+dt_forb_bp_site <- dt_sp %>% 
+  filter(life_form == "Forb") %>% 
+  group_by(site_id, species) %>% 
+  summarize(cover = sum(cover, na.rm = T)) %>% 
+  ungroup() %>% 
+  dplyr::select(site_id, cover, species) %>% 
+  group_by(site_id) %>% 
+  summarize(forb_berger_parker_site = max(cover, na.rm = T)/sum(cover, na.rm = T), 
+            forb_simpson_dominance_site = vegan::diversity(cover, index = "simpson")) %>% 
+  ungroup() %>% 
+  dplyr::select(forb_berger_parker_site, site_id)
+
+########### Woody 
+dt_woody_bp_plot <- dt_sp %>% 
+  filter(life_form %in% c("Shrub", "Tree")) %>% 
+  dplyr::select(plot_id, cluster_id, site_id, cover) %>% 
+  group_by(site_id, cluster_id, plot_id) %>% 
+  summarize(max_cover_plot = max(cover, na.rm = T), 
+            woody_berger_parker_plot = max(cover, na.rm = T)/sum(cover, na.rm = T), 
+            woody_simpson_dominance_plot = vegan::diversity(cover, index = "simpson")) %>% 
+  ungroup() %>% 
+  dplyr::select(woody_berger_parker_plot, plot_id, site_id)
+
+dt_woody_bp_site <- dt_sp %>% 
+  filter(life_form %in% c("Shrub", "Tree")) %>% 
+  group_by(site_id, species) %>% 
+  summarize(cover = sum(cover, na.rm = T)) %>% 
+  ungroup() %>% 
+  dplyr::select(site_id, cover, species) %>% 
+  group_by(site_id) %>% 
+  summarize(woody_berger_parker_site = max(cover, na.rm = T)/sum(cover, na.rm = T), 
+            woody_simpson_dominance_site = vegan::diversity(cover, index = "simpson")) %>% 
+  ungroup() %>% 
+  dplyr::select(woody_berger_parker_site, site_id)
+
+dt_lf_dom <- dt_sp %>% 
+  dplyr::select(plot_id, site_id) %>% 
+  unique() %>% 
+  left_join(dt_graminoid_bp_plot) %>% 
+  left_join(dt_graminoid_bp_site) %>% 
+  left_join(dt_forb_bp_plot) %>% 
+  left_join(dt_forb_bp_site) %>% 
+  left_join(dt_woody_bp_plot) %>% 
+  left_join(dt_woody_bp_site) %>% unique()
 
 ###### calculate FD -----------------------------------
 
@@ -673,6 +752,7 @@ dt_shan_site
 dt_shan_cluster
 
 dt_fd_all <- dt_dominance %>% 
+  left_join(dt_lf_dom) %>%
   left_join(dt_fd_plot) %>% 
   left_join(dt_fd_cluster) %>% 
   left_join(dt_fd_site) %>% 
