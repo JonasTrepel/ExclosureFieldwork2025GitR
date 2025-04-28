@@ -102,8 +102,8 @@ dt_out <- dt_comb %>%
              functional_pairwise_distance_plot, functional_pairwise_distance_cluster, functional_pairwise_distance_site,
              functional_nearerst_neighbour_distance_plot, functional_nearerst_neighbour_distance_cluster, functional_nearerst_neighbour_distance_site,
              
-             functional_beta_diversity_cluster, functional_beta_diversity_site, 
-             sorenson_dissimilarity_cluster, sorenson_dissimilarity_site,
+             functional_beta_diversity_site, 
+             sorenson_dissimilarity_site,
              
              plant_evenness_plot, plant_evenness_cluster, plant_evenness_site,
              shannon_diversity_plot, shannon_diversity_cluster, shannon_diversity_site,
@@ -151,8 +151,8 @@ dt_in <- dt_comb %>%
              functional_pairwise_distance_plot, functional_pairwise_distance_cluster, functional_pairwise_distance_site,
              functional_nearerst_neighbour_distance_plot, functional_nearerst_neighbour_distance_cluster, functional_nearerst_neighbour_distance_site,
              
-             functional_beta_diversity_cluster, functional_beta_diversity_site, 
-             sorenson_dissimilarity_cluster, sorenson_dissimilarity_site,
+            functional_beta_diversity_site, 
+            sorenson_dissimilarity_site,
              
              plant_evenness_plot, plant_evenness_cluster, plant_evenness_site,
              shannon_diversity_plot, shannon_diversity_cluster, shannon_diversity_site,

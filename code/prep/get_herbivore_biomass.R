@@ -33,9 +33,13 @@ dt <- pc %>%
   left_join(ht) %>%
   left_join(area) %>% 
   filter(!is.na(mass_kg) & !is.na(count) & !count == 0) %>% #remove predators
-  mutate(species_total_biomass = mass_kg*count) %>% 
+  mutate(species_total_biomass = mass_kg*count, 
+         elephant_biomass = ifelse(species == "Loxodonta africana", species_total_biomass, 0)) %>% 
   group_by(site) %>% 
   mutate(total_biomass = sum(species_total_biomass), 
-         herbivore_biomass_kg_km2 = total_biomass/area_km2)
- <- dt %>% dplyr::select(site, area_km2, herbivore_biomass_kg_km2) %>% unique()
+         herbivore_biomass_kg_km2 = total_biomass/area_km2, 
+         elephant_biomass_kg_km2 = sum(elephant_biomass)/area_km2, 
+         ratio_elephant_biomass  = elephant_biomass_kg_km2/herbivore_biomass_kg_km2)
+
+dt %>% dplyr::select(site, area_km2, herbivore_biomass_kg_km2, elephant_biomass_kg_km2, ratio_elephant_biomass) %>% unique()
 

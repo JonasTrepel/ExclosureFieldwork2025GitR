@@ -73,8 +73,9 @@ dt_res <- fread("builds/model_outputs/diversity_glmms_model_results.csv") %>%
       "Plant Functional Diversity", "Plant Functional Distance", "Plant Functional Specialization", "Plant Functional Dispersion"
     )),
     sig = ifelse(ci_ub < 0 | ci_lb > 0, "significant", "non-significant")
-  )
-
+  ) %>% 
+  mutate(label = paste0(clean_response, "\n(R²m = ", round(rsq_m, 2), "; R²c = ", round(rsq_c, 2), ")")
+  ) 
 
 dt_sig <- dt_res %>% dplyr::select(response, tier, term, sig, clean_term, clean_response)
 
@@ -140,6 +141,20 @@ dt_points <- dt_mod %>%
 
 # 2. Estimate plots --------------------------------------------------------
 
+label_df_dom <- dt_res %>%
+  filter(response %in% c("plant_richness_plot", 
+                         "functional_nearerst_neighbour_distance_plot", 
+                         "functional_diversity_plot",
+                         "functional_dispersion_plot"
+  ) & 
+    grepl("dominance", tier)) %>% 
+  distinct(clean_response, .keep_all = TRUE) %>%
+  mutate(
+    label = paste0(clean_response, "\n(R²m = ", round(rsq_m, 2), "; R²c = ", round(rsq_c, 2)),
+    label = factor(label, levels = label[order(clean_response)])
+  ) %>%
+  select(clean_response, label)
+
 p_est_dom_tax <- dt_res %>%
   filter(response %in% c("plant_richness_plot", 
                          "functional_nearerst_neighbour_distance_plot", 
@@ -147,10 +162,12 @@ p_est_dom_tax <- dt_res %>%
                          "functional_dispersion_plot"
                          ) & 
            grepl("dominance", tier)) %>%
+  dplyr::select(-label) %>% 
+  left_join(label_df_dom) %>% 
   ggplot() +
   geom_vline(xintercept = 0, linetype = "dashed", color = "grey25") +
   #facet_grid2(rows = vars(clean_response), scales = "free_y", space = "free_y") +
-  facet_wrap(~ clean_response, ncol = 1) +
+  facet_wrap(~ label, ncol = 1) +
   scale_color_manual(values = c("grey50", "orange2")) +
   geom_pointrange(aes(x = estimate, xmin = ci_lb, xmax = ci_ub, y = clean_term, color = sig), linewidth = 1.3, alpha = 0.9) +
   labs(y = "", x = "Estimate") +
@@ -170,17 +187,32 @@ p_est_dom_tax <- dt_res %>%
   )
 p_est_dom_tax
 
+label_df_eve <- dt_res %>%
+  filter(response %in% c("plant_richness_plot", 
+                         "functional_nearerst_neighbour_distance_plot", 
+                         "functional_diversity_plot",
+                         "functional_dispersion_plot"
+  ) & 
+    grepl("evenness", tier)) %>% 
+  distinct(clean_response, .keep_all = TRUE) %>%
+  mutate(
+    label = paste0(clean_response, "\n(R²m = ", round(rsq_m, 2), "; R²c = ", round(rsq_c, 2)),
+    label = factor(label, levels = label[order(clean_response)])
+  ) %>%
+  select(clean_response, label)
 
 p_est_eve_tax <- dt_res %>%
   filter(response %in% c("plant_richness_plot", 
                          "functional_nearerst_neighbour_distance_plot", 
                          "functional_diversity_plot",
                          "functional_dispersion_plot"
-  ) & 
-    grepl("evenness", tier)) %>%  ggplot() +
+  ) & grepl("evenness", tier)) %>% 
+  dplyr::select(-label) %>% 
+  left_join(label_df_eve) %>% 
+  ggplot() +
   geom_vline(xintercept = 0, linetype = "dashed", color = "grey25") +
   #facet_grid2(rows = vars(clean_response), scales = "free_y", space = "free_y") +
-  facet_wrap(~ clean_response, ncol = 4) +
+  facet_wrap(~ label, ncol = 4) +
   scale_color_manual(values = c("grey50", "orange2")) +
   geom_pointrange(aes(x = estimate, xmin = ci_lb, xmax = ci_ub, y = clean_term, color = sig), linewidth = 1.3, alpha = 0.9) +
   labs(y = "", x = "Estimate") +

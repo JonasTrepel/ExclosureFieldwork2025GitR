@@ -15,6 +15,10 @@ dt_traits <- fread("data/processed/fragments/species_trait_data_exclosures_2025.
 
 quantile(dt_sp$cover, na.rm = T)
 
+#########################################################################
+##############################  DOMINANCE  ##############################
+#########################################################################
+
 ### calc max cover #######
 library("abdiv")
 x <- c(15, 6, 4, 0, 3, 0)
@@ -169,7 +173,11 @@ dt_lf_dom <- dt_sp %>%
   left_join(dt_woody_bp_plot) %>% 
   left_join(dt_woody_bp_site) %>% unique()
 
-###### calculate FD -----------------------------------
+#########################################################################
+########################  FUNCTIONAL DIVERSITY  #########################
+#########################################################################
+
+### sort traits and get functional distance matrix  -----------------------------------
 
 trait_data <- dt_traits %>%
   mutate(leaf_area = ifelse(leaf_type == "a", 0, leaf_area)) %>% # absent leaves have an area of 0... 
@@ -186,9 +194,6 @@ trait_data <- dt_traits %>%
                 growth_form, spines, biomass_density_ordinal, leaf_type) %>% 
   unique() %>%
   filter(complete.cases(.))
-
-#summary(trait_data)
-#unique(trait_data$leaf_area)
 
 
 ### build trait data frame for functions 
@@ -207,12 +212,12 @@ tr_cat <- data.table(
   fuzzy_name = NA
 )
 
-#### as we're dealing with categorical traits we have to use the gower distance 
+### as we're dealing also with categorical traits we have to use gower distance 
 tr_cat_fdist <- tr_cat
 tr_cat_fdist$trait_weight <- c(1, 1, 1, 1, 1, 1) ## 
 fdist <- mFD::funct.dist(sp_tr = sp_tr, tr_cat = tr_cat_fdist, metric = "gower")
 
-#### get functional spaces 
+### get functional spaces 
 
 fspaces_quality <- mFD::quality.fspaces(
   sp_dist = fdist,
@@ -226,17 +231,15 @@ ggsave(plot = p, "builds/plots/exploratory/fspaces_quality.png", dpi = 600, heig
 
 round(fspaces_quality$"quality_fspaces", 3) %>% arrange(mad) # 6 dimensional space it is 
 
-#### get matrix of species coordinates 
+### get matrix of species coordinates 
 
 sp_faxes_coord <- fspaces_quality$"details_fspaces"$"sp_pc_coord"
 
 dt_sp <- fread("data/processed/fragments/plot_species_and_data.csv")
 
-##################### alpha diversity ########################
+##################### Alpha diversity ########################
 
-######------------------ plot level --------------------######
-
-# ---------------------- all life forms -------------------- #
+######------------------ Plot level --------------------######
 
 plants <- dt_sp %>% 
   dplyr::select(species, cover, plot_id)
@@ -260,7 +263,7 @@ asb_sp_summ <- mFD::asb.sp.summary(asb_sp_w = weight_mat)
 asb_sp_occ <- asb_sp_summ$'asb_sp_occ'
 
 
-#### distance based functional diversity metric 
+### distance based functional diversity metric 
 fd_hill_res <- alpha.fd.hill(asb_sp_w = weight_mat, sp_dist = fdist)
 
 dt_dbfd <- fd_hill_res$asb_FD_Hill %>% 
@@ -269,13 +272,13 @@ dt_dbfd <- fd_hill_res$asb_FD_Hill %>%
 hist(dt_dbfd$FD_q2)
 
 
-## the q argument defines the importance of species weight compared to trait based distances (higher q, species weight is considered more important)
+### the q argument defines the importance of species weight compared to trait based distances
+### (higher q, species weight is considered more important)
 
 
-#### compute functional richeness (volume occupied in multidimensional space)
+### compute distance based functional diversity metrics (needs at least 2 species per plot)
 nono_plots <- unique(dt_sp[dt_sp$plant_richness_plot < 2, plot_id])
 weight_mat_multi <- weight_mat[!(rownames(weight_mat) %in% c(nono_plots)), ]
-#weight_mat_multi <- weight_mat[!(rownames(weight_mat) %in% c()), ]
 
 alpha_fd_indices <- mFD::alpha.fd.multidim(
   sp_faxes_coord   = sp_faxes_coord[ , c("PC1", "PC2", "PC3", "PC4", "PC5", "PC6")],
@@ -319,8 +322,9 @@ dt_fd_plot <- dt_dbfd %>%
                 functional_specialization_plot) 
 
 
-##################### alpha diversity ########################
 ######------------------ Cluster level --------------------######
+### aggregate at cluster level 
+### not used in analysis 
 
 dt_sp_cluster_raw <- dt_sp %>% 
   dplyr::select(cluster_id, species, cover)
@@ -331,8 +335,6 @@ dt_sp_cluster <- dt_sp_cluster_raw %>%
   unique() 
 
 min(dt_sp_cluster$cover)
-
-#---------------------all plants ---------------------------#
 
 ### build matrix for species weights (i.e., species as columns and rows contain their biomass/cover). Assemblages should be row names 
 weight_mat_cluster <- dt_sp_cluster %>% 
@@ -422,9 +424,11 @@ dt_fd_cluster <- dt_dbfd_cluster %>%
 
 hist(dt_fd_cluster$functional_diversity_cluster)
 
-##################### alpha diversity ########################
-######------------------ site_id level -------------------#####
+##################### Gamma diversity ########################
 
+######------------------ Site level -------------------#####
+
+### aggregate data on site level 
 dt_sp_site_raw <- dt_sp %>% 
   dplyr::select(life_form, site_id, species, cover)
 
@@ -435,7 +439,6 @@ dt_sp_site <- dt_sp_site_raw %>%
   mutate(cover = as.numeric(ifelse(is.na(cover), 1, cover)),
          cover = as.numeric(ifelse(cover == 0, 1, cover))) %>% unique()
 min(dt_sp_site$cover)
-#---------------------all plants ---------------------------#
 
 ### build matrix for species weights (i.e., species as columns and rows contain their biomass/cover). Assemblages should be row names 
 which(duplicated(dt_sp_site))
@@ -516,84 +519,8 @@ dt_fd_site <- dt_dbfd_site %>%
 
 hist(dt_fd_site$functional_diversity_site)
 
-########################## beta diversity within clusters ##################################
 
-# Has to be calculated for each cluster seperately
-# Preparation steps are as usual, but we'll loop through the sites
-
-dt_beta_cluster <- data.table(
-  functional_beta_diversity_q0_cluster = NA,
-  functional_beta_diversity_q1_cluster = NA,
-  functional_beta_diversity_q2_cluster = NA,
-  sorenson_dissimilarity_cluster = NA, 
-  cluster_id = NA
-) %>% filter(!is.na(cluster_id))
-
-for(cluster in unique(dt_sp$cluster_id)){
-  
-  cluster_data_raw <- dt_sp %>% filter(cluster_id %in% c(cluster)) %>% 
-    dplyr::select(plot_id, species, cover)
-  
-  cluster_data <- cluster_data_raw %>% 
-    group_by(species, plot_id) %>% 
-    summarize(cover = sum(cover, na.rm = T)) %>% 
-    unique() 
-  
-  
-  ### build matrix for species weights (i.e., species as columns and rows contain their biomass/cover). Assemblages should be row names 
-  cluster_weights <- cluster_data %>% 
-    dplyr::filter(species %in% c(all_of(unique(trait_data$species)))) %>% 
-    dplyr::select(plot_id, cover, species) %>% 
-    pivot_wider(names_from = "species", values_from = "cover") %>% 
-    as.data.table() %>% 
-    mutate(across(where(is.list), ~ sapply(., toString)),
-           across(where(is.character) & !all_of("plot_id"), ~ as.numeric(.)),
-           across(everything(), ~ ifelse(is.na(.), 0, .))
-    ) %>% 
-    remove_rownames() %>% 
-    column_to_rownames(var="plot_id") %>% 
-    as.matrix()
-  
-  
-  ## calculate 
-  tr_cat_fdist <- tr_cat
-  tr_cat_fdist$trait_weight <- c(1, 1, 1, 1, 1, 1) #
-  fdist <- mFD::funct.dist(sp_tr = sp_tr, tr_cat = tr_cat_fdist, metric = "gower")
-  
-  
-  #### distance based functional diversity metric 
-  
-  beta_div_cluster <- beta.fd.hill(asb_sp_w = cluster_weights, sp_dist = fdist)
-  
-  ## the q argument defines the importance of species weight compared to trait based distances (higher q, species weight is considered more important)
-  mFD::dist.to.df(list_dist = list("FDq1" = beta_div_cluster$"beta_fd_q"$"q1"))
-  
-  
-  ### calculate beta diversity using the vegan approach (Soerensen dissimilarity index)
-  
-  tmp_veg_cluster <- betadiver(cluster_weights, method = "w") %>% mean(na.rm = T)
-  
-  
-  ## extract mean beta div
-  tmp <- data.table(
-    functional_beta_diversity_q0_cluster = mean(beta_div_cluster$beta_fd_q$q0),
-    functional_beta_diversity_q1_cluster = mean(beta_div_cluster$beta_fd_q$q1),
-    functional_beta_diversity_q2_cluster = mean(beta_div_cluster$beta_fd_q$q2),
-    sorenson_dissimilarity_cluster = tmp_veg_cluster, 
-    cluster_id = cluster
-  )
-  
-  dt_beta_cluster <- rbind(dt_beta_cluster, tmp)
-  
-  print(paste0(cluster, " done"))
-  
-}
-
-dt_beta_cluster
-plot(dt_beta_cluster$sorenson_dissimilarity_cluster, dt_beta_cluster$functional_beta_diversity_q1_cluster)
-hist(dt_beta_cluster$sorenson_dissimilarity_cluster)
-
-########################## beta diversity within site_id ##################################
+########################## beta diversity within sites ##################################
 
 # Has to be calculated for each site separately
 # Preparation steps are as usual, but we'll loop through the site_ids 
@@ -671,8 +598,10 @@ for(site in unique(dt_sp$site_id)){
 dt_beta_site <- dt_beta
 
 
+###########################################################################
+#################### EVENNESS & SHANNON DIVERSITY #########################
+###########################################################################
 
-######### calculate evenness and shannon diversity ########################
 library("chemodiv")
 library(vegan)
 
@@ -731,7 +660,7 @@ dt_shan_site <- data.table(
 )
 
 
-####### conbine to one functional diversity dataframe ######
+####### combine to one functional diversity dataframe ######
 
 dt_dominance
 dt_fd_plot
@@ -741,9 +670,6 @@ dt_beta_site_fin <- dt_beta_site %>% dplyr::select(functional_beta_diversity_sit
                                                    sorenson_dissimilarity_site, 
                                                    site_id)
 
-dt_beta_cluster_fin <- dt_beta_cluster %>% dplyr::select(functional_beta_diversity_cluster = functional_beta_diversity_q1_cluster, 
-                                                      sorenson_dissimilarity_cluster, 
-                                                   cluster_id)
 evenness_plot
 evenness_cluster
 evenness_site
@@ -756,7 +682,6 @@ dt_fd_all <- dt_dominance %>%
   left_join(dt_fd_plot) %>% 
   left_join(dt_fd_cluster) %>% 
   left_join(dt_fd_site) %>% 
-  left_join(dt_beta_cluster_fin) %>% 
   left_join(dt_beta_site_fin) %>% 
   left_join(evenness_plot) %>% 
   left_join(evenness_cluster) %>% 
