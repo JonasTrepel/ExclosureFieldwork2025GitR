@@ -25,7 +25,7 @@ guide <- dt %>%
                          "shannon_diversity_plot",
                          
                          "functional_dispersion_plot", "functional_diversity_plot", 
-                         "functional_specialization_plot",
+                         "functional_richness_plot",
                          "functional_nearerst_neighbour_distance_plot",
                          
                          "point_return_fraction_plot", "mean_point_height_plot"
@@ -39,7 +39,7 @@ guide <- dt %>%
                          "shannon_diversity_cluster",
                          
                          "functional_dispersion_cluster", "functional_diversity_cluster", 
-                         "functional_specialization_cluster", "functional_nearerst_neighbour_distance_cluster",
+                         "functional_richness_cluster", "functional_nearerst_neighbour_distance_cluster",
                          
                          "point_return_fraction_cluster", "mean_point_height_cluster"
     ) ~ "biome + 0 + (1|exclosure_id)")) %>% 
@@ -56,13 +56,12 @@ guide <- dt %>%
     grepl("plant_evenness", response_name) ~ "dominance",
     grepl("functional_dispersion", response_name) ~ "functional_diversity",
     grepl("functional_diversity", response_name) ~ "functional_diversity",
-    grepl("functional_specialization", response_name) ~ "functional_diversity",
+    grepl("functional_richness", response_name) ~ "functional_diversity",
     grepl("functional_nearerst_neighbour_distance", response_name) ~ "functional_diversity",
     grepl("point_return_fraction", response_name) ~ "structure",
     grepl("mean_point_height", response_name) ~ "structure"
   )) %>% 
-  filter(!grepl("cluster", response_name)) %>%
-  filter(!grepl("functional_specialization", response_name))
+  filter(!grepl("cluster", response_name)) 
 
 table(guide$response_tier)
 
@@ -153,14 +152,14 @@ estimates <- estimates %>%
       clean_response == "mean_point_height" ~ "Vegetation Height", 
       clean_response == "functional_nearerst_neighbour_distance" ~ "Plant Functional Distance", 
       clean_response == "functional_diversity" ~ "Plant Functional Diversity", 
-      clean_response == "functional_specialization" ~ "Plant Functional Specialization", 
+      clean_response == "functional_richness" ~ "Plant Functional Richness", 
       clean_response == "functional_dispersion" ~ "Plant Functional Dispersion", 
     ), 
     clean_response = factor(clean_response, levels = c(
       "Plant Richness", "Shannon Diversity", "Graminoid Richness", "Forb Richness", "Woody Richness",
       "Plant Dominance", "Plant Evenness",
       "Vegetation Density", "Vegetation Height",
-      "Plant Functional Diversity", "Plant Functional Distance", "Plant Functional Specialization", "Plant Functional Dispersion"
+      "Plant Functional Diversity", "Plant Functional Distance", "Plant Functional Richness", "Plant Functional Dispersion"
     )),
     clean_response_tier = case_when(response_tier == "taxonomic_diversity" ~ "Taxonomic\nDiversity", 
                                     response_tier ==  "dominance" ~ "Dominance", 

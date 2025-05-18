@@ -21,6 +21,7 @@ dt_box <- fread("data/processed/clean/all_vars.csv") %>%
 
              functional_dispersion_plot, functional_dispersion_site, 
              functional_diversity_plot, functional_diversity_site, 
+             functional_richness_plot, functional_richness_site, 
              functional_nearerst_neighbour_distance_plot, functional_nearerst_neighbour_distance_site, 
              
              plant_evenness_plot, plant_evenness_site,
@@ -45,13 +46,14 @@ dt_box <- fread("data/processed/clean/all_vars.csv") %>%
       clean_response == "mean_point_height" ~ "Vegetation Height", 
       clean_response == "functional_nearerst_neighbour_distance" ~ "Plant Functional Distance", 
       clean_response == "functional_diversity" ~ "Plant Functional Diversity", 
+      clean_response == "functional_richness" ~ "Plant Functional Richness", 
       clean_response == "functional_dispersion" ~ "Plant Functional Dispersion", 
     ), 
     clean_response = factor(clean_response, levels = c(
       "Plant Richness", "Shannon Diversity", "Graminoid Richness", "Forb Richness", "Woody Richness",
       "Plant Dominance", "Plant Evenness",
       "Vegetation Density", "Vegetation Height",
-      "Plant Functional Diversity", "Plant Functional Distance", "Plant Functional Dispersion"
+      "Plant Functional Diversity", "Plant Functional Richness", "Plant Functional Distance", "Plant Functional Dispersion"
     ))) 
 
 p_p_box <- dt_box %>% 
@@ -106,7 +108,7 @@ p_s_box <- dt_box %>%
 p_s_box
 
 p_box <- gridExtra::grid.arrange(p_p_box, p_s_box, ncol = 1)
-ggsave(plot = p_box, "builds/plots/supplement/response_boxplots.png", dpi = 600, height = 11, width = 9)
+ggsave(plot = p_box, "builds/plots/supplement/response_boxplots.png", dpi = 600, height = 13, width = 9)
 
 # 2. Correlations ----------------------------------------------------
 
@@ -120,7 +122,7 @@ dt_co_p <- fread("data/processed/clean/all_vars.csv") %>%
                 berger_parker_plot, 
                 
                 functional_dispersion_plot,
-                functional_specialization_plot,
+                functional_richness_plot,
                 functional_diversity_plot, 
                 functional_nearerst_neighbour_distance_plot, 
                 
@@ -141,7 +143,7 @@ dt_co_p <- fread("data/processed/clean/all_vars.csv") %>%
     "Vegetation Height" = mean_point_height_plot,
     "Plant Functional Distance" = functional_nearerst_neighbour_distance_plot,
     "Plant Functional Diversity" = functional_diversity_plot,
-    "Plant Functional Specialization" = functional_specialization_plot,
+    "Plant Functional Richness" = functional_richness_plot,
     "Plant Functional Dispersion" = functional_dispersion_plot
   ) %>% filter(complete.cases(.))
 
@@ -167,7 +169,7 @@ dt_co_p_es <- fread("data/processed/clean/long_data_with_lnrr.csv") %>%
                 berger_parker_plot, 
                 
                 functional_dispersion_plot,
-                functional_specialization_plot,
+                functional_richness_plot,
                 functional_diversity_plot, 
                 functional_nearerst_neighbour_distance_plot, 
                 
@@ -188,7 +190,7 @@ dt_co_p_es <- fread("data/processed/clean/long_data_with_lnrr.csv") %>%
     "Vegetation Height" = mean_point_height_plot,
     "Plant Functional Distance" = functional_nearerst_neighbour_distance_plot,
     "Plant Functional Diversity" = functional_diversity_plot,
-    "Plant Functional Specialization" = functional_specialization_plot,
+    "Plant Functional Richness" = functional_richness_plot,
     "Plant Functional Dispersion" = functional_dispersion_plot
   ) %>% filter(complete.cases(.))
 
@@ -309,7 +311,7 @@ dt_rr <- fread("data/processed/clean/long_data_with_lnrr.csv") %>%
     "berger_parker_plot", 
     
     "functional_dispersion_plot",
-    "functional_specialization_plot",
+    "functional_richness_plot",
     "functional_diversity_plot", 
     "functional_nearerst_neighbour_distance_plot", 
     
@@ -326,7 +328,7 @@ dt_rr <- fread("data/processed/clean/long_data_with_lnrr.csv") %>%
     "berger_parker_site", 
     
     "functional_dispersion_site",
-    "functional_specialization_site",
+    "functional_richness_site",
     "functional_diversity_site", 
     "functional_nearerst_neighbour_distance_site", 
     
@@ -352,7 +354,7 @@ dt_rr <- fread("data/processed/clean/long_data_with_lnrr.csv") %>%
       clean_response == "mean_point_height" ~ "Vegetation Height", 
       clean_response == "functional_nearerst_neighbour_distance" ~ "Plant Functional Distance", 
       clean_response == "functional_diversity" ~ "Plant Functional Diversity", 
-      clean_response == "functional_specialization" ~ "Plant Functional Specialization", 
+      clean_response == "functional_richness" ~ "Plant Functional Richness", 
       clean_response == "functional_dispersion" ~ "Plant Functional Dispersion", 
     ), 
     clean_response = factor(clean_response, levels = c(
@@ -360,7 +362,7 @@ dt_rr <- fread("data/processed/clean/long_data_with_lnrr.csv") %>%
       "Plant Dominance", "Plant Evenness",
       "Vegetation Density", "Vegetation Height",
       "Plant Functional Diversity", "Plant Functional Distance",
-      "Plant Functional Specialization", "Plant Functional Dispersion"
+      "Plant Functional Richness", "Plant Functional Dispersion"
     ))) 
 
 p_ridges <- dt_rr %>%
@@ -382,6 +384,6 @@ p_ridges <- dt_rr %>%
     axis.text.y = element_text(size = 10),
     plot.title = element_text(face = "bold", hjust = 0.5)
   )
-
+p_ridges
 ggsave(plot = p_ridges, "builds/plots/supplement/ln_rr_ridges.png", dpi = 600, height = 5, width = 8)
 

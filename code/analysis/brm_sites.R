@@ -9,7 +9,8 @@ library(broom)
 library("ggh4x")
 library(scico)
 
-dt <- fread("data/processed/clean/long_data_with_lnrr.csv")
+dt <- fread("data/processed/clean/long_data_with_lnrr.csv") %>% 
+  mutate(biome = ifelse(setup_id %in% c("addo_nyathi_full", "addo_jack"), "Thicket", "Savanna"))
 unique(dt$response_name)
 
 
@@ -24,7 +25,7 @@ guide <- dt %>%
                          "shannon_diversity_plot",
                          
                          "functional_dispersion_plot", "functional_diversity_plot", 
-                         "functional_specialization_plot", "functional_nearerst_neighbour_distance_plot",
+                         "functional_richness_plot", "functional_nearerst_neighbour_distance_plot",
                          
                          "point_return_fraction_plot", "mean_point_height_plot"
     ) ~ "setup_id + 0 + (1 | cluster_id)",
@@ -37,7 +38,7 @@ guide <- dt %>%
                          "shannon_diversity_cluster",
                          
                          "functional_dispersion_cluster", "functional_diversity_cluster", 
-                         "functional_specialization_cluster", "functional_nearerst_neighbour_distance_cluster",
+                         "functional_richness_cluster", "functional_nearerst_neighbour_distance_cluster",
                          
                          "point_return_fraction_cluster", "mean_point_height_cluster"
     ) ~ "setup_id + 0")) %>% 
@@ -54,13 +55,13 @@ guide <- dt %>%
     grepl("plant_evenness", response_name) ~ "dominance",
     grepl("functional_dispersion", response_name) ~ "functional_diversity",
     grepl("functional_diversity", response_name) ~ "functional_diversity",
-    grepl("functional_specialization", response_name) ~ "functional_diversity",
+    grepl("functional_richness", response_name) ~ "functional_diversity",
     grepl("functional_nearerst_neighbour_distance", response_name) ~ "functional_diversity",
     grepl("point_return_fraction", response_name) ~ "structure",
     grepl("mean_point_height", response_name) ~ "structure"
   )) %>% 
   filter(!grepl("cluster", response_name)) %>%
-  filter(!grepl("functional_specialization", response_name))
+  filter(!grepl("functional_richness", response_name))
 
 table(guide$response_tier)
 unique(dt$setup_id)
@@ -154,14 +155,14 @@ estimates <- estimates %>%
       clean_response == "mean_point_height" ~ "Vegetation Height", 
       clean_response == "functional_nearerst_neighbour_distance" ~ "Plant Functional Distance", 
       clean_response == "functional_diversity" ~ "Plant Functional Diversity", 
-      clean_response == "functional_specialization" ~ "Plant Functional Specialization", 
+      clean_response == "functional_richness" ~ "Plant Functional Richness", 
       clean_response == "functional_dispersion" ~ "Plant Functional Dispersion", 
     ), 
     clean_response = factor(clean_response, levels = c(
       "Plant Richness", "Shannon Diversity", "Graminoid Richness", "Forb Richness", "Woody Richness",
       "Plant Dominance", "Plant Evenness",
       "Vegetation Density", "Vegetation Height",
-      "Plant Functional Diversity", "Plant Functional Distance", "Plant Functional Specialization", "Plant Functional Dispersion"
+      "Plant Functional Diversity", "Plant Functional Distance", "Plant Functional Richness", "Plant Functional Dispersion"
     )),
     clean_response_tier = case_when(response_tier == "taxonomic_diversity" ~ "Taxonomic\nDiversity", 
                                     response_tier ==  "dominance" ~ "Dominance", 
@@ -172,15 +173,15 @@ estimates <- estimates %>%
                                                                  "Vegetation\nStructure",
                                                                  "Functional\nDiversity")), 
     clean_setup = case_when(
-      term == "knp_roan" ~ "Nwaswitshumbe (KNP)", 
-      term == "knp_satara" ~ "Satara (KNP)",
-      term == "knp_nkuhlu_full" ~ "Nkuhlu (KNP)", 
+      term == "knp_roan" ~ "Nwaswitshumbe", 
+      term == "knp_satara" ~ "Satara",
+      term == "knp_nkuhlu_full" ~ "Nkuhlu", 
       term == "pnr" ~ "PNR", 
-      term == "addo_jack" ~ "Jack's (AENP)", 
-      term == "addo_nyathi_full" ~ "Nyathi (AENP)"
+      term == "addo_jack" ~ "Jack's", 
+      term == "addo_nyathi_full" ~ "Nyathi"
     ), 
-    clean_setup = factor(clean_setup, levels = c("Nwaswitshumbe (KNP)", "Satara (KNP)", "Nkuhlu (KNP)", 
-                                                 "PNR", "Jack's (AENP)", "Nyathi (AENP)")))
+    clean_setup = factor(clean_setup, levels = c("Nwaswitshumbe", "Satara", "Nkuhlu", 
+                                                 "PNR", "Jack's", "Nyathi")))
 
 
 rts <- estimates %>%
@@ -207,15 +208,16 @@ p_plot <- estimates %>%
   geom_jitter(data = dt %>%
                 filter(response_name %in% unique(estimates[scale == "plot", ]$response_name)) %>%
                 left_join(rts) %>% 
-                unique(), aes(x = ln_rr, y = clean_response, color = npp), alpha = 0.5, height = 0.1) +
+                unique(), aes(x = ln_rr, y = clean_response, color = biome), alpha = 0.75, height = 0.1) +
   facet_grid2(cols = vars(clean_setup), rows = vars(clean_response_tier), scales = "free_y", space = "free_y") +
  #scale_color_manual(values = c("grey50", "orange2")) +
   scale_fill_scico(palette = "bam", midpoint = 0) +
-  scale_color_scico(palette = "bamako", direction = -1) +
+  scale_color_scico_d(palette = "bamako", direction = -1, begin = 0.5, end = 0.9) +
   geom_pointrange(aes(x = estimate, xmin = ci_lb, xmax = ci_ub, y = clean_response,
                       fill = estimate), linewidth = 1.1, alpha = 0.9, shape = 23, size = 1.1, color = "black") +
   labs(title = "Site-Specific Estimates", y = "Response", x = "Log-Response Ratio", 
-       color = expression(NPP~(kg~C~ha^{-1}~yr^{-1})), fill = "Estimate (Log-\nResponse Ratio)") +
+       color = "Biome", #expression(NPP~(kg~C~ha^{-1}~yr^{-1})),
+       fill = "Estimate (Log-\nResponse Ratio)") +
   theme_minimal() +
   scale_y_discrete(limits = rev) +
   theme(legend.position = "bottom", 

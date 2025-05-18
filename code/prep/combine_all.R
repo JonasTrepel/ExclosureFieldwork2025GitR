@@ -97,6 +97,7 @@ dt_out <- dt_comb %>%
              woody_berger_parker_plot, woody_berger_parker_site, 
              
              functional_diversity_plot, functional_diversity_cluster, functional_diversity_site,
+             functional_richness_plot, functional_richness_cluster, functional_richness_site,
              functional_dispersion_plot, functional_dispersion_cluster, functional_dispersion_site,
              functional_specialization_plot, functional_specialization_cluster, functional_specialization_site,
              functional_pairwise_distance_plot, functional_pairwise_distance_cluster, functional_pairwise_distance_site,
@@ -146,6 +147,7 @@ dt_in <- dt_comb %>%
              woody_berger_parker_plot, woody_berger_parker_site, 
              
              functional_dispersion_plot, functional_dispersion_cluster, functional_dispersion_site,
+             functional_richness_plot, functional_richness_cluster, functional_richness_site,
              functional_specialization_plot, functional_specialization_cluster, functional_specialization_site,
              functional_diversity_plot, functional_diversity_cluster, functional_diversity_site,
              functional_pairwise_distance_plot, functional_pairwise_distance_cluster, functional_pairwise_distance_site,

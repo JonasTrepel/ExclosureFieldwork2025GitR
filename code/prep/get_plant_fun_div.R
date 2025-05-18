@@ -261,16 +261,28 @@ weight_mat <- plants %>%
 ### Get the occurrence dataframe:
 asb_sp_summ <- mFD::asb.sp.summary(asb_sp_w = weight_mat) 
 asb_sp_occ <- asb_sp_summ$'asb_sp_occ'
+head(asb_sp_occ)
 
-
-### distance based functional diversity metric 
+### distance based functional diversity metric  --> accounting for species weights 
 fd_hill_res <- alpha.fd.hill(asb_sp_w = weight_mat, sp_dist = fdist)
 
 dt_dbfd <- fd_hill_res$asb_FD_Hill %>% 
   as.data.frame() %>% 
   rownames_to_column(var = "plot_id")
-hist(dt_dbfd$FD_q2)
+hist(dt_dbfd$FD_q1)
 
+### distance based functional richness
+fr_hill_res <- alpha.fd.hill(asb_sp_w = asb_sp_occ, sp_dist = fdist)
+
+dt_dbfr <- fr_hill_res$asb_FD_Hill %>% 
+  as.data.frame() %>% 
+  rownames_to_column(var = "plot_id") %>% 
+  rename(FR_q1 = FD_q1, 
+         FR_q2 = FD_q2, 
+         FR_q0 = FD_q0)
+hist(dt_dbfr$FR_q1)
+plot(dt_dbfr$FR_q1, dt_dbfd$FD_q2)
+plot(dt_dbfd$FD_q1, dt_dbfd$FD_q2)
 
 ### the q argument defines the importance of species weight compared to trait based distances
 ### (higher q, species weight is considered more important)
@@ -306,9 +318,10 @@ dt_afdi <- alpha_fd_indices$functional_diversity_indices %>%
 
 dt_fd_plot <- dt_dbfd %>% 
   left_join(dt_afdi) %>% 
+  left_join(dt_dbfr) %>% 
   as.data.table() %>% 
-  rename(functional_diversity_plot = FD_q2, #q2 is recommended by Chao et al 2019 https://esajournals.onlinelibrary.wiley.com/doi/pdfdirect/10.1002/ecm.1343?casa_token=-QbN1gFpfe0AAAAA:7tp9ejf7BHdDGdlWJ5vaJUaj6PQwUTltt7fHDI927IXq-iom2DP7bZpkstN9bzFGDXw3mAuUUE10Txp_
-         
+  rename(functional_diversity_plot = FD_q1, #q1 is apparently the effective number of funcitonal distinct species: https://doi.org/10.1098/rspb.2025.0252  q2 is recommended by Chao et al 2019 https://esajournals.onlinelibrary.wiley.com/doi/pdfdirect/10.1002/ecm.1343?casa_token=-QbN1gFpfe0AAAAA:7tp9ejf7BHdDGdlWJ5vaJUaj6PQwUTltt7fHDI927IXq-iom2DP7bZpkstN9bzFGDXw3mAuUUE10Txp_
+         functional_richness_plot = FR_q1,
          functional_dispersion_plot = fdis, #Functional Dispersion: the biomass weighted deviation of species traits values from the center of the functional space filled by the assemblage i.e. the biomass-weighted mean distance to the biomass-weighted mean trait values of the assemblage.
          functional_pairwise_distance_plot = fmpd, #Functional Mean Pairwise Distance: the mean weighted distance between all species pairs. 
          functional_nearerst_neighbour_distance_plot = fnnd, #Functional Mean Nearest Neighbour Distance: the weighted distance to the nearest neighbor within the assemblage.
@@ -316,7 +329,7 @@ dt_fd_plot <- dt_dbfd %>%
          functional_specialization_plot = fspe #Functional Specialization: the biomass weighted mean distance to the mean position of species from the global pool (present in all assemblages).
   ) %>% 
   dplyr::select(plot_id,
-                functional_diversity_plot,
+                functional_diversity_plot,functional_richness_plot,
                 functional_dispersion_plot, functional_pairwise_distance_plot,
                 functional_nearerst_neighbour_distance_plot, functional_originality_plot, 
                 functional_specialization_plot) 
@@ -377,52 +390,67 @@ dt_dbfd_cluster <- fd_hill_res_cluster$asb_FD_Hill %>%
   as.data.frame() %>% 
   rownames_to_column(var = "cluster_id")
 
-#### compute alpha diversity indices in a multidimensional space 
+### distance based functional richness
+fr_hill_res_cluster <- alpha.fd.hill(asb_sp_w = asb_sp_occ_cluster, sp_dist = fdist)
+
+dt_dbfr_cluster <- fr_hill_res_cluster$asb_FD_Hill %>% 
+  as.data.frame() %>% 
+  rownames_to_column(var = "cluster_id") %>% 
+  rename(FR_q1 = FD_q1, 
+         FR_q2 = FD_q2, 
+         FR_q0 = FD_q0)
+hist(dt_dbfr_cluster$FR_q1)
+plot(dt_dbfr_cluster$FR_q1, dt_dbfd_cluster$FD_q2)
+plot(dt_dbfd_cluster$FD_q1, dt_dbfd_cluster$FD_q2)
+
+### the q argument defines the importance of species weight compared to trait based distances
+### (higher q, species weight is considered more important)
+
+### compute distance based functional diversity metrics (needs at least 2 species per cluster)
 nono_clusters <- unique(dt_sp[dt_sp$plant_richness_cluster < 2, cluster_id])
 weight_mat_cluster_multi <- weight_mat_cluster[!(rownames(weight_mat_cluster) %in% c(nono_clusters)), ]
-
 
 alpha_fd_indices_cluster <- mFD::alpha.fd.multidim(
   sp_faxes_coord   = sp_faxes_coord[ , c("PC1", "PC2", "PC3", "PC4", "PC5", "PC6")],
   asb_sp_w         = weight_mat_cluster_multi,
-  ind_vect         = c("fdis", "fmpd", "fnnd", "fori", "fspe"),
+  ind_vect         = c("fdis", "fmpd", "fnnd", "fori", 
+                       "fspe", "fide"),
   scaling          = TRUE,
   check_input      = TRUE,
   details_returned = TRUE)
 
 
-#alpha_fd_indices_cluster$functional_diversity_indices
+alpha_fd_indices_cluster$functional_diversity_indices
+hist(alpha_fd_indices_cluster$functional_diversity_indices$fdis)
+hist(alpha_fd_indices_cluster$functional_diversity_indices$fmpd)
+hist(alpha_fd_indices_cluster$functional_diversity_indices$fnnd)
+hist(alpha_fd_indices_cluster$functional_diversity_indices$fori)
+hist(alpha_fd_indices_cluster$functional_diversity_indices$fspe)
+
 
 ## extract functional diversity metrics 
 dt_afdi_cluster <- alpha_fd_indices_cluster$functional_diversity_indices %>% 
   rownames_to_column(var = "cluster_id") %>% 
   as.data.table() %>% 
-  dplyr::select("cluster_id", "fdis", "fmpd", "fnnd", "fori", "fspe")
-
-
-dt_dbfd_cluster <- fd_hill_res_cluster$asb_FD_Hill %>% 
-  as.data.frame() %>% 
-  rownames_to_column(var = "cluster_id")
+  dplyr::select("cluster_id", "fdis", "fmpd", "fnnd", "fori", "fspe") 
 
 dt_fd_cluster <- dt_dbfd_cluster %>% 
   left_join(dt_afdi_cluster) %>% 
+  left_join(dt_dbfr_cluster) %>% 
   as.data.table() %>% 
-  rename(
-         functional_diversity_cluster = FD_q2, 
-         
+  rename(functional_diversity_cluster = FD_q1, #q1 is apparently the effective number of funcitonal distinct species: https://doi.org/10.1098/rspb.2025.0252  q2 is recommended by Chao et al 2019 https://esajournals.onlinelibrary.wiley.com/doi/pdfdirect/10.1002/ecm.1343?casa_token=-QbN1gFpfe0AAAAA:7tp9ejf7BHdDGdlWJ5vaJUaj6PQwUTltt7fHDI927IXq-iom2DP7bZpkstN9bzFGDXw3mAuUUE10Txp_
+         functional_richness_cluster = FR_q1,
          functional_dispersion_cluster = fdis, #Functional Dispersion: the biomass weighted deviation of species traits values from the center of the functional space filled by the assemblage i.e. the biomass-weighted mean distance to the biomass-weighted mean trait values of the assemblage.
          functional_pairwise_distance_cluster = fmpd, #Functional Mean Pairwise Distance: the mean weighted distance between all species pairs. 
          functional_nearerst_neighbour_distance_cluster = fnnd, #Functional Mean Nearest Neighbour Distance: the weighted distance to the nearest neighbor within the assemblage.
          functional_originality_cluster = fori, #Functional Originality: the weighted mean distance to the nearest species from the global species pool.
          functional_specialization_cluster = fspe #Functional Specialization: the biomass weighted mean distance to the mean position of species from the global pool (present in all assemblages).
   ) %>% 
-  dplyr::select(cluster_id, 
-                functional_diversity_cluster,
+  dplyr::select(cluster_id,
+                functional_diversity_cluster,functional_richness_cluster,
                 functional_dispersion_cluster, functional_pairwise_distance_cluster,
                 functional_nearerst_neighbour_distance_cluster, functional_originality_cluster, 
                 functional_specialization_cluster) 
-
-hist(dt_fd_cluster$functional_diversity_cluster)
 
 ##################### Gamma diversity ########################
 
@@ -476,35 +504,56 @@ dt_dbfd_site <- fd_hill_res_site$asb_FD_Hill %>%
   as.data.frame() %>% 
   rownames_to_column(var = "site_id")
 
-#### compute alpha diversity indices in a multidimensional space 
+### distance based functional richness
+fr_hill_res_site <- alpha.fd.hill(asb_sp_w = asb_sp_occ_site, sp_dist = fdist)
+
+dt_dbfr_site <- fr_hill_res_site$asb_FD_Hill %>% 
+  as.data.frame() %>% 
+  rownames_to_column(var = "site_id") %>% 
+  rename(FR_q1 = FD_q1, 
+         FR_q2 = FD_q2, 
+         FR_q0 = FD_q0)
+hist(dt_dbfr_site$FR_q1)
+plot(dt_dbfr_site$FR_q1, dt_dbfd_site$FD_q2)
+plot(dt_dbfd_site$FD_q1, dt_dbfd_site$FD_q2)
+
+### the q argument defines the importance of species weight compared to trait based distances
+### (higher q, species weight is considered more important)
+
+### compute distance based functional diversity metrics (needs at least 2 species per site)
+nono_sites <- unique(dt_sp[dt_sp$plant_richness_site < 2, site_id])
+weight_mat_site_multi <- weight_mat_site[!(rownames(weight_mat_site) %in% c(nono_sites)), ]
 
 alpha_fd_indices_site <- mFD::alpha.fd.multidim(
   sp_faxes_coord   = sp_faxes_coord[ , c("PC1", "PC2", "PC3", "PC4", "PC5", "PC6")],
-  asb_sp_w         = weight_mat_site,
-  ind_vect         = c("fdis", "fmpd", "fnnd", "fori", "fspe"),
+  asb_sp_w         = weight_mat_site_multi,
+  ind_vect         = c("fdis", "fmpd", "fnnd", "fori", 
+                       "fspe", "fide"),
   scaling          = TRUE,
   check_input      = TRUE,
   details_returned = TRUE)
 
 
 alpha_fd_indices_site$functional_diversity_indices
+hist(alpha_fd_indices_site$functional_diversity_indices$fdis)
+hist(alpha_fd_indices_site$functional_diversity_indices$fmpd)
+hist(alpha_fd_indices_site$functional_diversity_indices$fnnd)
+hist(alpha_fd_indices_site$functional_diversity_indices$fori)
+hist(alpha_fd_indices_site$functional_diversity_indices$fspe)
+
 
 ## extract functional diversity metrics 
 dt_afdi_site <- alpha_fd_indices_site$functional_diversity_indices %>% 
   rownames_to_column(var = "site_id") %>% 
   as.data.table() %>% 
-  dplyr::select("site_id", "fdis", "fmpd", "fnnd", "fori", "fspe")
-
-dt_dbfd_site <- fd_hill_res_site$asb_FD_Hill %>% 
-  as.data.frame() %>% 
-  rownames_to_column(var = "site_id")
+  dplyr::select("site_id", "fdis", "fmpd", "fnnd", "fori", "fspe") 
 
 dt_fd_site <- dt_dbfd_site %>% 
   left_join(dt_afdi_site) %>% 
+  left_join(dt_dbfr_site) %>% 
   as.data.table() %>% 
-  rename(
-         functional_diversity_site = FD_q2, 
-         
+  rename(functional_diversity_site = FD_q1, #q1 is apparently the effective number of funcitonal distinct species: https://doi.org/10.1098/rspb.2025.0252  q2 is recommended by Chao et al 2019 https://esajournals.onlinelibrary.wiley.com/doi/pdfdirect/10.1002/ecm.1343?casa_token=-QbN1gFpfe0AAAAA:7tp9ejf7BHdDGdlWJ5vaJUaj6PQwUTltt7fHDI927IXq-iom2DP7bZpkstN9bzFGDXw3mAuUUE10Txp_
+         functional_richness_site = FR_q1,
          functional_dispersion_site = fdis, #Functional Dispersion: the biomass weighted deviation of species traits values from the center of the functional space filled by the assemblage i.e. the biomass-weighted mean distance to the biomass-weighted mean trait values of the assemblage.
          functional_pairwise_distance_site = fmpd, #Functional Mean Pairwise Distance: the mean weighted distance between all species pairs. 
          functional_nearerst_neighbour_distance_site = fnnd, #Functional Mean Nearest Neighbour Distance: the weighted distance to the nearest neighbor within the assemblage.
@@ -512,13 +561,10 @@ dt_fd_site <- dt_dbfd_site %>%
          functional_specialization_site = fspe #Functional Specialization: the biomass weighted mean distance to the mean position of species from the global pool (present in all assemblages).
   ) %>% 
   dplyr::select(site_id,
-                functional_diversity_site,
+                functional_diversity_site,functional_richness_site,
                 functional_dispersion_site, functional_pairwise_distance_site,
                 functional_nearerst_neighbour_distance_site, functional_originality_site, 
                 functional_specialization_site) 
-
-hist(dt_fd_site$functional_diversity_site)
-
 
 ########################## beta diversity within sites ##################################
 

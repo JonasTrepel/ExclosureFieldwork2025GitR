@@ -13,7 +13,7 @@ dt <- fread("data/processed/clean/long_data_with_lnrr.csv") %>%
   as.data.table() %>% 
   dplyr::select(plant_richness_plot, berger_parker_plot, mean_point_height_plot, point_return_fraction_plot, 
                 functional_diversity_plot, functional_nearerst_neighbour_distance_plot, 
-                functional_specialization_plot, functional_dispersion_plot,
+                functional_richness_plot, functional_dispersion_plot,
                 exclosure_id, cluster_id) %>%
   filter(complete.cases(.))
 
@@ -59,6 +59,15 @@ m_psem <- psem(
             plant_richness_plot +
             (1 | exclosure_id/cluster_id), na.action = na.omit,
           data = dt),
+  
+  #Functional Richness
+  glmmTMB(functional_richness_plot ~
+            berger_parker_plot +
+            mean_point_height_plot +
+            point_return_fraction_plot +
+            plant_richness_plot +
+            (1 | exclosure_id/cluster_id), na.action = na.omit,
+          data = dt),
 
 
   
@@ -66,6 +75,9 @@ m_psem <- psem(
   functional_diversity_plot %~~% functional_nearerst_neighbour_distance_plot,
   functional_diversity_plot %~~% functional_dispersion_plot,
   functional_dispersion_plot %~~% functional_nearerst_neighbour_distance_plot,
+  functional_richness_plot %~~% functional_diversity_plot, 
+  functional_richness_plot %~~% functional_nearerst_neighbour_distance_plot, 
+  functional_richness_plot %~~% functional_dispersion_plot,
 
   data = dt
 )
@@ -120,12 +132,12 @@ dt_est <- dt_est_raw %>%
       Response == "shannon_diversity_plot" ~ "Shannon Diversity",
       Response == "functional_nearerst_neighbour_distance_plot" ~ "Plant Functional Distance", 
       Response == "functional_diversity_plot" ~ "Plant Functional Diversity", 
-      Response == "functional_specialization_plot" ~ "Plant Functional Specialization", 
+      Response == "functional_richness_plot" ~ "Plant Functional Richness", 
       Response == "functional_dispersion_plot" ~ "Plant Functional Dispersion"
     ),
     clean_response = factor(clean_response, levels = c(
       "Plant Richness", "Shannon Diversity", "Graminoid Richness", "Forb Richness", "Woody Richness", 
-      "Plant Functional Diversity", "Plant Functional Distance", "Plant Functional Specialization", "Plant Functional Dispersion"
+      "Plant Functional Diversity", "Plant Functional Distance", "Plant Functional Richness", "Plant Functional Dispersion"
     )),
     clean_term = case_when(
       .default = NA,
@@ -162,7 +174,7 @@ p1 <- dt_est %>%
   geom_pointrange(aes(x = estimate, xmin = ci_lb, xmax = ci_ub, y = clean_term, color = significance), 
                   linewidth = 1.3, size = 0.9, alpha = 0.75) +
   scale_color_manual(values = c("Non significant" = "grey", "Significantly positive" = "orange2","Significantly negative" = "orange2")) +
-  facet_wrap(~ Label, ncol = 4) +
+  facet_wrap(~ Label, ncol = 5) +
   labs(y = "", color = "") +
   scale_y_discrete(limits = rev) +
   theme_minimal() + 
@@ -180,4 +192,4 @@ p1 <- dt_est %>%
   )
 p1
 
-ggsave(plot = p1, "builds/plots/supplement/psem_estimates.png", dpi = 600, height = 3, width = 10)
+ggsave(plot = p1, "builds/plots/supplement/psem_estimates.png", dpi = 600, height = 3, width = 11)

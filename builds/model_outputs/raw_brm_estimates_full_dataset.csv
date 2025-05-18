@@ -21,9 +21,13 @@ fixed,cond,,Intercept,0.186421828408344,0.204086542972099,-0.21613808571173,0.61
 Diversity"
 fixed,cond,,Intercept,0.0127766307496259,0.155596330423906,-0.27494412397213,0.308777972582549,site,1,functional_dispersion_site,functional_diversity,6,non-significant,1.2858600623878,36.1759988882639,-24.0385433716141,Plant Functional Dispersion,"Functional
 Diversity"
-fixed,cond,,Intercept,0.138249713367586,0.0702441842047507,0.0010043023080455,0.282160553450772,plot,1 + (1 | exclosure_id/cluster_id),functional_diversity_plot,functional_diversity,108,significant,14.8262250909745,32.5991595423732,0.100480678847803,Plant Functional Diversity,"Functional
+fixed,cond,,Intercept,0.039021195987199,0.0773434436082465,-0.121382291804472,0.189348502935765,plot,1 + (1 | exclosure_id/cluster_id),functional_richness_plot,functional_diversity,108,non-significant,3.97925228455895,20.8462031670771,-11.4304699190997,Plant Functional Richness,"Functional
 Diversity"
-fixed,cond,,Intercept,0.135911402547977,0.130514663431876,-0.117540652311276,0.387297857314888,site,1,functional_diversity_site,functional_diversity,6,non-significant,14.5580393594648,47.2995168323988,-11.0895633135712,Plant Functional Diversity,"Functional
+fixed,cond,,Intercept,-0.0699024532278642,0.107382246189935,-0.292152899434653,0.154191046408475,site,1,functional_richness_site,functional_diversity,6,non-significant,-6.7515223650379,16.6713761961951,-25.3345635784989,Plant Functional Richness,"Functional
+Diversity"
+fixed,cond,,Intercept,0.134232893343076,0.0806492288139363,-0.0264136420492332,0.305154278225432,plot,1 + (1 | exclosure_id/cluster_id),functional_diversity_plot,functional_diversity,108,non-significant,14.3659139231688,35.6834316850134,-2.60678530116054,Plant Functional Diversity,"Functional
+Diversity"
+fixed,cond,,Intercept,0.113837006517826,0.140402276054342,-0.165378401354493,0.400638187970333,site,1,functional_diversity_site,functional_diversity,6,non-significant,12.0569464479297,49.2777066079867,-15.2427079341907,Plant Functional Diversity,"Functional
 Diversity"
 fixed,cond,,Intercept,-0.363924110489587,0.16014561338756,-0.657229242509799,-0.0247950550403371,plot,1 + (1 | exclosure_id/cluster_id),functional_nearerst_neighbour_distance_plot,functional_diversity,105,significant,-30.5056068303465,-2.44901826369922,-48.1714610009379,Plant Functional Distance,"Functional
 Diversity"

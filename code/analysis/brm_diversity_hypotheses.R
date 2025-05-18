@@ -57,15 +57,19 @@ vars_plot <- c(
 guide <- CJ(vars = vars_plot, 
             response = responses_plot, 
             scale = "plot") %>% 
-  mutate(formula_id = paste0("formula_", 1:nrow(.)), 
-         formula = paste0(response, " ~ ", vars), 
-         intercept_only_formula = paste0(response, " ~ 1 + (1 | exclosure_id/cluster_id)")) %>% 
   mutate(term_tier = ifelse(grepl("evenness", vars), "evenness", "dominance"),
          response_tier = ifelse(grepl("functional", response), "fun_div", "richness"), 
          tier = paste0(response_tier, "_", term_tier)
-  )
+  ) %>% 
+  mutate(formula_id = paste0("formula_", 1:nrow(.)), 
+         formula = ifelse(response_tier == "richness", 
+                          paste0(response, " ~ ", vars), 
+                          paste0(response, " ~ plant_richness_plot + ", vars)),
+         intercept_only_formula = paste0(response, " ~ 1 + (1 | exclosure_id/cluster_id)"))
 
 table(guide$tier)
+
+
 
 
 #### run models --------
