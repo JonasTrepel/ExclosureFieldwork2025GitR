@@ -31,6 +31,7 @@ dt_box <- fread("data/processed/clean/all_vars.csv") %>%
              mean_point_height_plot, mean_point_height_site), 
     names_to = "response_name", values_to = "response_value") %>% 
   mutate(
+    response_value = ifelse(is.na(response_value) & grepl("richness", response_name), 0, response_value), 
     clean_response = gsub("_plot", "", response_name),
     clean_response = gsub("_cluster", "", clean_response),
     clean_response = gsub("_site", "", clean_response),

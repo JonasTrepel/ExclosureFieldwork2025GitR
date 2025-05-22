@@ -81,7 +81,7 @@ dt_out <- dt_comb %>%
                    rock_cover, notes, herbivore_signs, lidar_scanner_height)) %>%
   unique() %>% 
   pivot_longer(
-    cols = c(bare_ground_cover, woody_height, herb_height,
+    cols = c(
              
              plant_richness_plot, plant_richness_cluster, plant_richness_site,
              woody_richness_plot, woody_richness_cluster, woody_richness_site,
@@ -118,6 +118,8 @@ dt_out <- dt_comb %>%
              
 ),
     names_to = "response_name", values_to = "response_value_out") %>% 
+  # mutate(response_value_out =
+  #          ifelse(is.na(response_value_out) & grepl("richness", response_name), 0.1, response_value_out)) %>% 
   unique() %>%
   dplyr::select(response_name, response_value_out, pair_id, cluster_number) %>% unique()
 
@@ -131,7 +133,7 @@ dt_in <- dt_comb %>%
                    rock_cover, notes, herbivore_signs, lidar_scanner_height)) %>%
   unique() %>% 
   pivot_longer(
-    cols = c(bare_ground_cover, woody_height, herb_height,
+    cols = c(
              
              plant_richness_plot, plant_richness_cluster, plant_richness_site,
              woody_richness_plot, woody_richness_cluster, woody_richness_site,
@@ -168,23 +170,143 @@ dt_in <- dt_comb %>%
              
     ),
     names_to = "response_name", values_to = "response_value_in") %>% 
+  # mutate(response_value_in =
+  #          ifelse(is.na(response_value_in) & grepl("richness", response_name), 0.1, response_value_in)) %>%
   unique() %>%
   dplyr::select(response_name, response_value_in, pair_id, cluster_number, setup_id, exclosure_id, 
                 mat, map, npp, ndvi, evi, mat_pair, map_pair, npp_pair, ndvi_pair, evi_pair) %>% unique()
 
 
-dt_rr <- dt_in %>% left_join(dt_out) %>% 
+## 4. Calculate effect sizes with offset--------------------
+
+dt_out_offset <- dt_comb %>%
+  filter(grepl("out", plot_id)) %>%
+  dplyr::select(-c(plot_id, site_id, cluster_id, in_or_out,
+                   n_forb_flowers, n_grass_flowers, 
+                   time, date,
+                   rock_cover, notes, herbivore_signs, lidar_scanner_height)) %>%
+  unique() %>% 
+  pivot_longer(
+    cols = c(
+             
+             plant_richness_plot, plant_richness_cluster, plant_richness_site,
+             woody_richness_plot, woody_richness_cluster, woody_richness_site,
+             forb_richness_plot, forb_richness_cluster, forb_richness_site,
+             graminoid_richness_plot, graminoid_richness_cluster, graminoid_richness_site,
+             
+             community_dominance_plot, community_dominance_cluster, community_dominance_site,
+             berger_parker_plot, berger_parker_cluster, berger_parker_site,
+             simpson_dominance_plot, simpson_dominance_cluster, simpson_dominance_site,
+             
+             graminoid_berger_parker_plot, graminoid_berger_parker_site, 
+             forb_berger_parker_plot, forb_berger_parker_site, 
+             woody_berger_parker_plot, woody_berger_parker_site, 
+             
+             functional_diversity_plot, functional_diversity_cluster, functional_diversity_site,
+             functional_richness_plot, functional_richness_cluster, functional_richness_site,
+             functional_dispersion_plot, functional_dispersion_cluster, functional_dispersion_site,
+             functional_specialization_plot, functional_specialization_cluster, functional_specialization_site,
+             functional_pairwise_distance_plot, functional_pairwise_distance_cluster, functional_pairwise_distance_site,
+             functional_nearerst_neighbour_distance_plot, functional_nearerst_neighbour_distance_cluster, functional_nearerst_neighbour_distance_site,
+             
+             functional_beta_diversity_site, 
+             sorenson_dissimilarity_site,
+             
+             plant_evenness_plot, plant_evenness_cluster, plant_evenness_site,
+             shannon_diversity_plot, shannon_diversity_cluster, shannon_diversity_site,
+             
+             mean_point_distance_plot, mean_point_distance_cluster, mean_point_distance_site,
+             adjusted_mean_point_distance_plot, adjusted_mean_point_distance_cluster, adjusted_mean_point_distance_site,
+             sd_point_distance_plot, sd_point_distance_cluster, sd_point_distance_site,
+             point_return_fraction_plot, point_return_fraction_cluster, point_return_fraction_site,
+             mean_point_height_plot, mean_point_height_cluster, mean_point_height_site,
+             sd_point_height_plot, sd_point_height_cluster, sd_point_height_site
+             
+    ),
+    names_to = "response_name", values_to = "response_value_out_offset") %>% 
+   mutate(response_value_out_offset =
+          ifelse(is.na(response_value_out_offset) & grepl("richness", response_name), 0.1, response_value_out_offset)) %>% 
+  unique() %>%
+  dplyr::select(response_name, response_value_out_offset, pair_id, cluster_number) %>% unique()
+
+names(dt_out_offset)
+
+dt_in_offset <- dt_comb %>%
+  filter(grepl("in", plot_id)) %>%
+  dplyr::select(-c(plot_id, site_id, cluster_id, in_or_out,
+                   n_forb_flowers, n_grass_flowers, 
+                   time, date,
+                   rock_cover, notes, herbivore_signs, lidar_scanner_height)) %>%
+  unique() %>% 
+  pivot_longer(
+    cols = c(
+             
+             plant_richness_plot, plant_richness_cluster, plant_richness_site,
+             woody_richness_plot, woody_richness_cluster, woody_richness_site,
+             forb_richness_plot, forb_richness_cluster, forb_richness_site,
+             graminoid_richness_plot, graminoid_richness_cluster, graminoid_richness_site,
+             
+             community_dominance_plot, community_dominance_cluster, community_dominance_site,
+             berger_parker_plot, berger_parker_cluster, berger_parker_site,
+             simpson_dominance_plot, simpson_dominance_cluster, simpson_dominance_site,
+             
+             graminoid_berger_parker_plot, graminoid_berger_parker_site, 
+             forb_berger_parker_plot, forb_berger_parker_site, 
+             woody_berger_parker_plot, woody_berger_parker_site, 
+             
+             functional_dispersion_plot, functional_dispersion_cluster, functional_dispersion_site,
+             functional_richness_plot, functional_richness_cluster, functional_richness_site,
+             functional_specialization_plot, functional_specialization_cluster, functional_specialization_site,
+             functional_diversity_plot, functional_diversity_cluster, functional_diversity_site,
+             functional_pairwise_distance_plot, functional_pairwise_distance_cluster, functional_pairwise_distance_site,
+             functional_nearerst_neighbour_distance_plot, functional_nearerst_neighbour_distance_cluster, functional_nearerst_neighbour_distance_site,
+             
+             functional_beta_diversity_site, 
+             sorenson_dissimilarity_site,
+             
+             plant_evenness_plot, plant_evenness_cluster, plant_evenness_site,
+             shannon_diversity_plot, shannon_diversity_cluster, shannon_diversity_site,
+             
+             mean_point_distance_plot, mean_point_distance_cluster, mean_point_distance_site,
+             adjusted_mean_point_distance_plot, adjusted_mean_point_distance_cluster, adjusted_mean_point_distance_site,
+             sd_point_distance_plot, sd_point_distance_cluster, sd_point_distance_site,
+             point_return_fraction_plot, point_return_fraction_cluster, point_return_fraction_site,
+             mean_point_height_plot, mean_point_height_cluster, mean_point_height_site,
+             sd_point_height_plot, sd_point_height_cluster, sd_point_height_site
+             
+    ),
+    names_to = "response_name", values_to = "response_value_in_offset") %>% 
+   mutate(response_value_in_offset =
+            ifelse(is.na(response_value_in_offset) & grepl("richness", response_name), 0.1, response_value_in_offset)) %>%
+  unique() %>%
+  dplyr::select(response_name, response_value_in_offset, pair_id, cluster_number) %>% unique()
+
+dt_in_offset
+
+# 5. Combine -----------
+
+dt_rr <- dt_in %>%
+  left_join(dt_out) %>%
+  left_join(dt_out_offset) %>%
+  left_join(dt_in_offset) %>%
   mutate(ln_rr = log(response_value_out/response_value_in), # that way, it's larger values represent positive effect of megafauna
-         rr = response_value_out/response_value_in) %>% 
+         rr = response_value_out/response_value_in, 
+         rr_offset = response_value_out_offset/response_value_in_offset, 
+         ln_rr_offset = log(response_value_out_offset/response_value_in_offset)) %>% 
   mutate(scale = case_when(
     grepl("plot", response_name) ~ "plot", 
     grepl("cluster", response_name) ~ "cluster", 
     grepl("site", response_name) ~ "site", 
   ), 
-  cluster_id = paste0(setup_id, "_cluster_", cluster_number))
+  cluster_id = paste0(setup_id, "_cluster_", cluster_number)) %>%
+  mutate(across(everything(), ~ifelse(is.infinite(.), NA, .)))
+
 
 dt_out$response_value_out
 plot(dt_rr$ln_rr, dt_rr$rr)
+plot(dt_rr$ln_rr, dt_rr$ln_rr_offset)
+quantile(dt_rr$ln_rr_offset, na.rm = T)
+quantile(dt_rr$ln_rr, na.rm = T)
 
 fwrite(dt_rr, "data/processed/clean/long_data_with_lnrr.csv")
 
