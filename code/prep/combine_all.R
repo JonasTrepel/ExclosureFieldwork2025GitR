@@ -173,8 +173,7 @@ dt_in <- dt_comb %>%
   # mutate(response_value_in =
   #          ifelse(is.na(response_value_in) & grepl("richness", response_name), 0.1, response_value_in)) %>%
   unique() %>%
-  dplyr::select(response_name, response_value_in, pair_id, cluster_number, setup_id, exclosure_id, 
-                mat, map, npp, ndvi, evi, mat_pair, map_pair, npp_pair, ndvi_pair, evi_pair) %>% unique()
+  dplyr::select(response_name, response_value_in, pair_id, cluster_number, setup_id, exclosure_id, mat_pair, map_pair, npp_pair, ndvi_pair, evi_pair) %>% unique()
 
 
 ## 4. Calculate effect sizes with offset--------------------
@@ -314,7 +313,7 @@ dt_rr %>%
   filter(scale == "plot") %>% 
   ggplot() +
   geom_vline(xintercept = 0) +
-  geom_jitter(aes(x = ln_rr, y = response_name, color = map), alpha = 0.5, height = 0.1) +
+  geom_jitter(aes(x = ln_rr, y = response_name, color = map_pair), alpha = 0.5, height = 0.1) +
   theme_minimal() +
   theme(legend.position = "none")
 
