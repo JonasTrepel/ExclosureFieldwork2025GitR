@@ -187,9 +187,6 @@ fwrite(estimates %>%
 fwrite(estimates, "builds/model_outputs/raw_brm_estimates_biomes.csv")
 
 
-dt %>% dplyr::select(npp, setup_id) %>% arrange(npp) %>% unique() 
-
-
 p_plot <- estimates %>%
   filter(scale == "plot") %>% 
   arrange(desc(response_tier)) %>% 

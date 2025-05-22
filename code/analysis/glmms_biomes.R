@@ -178,7 +178,6 @@ fwrite(estimates %>%
 
 fwrite(estimates, "builds/model_outputs/raw_glmm_estimates_biomes.csv")
 
-dt %>% dplyr::select(npp, setup_id) %>% arrange(npp) %>% unique() 
 
 
 p_plot <- estimates %>%
