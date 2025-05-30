@@ -15,7 +15,9 @@ summary(plot_meta)
 
 
 ### adapt file_path 
-files_raw <- as.data.table(list.files("/Volumes/Untitled/lidar_exclosures_2025", pattern = ".laz", full.names = TRUE))
+## files are too large for Github. See OSF Repo at https://osf.io/d8fm6/
+
+files_raw <- as.data.table(list.files("data/raw/lidar_scans", pattern = ".laz", full.names = TRUE))
 
 
 files <- files_raw %>% 
