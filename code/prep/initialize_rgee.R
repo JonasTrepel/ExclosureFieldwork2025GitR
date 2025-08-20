@@ -28,7 +28,7 @@ ee$Authenticate(auth_mode='notebook')
 # before working with rgee. It is IMPORTANT THAT YOU SPECIFY A PROJECT using
 # the project parameter. If you forget what project IDs you have access to, find them
 # here: console.cloud.google.com/project
-ee$Initialize(project='ee-jonastrepel')  # <-- EDIT THIS FOR YOUR PROJECT
+ee$Initialize(project='jonas-trepel')  # <-- EDIT THIS FOR YOUR PROJECT
 
 # Optionally make a request to verify you are connected.
 ee$String('Hello from the Earth Engine servers!')$getInfo()

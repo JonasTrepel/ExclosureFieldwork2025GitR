@@ -100,8 +100,7 @@ exclosures_mat_extr <- exactextractr::exact_extract(mat, exclosures_mat,
 setnames(exclosures_mat_extr, "mean", "mat_exclosure")
 
 # rgee -------------
-
-ee_Initialize(project = "ee-jonastrepel", drive = TRUE)
+ee$Initialize(project='jonas-trepel') 
 
 ### EVI ------
 
@@ -144,14 +143,160 @@ npp_img <- ee$
 plot_extr_npp <- ee_extract(x = npp_img, y = plots["plot_id"] %>% st_buffer(100), sf = FALSE, scale = 500) %>% 
   rename(npp_plot = Npp)
 
+################## FIRE ########################
+#fire frequency 
 
+year_list <- ee$List$sequence(2001, 2024)
+n_years <- 2024-2001
+
+modis_burndate <- ee$ImageCollection("MODIS/061/MCD64A1")$
+  select("BurnDate")
+
+modis_qa <- ee$ImageCollection("MODIS/061/MCD64A1")$
+  select("QA")
+
+# Bitwise extraction function (bit 0: valid burn)
+bitwise_extract <- function(input, from_bit, to_bit) {
+  mask_size <- ee$Number(1)$add(to_bit)$subtract(from_bit)
+  mask <- ee$Number(1)$leftShift(mask_size)$subtract(1)
+  input$rightShift(from_bit)$bitwiseAnd(mask)
+}
+
+# Function to get annual binary burn map (1 = burned, 0 = unburned)
+get_annual_binary <- function(year) {
+  year <- ee$Number(year)
+  next_year <- year$add(1)
+  
+  # BurnDate and QA filtered by July 1 - June 30
+  start_date <- ee$Date$fromYMD(year, 7, 1)
+  end_date <- ee$Date$fromYMD(next_year, 6, 30)
+  
+  burn_img <- modis_burndate$
+    filterDate(start_date, end_date)$
+    select("BurnDate")$
+    max()
+  
+  qa_img <- modis_qa$
+    filterDate(start_date, end_date)$
+    select("QA")$
+    max()
+  
+  # Mask: burn pixels with good quality
+  mask <- bitwise_extract(qa_img, 0, 0)$eq(1)
+  
+  # Burned = 1, Unburned = 0
+  burned_bin <- burn_img$
+    where(burn_img$neq(0), 1)$
+    unmask(0)$
+    updateMask(mask)$
+    rename("Burned")$
+    set("system:time_start", start_date)
+  
+  return(burned_bin)
+}
+
+# Build the annual binary image collection
+burned_col <- ee$ImageCollection$fromImages(
+  year_list$map(ee_utils_pyfunc(function(yr) {
+    get_annual_binary(yr)
+  }))
+)
+
+# Sum the collection to get fire frequency
+fire_frequency <- burned_col$sum()$divide(n_years)
+
+# Visualization
+vis_params <- list(
+  min = 0,
+  max = 1,
+  palette = c("#ffffff", "#ffffb2", "#fd8d3c", "#e31a1c", "#b10026")
+)
+Map$addLayer(fire_frequency, vis_params, "Fire Frequency")
+
+#### time since last fire 
+
+# Create an image collection with the burn year (instead of just 1/0)
+get_annual_burnyear <- function(year) {
+  year <- ee$Number(year)
+  next_year <- year$add(1)
+  
+  # July 1 – June 30
+  start_date <- ee$Date$fromYMD(year, 7, 1)
+  end_date <- ee$Date$fromYMD(next_year, 6, 30)
+  
+  burn_img <- modis_burndate$
+    filterDate(start_date, end_date)$
+    select("BurnDate")$
+    max()
+  
+  qa_img <- modis_qa$
+    filterDate(start_date, end_date)$
+    select("QA")$
+    max()
+  
+  mask <- bitwise_extract(qa_img, 0, 0)$eq(1)
+  
+  # Where burned, assign the year; otherwise 0
+  burn_year_img <- burn_img$
+    where(burn_img$neq(0), year)$
+    unmask(0)$
+    updateMask(mask)$
+    rename("BurnYear")$
+    set("system:time_start", start_date)
+  
+  return(burn_year_img)
+}
+
+# Build annual burn-year collection
+burnyear_col <- ee$ImageCollection$fromImages(
+  year_list$map(ee_utils_pyfunc(function(yr) {
+    get_annual_burnyear(yr)
+  }))
+)
+
+# Last fire year (per pixel)
+last_fire_year <- burnyear_col$max()
+
+# Reference year as an image
+ref_year_img <- ee$Image$constant(2024)$rename("ref_year")
+
+# Time since last fire
+tslf <- ref_year_img$subtract(last_fire_year)$rename("TSLF")
+
+# Mask out unburned pixels
+tslf <- tslf$updateMask(last_fire_year$gt(0))
+
+# Visualization
+tslf_vis <- list(
+  min = 0,
+  max = 23,  # since 2001–2024
+  palette = c("#084081","#0868ac","#2b8cbe","#4eb3d3",
+              "#7bccc4","#a8ddb5","#ccebc5","#f7fcf0")
+)
+
+Map$addLayer(tslf, tslf_vis, "Time Since Last Fire")
+
+
+## extract 
+plot_extr_ff <- ee_extract(x = fire_frequency, y = plots["plot_id"] %>% st_buffer(100), sf = FALSE, scale = 500) %>% 
+  rename(fire_frequency = Burned)
+
+plot_extr_tslf <- ee_extract(x = tslf, y = plots["plot_id"] %>% st_buffer(100),
+                             sf = FALSE, scale = 500) %>% rename(years_since_last_fire = TSLF)
+
+plot_extr_lfy <- ee_extract(x = last_fire_year, y = plots["plot_id"] %>% st_buffer(100),
+                            sf = FALSE, scale = 500) %>% rename(last_fire_year = BurnYear)
+###### combine 
 
 plot_env <- plots_ele_extr %>% 
   left_join(plots_map_extr) %>% 
   left_join(plots_mat_extr) %>% 
   left_join(plot_extr_npp) %>% 
   left_join(plot_extr_ndvi) %>% 
-  left_join(plot_extr_evi)
+  left_join(plot_extr_evi) %>% 
+  left_join(plot_extr_ff) %>% 
+  left_join(plot_extr_tslf) %>% 
+  left_join(plot_extr_lfy)
 
 fwrite(plot_env, "data/processed/fragments/plot_environmental.csv")
 
@@ -161,3 +306,7 @@ cor.test(plot_env$evi_plot, plot_env$map_plot)
 
 ggplot() +
   geom_point(data = plot_env, aes(x = npp_plot, y = npp_plot, color = site_id))
+
+
+
+

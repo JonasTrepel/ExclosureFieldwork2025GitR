@@ -128,11 +128,59 @@ dt_graminoid <- dt_plot_raw %>%
 dt_plot <- dt_plot_raw %>% 
   left_join(dt_woody) %>% 
   left_join(dt_forb) %>% 
-  left_join(dt_graminoid)
+  left_join(dt_graminoid) %>% 
+  mutate(id_level = case_when(
+    .default = "species", 
+    species %in% c("Poaceae sp. 1", "Nidorella sp. 1",
+                   "Eriosema sp. 1", "Fabaceae sp. 5", 
+                   "Indigastrum sp. 1") ~ "higher", 
+    species %in% c("Soft leaf shrub", "Cup leaf") ~ "no_id"
+  ))
 
-summary(dt_plot)
 
-fwrite(dt_plot, "data/processed/fragments/plot_species_and_data.csv")
+table(unique(dt_plot[, c("species", "id_level")])$id_level)
+
+dt_plot %>% 
+  dplyr::select(species, id_level, in_or_out) %>% 
+  unique() %>% 
+  ggplot(aes(x = in_or_out)) +
+  geom_bar() +
+  facet_wrap(~id_level, scales = "free")
+
+#get unoque species 
+dt_us <- dt_plot %>% 
+  filter(id_level == "species") |>
+  dplyr::select(species) %>% 
+  unique() 
+
+fwrite(dt_us, "data/processed/fragments/species_list.csv")
+
+## add family information 
+
+dt_tnrs <- fread("data/raw/tnrs_result.csv") %>% 
+  dplyr::select(species = Name_submitted, family = Accepted_family, Overall_score_order) %>% 
+  group_by(species) %>% 
+  slice_min(Overall_score_order) %>% 
+  ungroup() %>% 
+  dplyr::select(-Overall_score_order) %>% 
+  unique()
+
+
+dt_plot_fin <- dt_plot %>% 
+  left_join(dt_tnrs) %>% 
+  group_by(plot_id, family) %>% 
+  mutate(n_species_per_family_plot = n_distinct(species)) %>% 
+  ungroup() %>% 
+  group_by(plot_id) %>% 
+  mutate(n_families_plot = n_distinct(family), 
+         mean_species_per_family_plot = mean(n_species_per_family_plot, na.rm = T)) %>% 
+  ungroup()
+
+
+fwrite(dt_plot_fin, "data/processed/fragments/plot_species_and_data.csv")
+
+
+
 
 mean(dt_plot[dt_plot$in_or_out == "outside", ]$woody_height, na.rm = T)
 mean(dt_plot[dt_plot$in_or_out == "inside", ]$woody_height, na.rm = T)

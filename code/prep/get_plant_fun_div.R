@@ -186,7 +186,8 @@ trait_data <- dt_traits %>%
     spines = as.factor(spines), 
     biomass_density_ordinal = factor(biomass_density_ordinal,
                                      levels = sort(unique(biomass_density_ordinal)),
-                                     ordered = TRUE),    leaf_type = as.factor(leaf_type), 
+                                     ordered = TRUE),
+    leaf_type = as.factor(leaf_type), 
     plant_height_max = as.numeric(plant_height_max), 
     leaf_area = as.numeric(leaf_area)) %>%
   dplyr::select(species,

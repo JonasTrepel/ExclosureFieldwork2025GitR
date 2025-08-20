@@ -11,10 +11,10 @@ dt_sp <- fread("data/processed/fragments/plot_species_and_data.csv")
 names(dt_sp)
 
 dt_tax <- dt_sp %>% 
-  dplyr::select(-c(species, cover, life_form)) %>% 
+  dplyr::select(-c(species, cover, life_form, family, n_species_per_family_plot, id_level)) %>% 
   unique()
 
-## functional diversity 
+## functional diversity ## functional diversitfamilyy 
 
 dt_fun <- fread("data/processed/fragments/functional_diversity_metrics.csv")
 
@@ -45,6 +45,7 @@ dt_lid <- fread("data/processed/fragments/lidar_metrics_750cm_radius.csv") %>%
          mean_point_height_site = mean(mean_point_height_cluster, na.rm = T), 
          sd_point_height_site = mean(sd_point_height_cluster, na.rm = T)) %>% 
   ungroup() 
+
 # environmental
 dt_env <- fread("data/processed/fragments/plot_environmental.csv")
 
@@ -59,7 +60,8 @@ dt_comb <- dt_tax %>%
          ndvi = mean(ndvi_plot, na.rm = T),
          evi = mean(evi_plot, na.rm = T),
          mat = mean(mat_plot, na.rm = T),
-         map = mean(map_plot, na.rm = T)) %>% 
+         map = mean(map_plot, na.rm = T), 
+         mean_fire_frequency = mean(fire_frequency, na.rm = T)) %>% 
   ungroup() %>% 
   group_by(pair_id) %>% 
   mutate(npp_pair = mean(npp_plot, na.rm = T),
@@ -70,7 +72,11 @@ dt_comb <- dt_tax %>%
   ungroup()
 glimpse(dt_comb)
 
+
+dt_comb %>% select(setup_id, mean_fire_frequency, last_fire_year, years_since_last_fire) %>% unique()
+
 fwrite(dt_comb, "data/processed/clean/all_vars.csv")
+
 ## 3. Calculate effect sizes --------------------
 
 dt_out <- dt_comb %>%
@@ -82,7 +88,7 @@ dt_out <- dt_comb %>%
   unique() %>% 
   pivot_longer(
     cols = c(
-             
+      n_families_plot, mean_species_per_family_plot, 
              plant_richness_plot, plant_richness_cluster, plant_richness_site,
              woody_richness_plot, woody_richness_cluster, woody_richness_site,
              forb_richness_plot, forb_richness_cluster, forb_richness_site,
@@ -134,7 +140,7 @@ dt_in <- dt_comb %>%
   unique() %>% 
   pivot_longer(
     cols = c(
-             
+      n_families_plot, mean_species_per_family_plot, 
              plant_richness_plot, plant_richness_cluster, plant_richness_site,
              woody_richness_plot, woody_richness_cluster, woody_richness_site,
              forb_richness_plot, forb_richness_cluster, forb_richness_site,
@@ -187,7 +193,7 @@ dt_out_offset <- dt_comb %>%
   unique() %>% 
   pivot_longer(
     cols = c(
-             
+      n_families_plot, mean_species_per_family_plot, 
              plant_richness_plot, plant_richness_cluster, plant_richness_site,
              woody_richness_plot, woody_richness_cluster, woody_richness_site,
              forb_richness_plot, forb_richness_cluster, forb_richness_site,
@@ -239,7 +245,7 @@ dt_in_offset <- dt_comb %>%
   unique() %>% 
   pivot_longer(
     cols = c(
-             
+      n_families_plot, mean_species_per_family_plot, 
              plant_richness_plot, plant_richness_cluster, plant_richness_site,
              woody_richness_plot, woody_richness_cluster, woody_richness_site,
              forb_richness_plot, forb_richness_cluster, forb_richness_site,
@@ -300,7 +306,9 @@ dt_rr <- dt_in %>%
   cluster_id = paste0(setup_id, "_cluster_", cluster_number)) %>%
   mutate(across(everything(), ~ifelse(is.infinite(.), NA, .)))
 
+unique(dt_rr$response_name)
 
+dt_rr[dt_rr$response_name == "mean_species_per_family_plot", ]$scale
 dt_out$response_value_out
 plot(dt_rr$ln_rr, dt_rr$rr)
 plot(dt_rr$ln_rr, dt_rr$ln_rr_offset)

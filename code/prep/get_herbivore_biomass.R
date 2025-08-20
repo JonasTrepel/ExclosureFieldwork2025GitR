@@ -43,3 +43,20 @@ dt <- pc %>%
 
 dt %>% dplyr::select(site, area_km2, herbivore_biomass_kg_km2, elephant_biomass_kg_km2, ratio_elephant_biomass) %>% unique()
 
+
+dt_sl <- dt %>% 
+  filter(mass_kg >= 45) %>% 
+  mutate(biomass_kg_km2 = round(species_total_biomass/area_km2)) %>% 
+  dplyr::select(Site = site, `Species name` = species,
+                `Common name`= common_name, 
+                `Biomass (kg/km2)` = biomass_kg_km2, `Species count` = count) %>% 
+  mutate(Site = case_when(
+    Site == "addo_nyathi" ~ "AENP Nyathi Section", 
+    Site == "addo_main" ~ "AENP Main Section", 
+    Site == "knp" ~ "KNP", 
+    Site == "pnr" ~ "PNR"
+  ))
+
+library(openxlsx)
+
+write.xlsx(dt_sl, "data/processed/fragments/herbivore_species_lists.xlsx")
