@@ -40,7 +40,7 @@ dt_points <- dt_long %>%
       "Plant Richness", "Shannon Diversity", "Graminoid Richness", "Forb Richness", "Woody Richness",
       "Plant Dominance", "Plant Evenness",
       "Vegetation Density", "Vegetation Height",
-      "Plant Functional Diversity", "Plant Functional Distance", "Plant Functional Richness", "Plant Functional Dispersion"
+      "Plant Functional Richness", "Plant Functional Diversity", "Plant Functional Dispersion", "Plant Functional Distance"
     ))
   )
 
@@ -71,7 +71,7 @@ dt_res <- fread("builds/model_outputs/diversity_glmms_model_results.csv") %>%
     ),
     clean_response = factor(clean_response, levels = c(
       "Plant Richness", "Shannon Diversity", "Graminoid Richness", "Forb Richness", "Woody Richness",
-      "Plant Functional Diversity", "Plant Functional Distance", "Plant Functional Richness", "Plant Functional Dispersion"
+      "Plant Functional Richness", "Plant Functional Diversity", "Plant Functional Dispersion", "Plant Functional Distance"
     )),
     sig = ifelse(ci_ub < 0 | ci_lb > 0, "significant", "non-significant")
   ) %>% 
@@ -188,7 +188,7 @@ p_est_dom_tax <- dt_res %>%
     panel.grid.minor.x = element_blank(),
     panel.grid.minor.y = element_line(linetype = "dashed", color = "seashell3"),
     panel.grid.major.y = element_line(linetype = "dashed", color = "seashell3"),
-    panel.background = element_rect(fill = "seashell1", color = "seashell1"),
+    panel.background = element_rect(fill = "snow", color = "snow"),
     strip.text = element_text(size = 10, face = "italic"),
     strip.background = element_rect(fill = "seashell2", color = "seashell2")
   )
@@ -217,7 +217,7 @@ p_est_dom_tax_sr <- dt_res %>%
     panel.grid.minor.x = element_blank(),
     panel.grid.minor.y = element_line(linetype = "dashed", color = "seashell3"),
     panel.grid.major.y = element_line(linetype = "dashed", color = "seashell3"),
-    panel.background = element_rect(fill = "seashell1", color = "seashell1"),
+    panel.background = element_rect(fill = "snow", color = "snow"),
     strip.text = element_text(size = 10, face = "italic"),
     strip.background = element_rect(fill = "seashell2", color = "seashell2")
   )
@@ -264,7 +264,7 @@ p_est_eve_tax <- dt_res %>%
     panel.grid.minor.x = element_blank(),
     panel.grid.minor.y = element_line(linetype = "dashed", color = "seashell3"),
     panel.grid.major.y = element_line(linetype = "dashed", color = "seashell3"),
-    panel.background = element_rect(fill = "seashell1", color = "seashell1"),
+    panel.background = element_rect(fill = "snow", color = "snow"),
     strip.text = element_text(size = 10, face = "italic"),
     strip.background = element_rect(fill = "seashell2", color = "seashell2")
   )
@@ -272,43 +272,6 @@ p_est_eve_tax
 
 
 # 3. Prediction plots -----------------------------------
-
-p_pred_dom_tax_raw <- dt_pred %>%
-  filter(response %in% c("plant_richness_plot"
-  ) & 
-    grepl("dominance", tier)) %>%
-  ggplot() +
-  geom_hline(yintercept = 0, linetype = "dashed", color = "seashell3") +
-  geom_vline(xintercept = 0, linetype = "dashed", color = "seashell3") +
-  geom_point(
-    data = dt_points %>% filter(!term_name %in% c("plant_evenness_plot", 
-                                                  "plant_richness_plot") & response_name %in% c("plant_richness_plot") ),
-    aes(x = term_value, y = response_value),
-    alpha = 0.15, color = "black", size = 1
-  ) +
-  geom_ribbon(aes(x = var_value, ymax = conf.high, ymin = conf.low, linetype = sig, fill = sig), alpha = 0.25) +
-  geom_line(aes(x = var_value, y = predicted, linetype = sig, color = sig), linewidth = 1.05) +
-  scale_linetype_manual(values = c("non-significant" = "dashed", "significant" = "solid")) +
-  scale_fill_manual(values = c("grey50", "orange2")) +
-  scale_color_manual(values = c("grey50", "orange2")) +
-  facet_grid(rows = vars(clean_response), cols = vars(clean_term), scales = "free") +
-  labs(y = "Response Value", x = "Predictor Value") +
-  theme_minimal() +
-  theme(
-    legend.position = "none",
-    plot.title = element_text(hjust = .5),
-    axis.title.x = element_blank(),
-    axis.title.y = element_text(color = "white"),
-    panel.grid.major.x = element_blank(),
-    panel.grid.minor.x = element_blank(),
-    panel.grid.minor.y = element_line(linetype = "dashed", color = "seashell1"),
-    panel.grid.major.y = element_line(linetype = "dashed", color = "seashell1"),
-    panel.background = element_rect(fill = "seashell1", color = "seashell1"),
-    strip.text = element_text(size = 10, face = "italic"),
-    strip.background = element_rect(fill = "seashell2", color = "seashell2")
-  )
-p_pred_dom_tax_raw
-
 
 p_pred_dom_fun <- dt_pred %>%
   filter(response %in% c("functional_richness_plot", 
@@ -321,10 +284,19 @@ p_pred_dom_fun <- dt_pred %>%
   geom_hline(yintercept = 0, linetype = "dashed", color = "seashell3") +
   geom_vline(xintercept = 0, linetype = "dashed", color = "seashell3") +
   geom_point(
-    data = dt_points %>% filter(term_name != "plant_evenness_plot" & response_name %in% c("functional_richness_plot", 
-                                                                                          "functional_nearerst_neighbour_distance_plot", 
-                                                                                          "functional_diversity_plot",
-                                                                                          "functional_dispersion_plot")),
+    data = dt_points %>%
+      filter(term_name != "plant_evenness_plot" & 
+               response_name %in% c("functional_richness_plot", 
+                                    "functional_nearerst_neighbour_distance_plot", 
+                                    "functional_diversity_plot",
+                                    "functional_dispersion_plot")) %>%
+      mutate(clean_response = fct_relevel(
+        clean_response,
+        "Plant Functional\nRichness",
+        "Plant Functional\nDiversity",
+        "Plant Functional\nDispersion",
+        "Plant Functional\nDistance"
+      )),
     aes(x = term_value, y = response_value),
     alpha = 0.15, color = "black", size = 1
   ) +
@@ -333,7 +305,15 @@ p_pred_dom_fun <- dt_pred %>%
   scale_linetype_manual(values = c("non-significant" = "dashed", "significant" = "solid")) +
   scale_fill_manual(values = c("grey50", "orange2")) +
   scale_color_manual(values = c("grey50", "orange2")) +
-  facet_grid(rows = vars(clean_response), cols = vars(clean_term), scales = "free") +
+  facet_grid(
+    rows = vars(fct_relevel(clean_response,
+                            "Plant Functional\nRichness",
+                            "Plant Functional\nDiversity",
+                            "Plant Functional\nDispersion",
+                            "Plant Functional\nDistance")),
+    cols = vars(clean_term),
+    scales = "free"
+  ) +
   labs(y = "Response Value", x = "Predictor Value") +
   theme_minimal() +
   theme(
@@ -341,23 +321,25 @@ p_pred_dom_fun <- dt_pred %>%
     plot.title = element_text(hjust = .5),
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank(),
-    panel.grid.minor.y = element_line(linetype = "dashed", color = "seashell1"),
-    panel.grid.major.y = element_line(linetype = "dashed", color = "seashell1"),
-    panel.background = element_rect(fill = "seashell1", color = "seashell1"),
+    panel.grid.minor.y = element_line(linetype = "dashed", color = "snow"),
+    panel.grid.major.y = element_line(linetype = "dashed", color = "snow"),
+    panel.background = element_rect(fill = "snow", color = "snow"),
     strip.text = element_text(size = 10, face = "italic"),
     strip.background = element_rect(fill = "seashell2", color = "seashell2")
   )
+
 p_pred_dom_fun
 
 
 # 4. Combine plots -------------------
 
 p_empty <- ggplot() + theme_void()
+
 # 4.1 Dominance ---------------------------
 p_pred_dom_tax <- grid.arrange(p_pred_dom_tax_raw, p_empty, widths = c(3.6, 1))
 
 p_pred_dom <- grid.arrange(p_pred_dom_tax, p_pred_dom_fun, heights = c(1, 3.5))
-p_comb_dom <- grid.arrange(p_est_dom_tax, p_empty, p_pred_dom, ncol = 3, widths = c(1.25,0.1, 2))
+p_comb_dom <- grid.arrange(p_est_dom_tax, p_empty, p_pred_dom, ncol = 3, widths = c(1.25,0.2, 2))
 
 ggsave(plot = p_comb_dom, "builds/plots/main/diversity_mechanism.png", dpi = 600, height = 8, width = 10)
 
@@ -387,7 +369,7 @@ p_est_dom_tax_sr <- dt_res %>%
     panel.grid.minor.x = element_blank(),
     panel.grid.minor.y = element_line(linetype = "dashed", color = "seashell3"),
     panel.grid.major.y = element_line(linetype = "dashed", color = "seashell3"),
-    panel.background = element_rect(fill = "seashell1", color = "seashell1"),
+    panel.background = element_rect(fill = "snow", color = "snow"),
     strip.text = element_text(size = 10, face = "italic"),
     strip.background = element_rect(fill = "seashell2", color = "seashell2")
   )
@@ -421,9 +403,9 @@ p_pred_dom_tax_sr <- dt_pred %>%
     #axis.title.y = element_text(color = "white"),
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank(),
-    panel.grid.minor.y = element_line(linetype = "dashed", color = "seashell1"),
-    panel.grid.major.y = element_line(linetype = "dashed", color = "seashell1"),
-    panel.background = element_rect(fill = "seashell1", color = "seashell1"),
+    panel.grid.minor.y = element_line(linetype = "dashed", color = "snow"),
+    panel.grid.major.y = element_line(linetype = "dashed", color = "snow"),
+    panel.background = element_rect(fill = "snow", color = "snow"),
     strip.text = element_text(size = 10, face = "italic"),
     strip.background = element_rect(fill = "seashell2", color = "seashell2")
   )
@@ -458,7 +440,7 @@ p_est_dom_tax_fd <- dt_res %>%
     panel.grid.minor.x = element_blank(),
     panel.grid.minor.y = element_line(linetype = "dashed", color = "seashell3"),
     panel.grid.major.y = element_line(linetype = "dashed", color = "seashell3"),
-    panel.background = element_rect(fill = "seashell1", color = "seashell1"),
+    panel.background = element_rect(fill = "snow", color = "snow"),
     strip.text = element_text(size = 10, face = "italic"),
     strip.background = element_rect(fill = "seashell2", color = "seashell2")
   )
@@ -469,25 +451,46 @@ p_pred_dom_fd <- dt_pred %>%
                          "functional_nearerst_neighbour_distance_plot", 
                          "functional_diversity_plot",
                          "functional_dispersion_plot"
-  ) & 
-    grepl("dominance", tier)) %>%
+  ) & grepl("dominance", tier)) %>%
+  mutate(clean_response = fct_relevel(
+    clean_response,
+    "Plant Functional\nRichness",
+    "Plant Functional\nDiversity",
+    "Plant Functional\nDispersion",
+    "Plant Functional\nDistance"
+  )) %>%
   ggplot() +
   geom_hline(yintercept = 0, linetype = "dashed", color = "seashell3") +
   geom_vline(xintercept = 0, linetype = "dashed", color = "seashell3") +
   geom_point(
-    data = dt_points %>% filter(term_name != "plant_evenness_plot" & response_name %in% c("functional_richness_plot", 
-                                                                                          "functional_nearerst_neighbour_distance_plot", 
-                                                                                          "functional_diversity_plot",
-                                                                                          "functional_dispersion_plot")),
+    data = dt_points %>%
+      filter(term_name != "plant_evenness_plot" &
+               response_name %in% c("functional_richness_plot", 
+                                    "functional_nearerst_neighbour_distance_plot", 
+                                    "functional_diversity_plot",
+                                    "functional_dispersion_plot")) %>%
+      mutate(clean_response = fct_relevel(
+        clean_response,
+        "Plant Functional\nRichness",
+        "Plant Functional\nDiversity",
+        "Plant Functional\nDispersion",
+        "Plant Functional\nDistance"
+      )),
     aes(x = term_value, y = response_value),
     alpha = 0.15, color = "black", size = 1
   ) +
-  geom_ribbon(aes(x = var_value, ymax = conf.high, ymin = conf.low, linetype = sig, fill = sig), alpha = 0.25) +
-  geom_line(aes(x = var_value, y = predicted, linetype = sig, color = sig), linewidth = 1.05) +
+  geom_ribbon(aes(x = var_value, ymax = conf.high, ymin = conf.low, linetype = sig, fill = sig),
+              alpha = 0.25) +
+  geom_line(aes(x = var_value, y = predicted, linetype = sig, color = sig),
+            linewidth = 1.05) +
   scale_linetype_manual(values = c("non-significant" = "dashed", "significant" = "solid")) +
   scale_fill_manual(values = c("grey50", "orange2")) +
   scale_color_manual(values = c("grey50", "orange2")) +
-  facet_grid(rows = vars(clean_response), cols = vars(clean_term), scales = "free") +
+  facet_grid(
+    rows = vars(clean_response),
+    cols = vars(clean_term),
+    scales = "free"
+  ) +
   labs(y = "Response Value", x = "Predictor Value") +
   theme_minimal() +
   theme(
@@ -495,20 +498,18 @@ p_pred_dom_fd <- dt_pred %>%
     plot.title = element_text(hjust = .5),
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank(),
-    panel.grid.minor.y = element_line(linetype = "dashed", color = "seashell1"),
-    panel.grid.major.y = element_line(linetype = "dashed", color = "seashell1"),
-    panel.background = element_rect(fill = "seashell1", color = "seashell1"),
+    panel.grid.minor.y = element_line(linetype = "dashed", color = "snow"),
+    panel.grid.major.y = element_line(linetype = "dashed", color = "snow"),
+    panel.background = element_rect(fill = "snow", color = "snow"),
     strip.text = element_text(size = 10, face = "italic"),
     strip.background = element_rect(fill = "seashell2", color = "seashell2")
   )
-p_pred_dom_fd
-
 
 p_pred_d_sr <- grid.arrange(p_est_dom_tax_sr,
                             p_empty,
                             p_pred_dom_tax_sr,
                             p_empty, 
-                            widths = c(1.25, 0.1, 2, 0.575))
+                            widths = c(1.25, 0.2, 2, 0.575))
 ggsave(plot = p_pred_d_sr, 
        "builds/plots/inkscape/fig_3_components/diversity_mechanism_species_richness.png",
        dpi = 600, height = 2.5, width = 12)
@@ -516,7 +517,7 @@ ggsave(plot = p_pred_d_sr,
 p_pred_d_fd <- grid.arrange(p_est_dom_tax_fd,
                             p_empty,
                             p_pred_dom_fd,
-                            widths = c(1.25, 0.1, 2.6))
+                            widths = c(1.25, 0.2, 2.6))
 ggsave(plot = p_pred_d_fd, 
        "builds/plots/inkscape/fig_3_components/diversity_mechanism_fun_div.png",
        dpi = 600, height = 7.5, width = 12)
@@ -572,7 +573,7 @@ p_est_dom_lf <- dt_res %>%
     panel.grid.minor.x = element_blank(),
     panel.grid.minor.y = element_line(linetype = "dashed", color = "seashell3"),
     panel.grid.major.y = element_line(linetype = "dashed", color = "seashell3"),
-    panel.background = element_rect(fill = "seashell1", color = "seashell1"),
+    panel.background = element_rect(fill = "snow", color = "snow"),
     strip.text = element_text(size = 10, face = "italic"),
     strip.background = element_rect(fill = "seashell2", color = "seashell2")
   )

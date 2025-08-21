@@ -18,21 +18,21 @@ Diversity",Thicket
 fixed,cond,Savanna,-0.271476651789606,0.122403242289085,-0.518982704780969,-0.0304892728815588,plot,biome + 0 + (1 | exclosure_id/cluster_id),berger_parker_plot,dominance,108,significant,-23.7746919494429,-3.0029162996544,-40.4874341382841,Plant Dominance,Dominance,Savanna
 fixed,cond,Thicket,-0.0813981713472399,0.149483745434475,-0.375894544122589,0.217660844776145,plot,biome + 0 + (1 | exclosure_id/cluster_id),berger_parker_plot,dominance,108,non-significant,-7.81734265671435,24.3165370083264,-31.3325256888269,Plant Dominance,Dominance,Thicket
 fixed,cond,Savanna,0.2802985916621,0.291258920611998,-0.316388970924353,0.864162794556508,plot,biome + 0 + (1 | exclosure_id/cluster_id),functional_dispersion_plot,functional_diversity,105,non-significant,32.3524946856277,137.301855005764,-27.122407761501,Plant Functional Dispersion,"Functional
-Diversity",Savanna
+Characteristics",Savanna
 fixed,cond,Thicket,0.0202306279266673,0.318752977264552,-0.620967116691142,0.633535808604192,plot,biome + 0 + (1 | exclosure_id/cluster_id),functional_dispersion_plot,functional_diversity,105,non-significant,2.04366540805425,88.4261201640932,-46.2575565957243,Plant Functional Dispersion,"Functional
-Diversity",Thicket
+Characteristics",Thicket
 fixed,cond,Savanna,0.0651767058342782,0.121531687875614,-0.189389080056614,0.307117484104364,plot,biome + 0 + (1 | exclosure_id/cluster_id),functional_richness_plot,functional_diversity,108,non-significant,6.73476142718801,35.9500678409669,-17.2535505877758,Plant Functional Richness,"Functional
-Diversity",Savanna
+Characteristics",Savanna
 fixed,cond,Thicket,0.013268262198833,0.13522178720947,-0.253026899814796,0.290303685814797,plot,biome + 0 + (1 | exclosure_id/cluster_id),functional_richness_plot,functional_diversity,108,non-significant,1.33566761903188,33.6833403728391,-22.3553004737555,Plant Functional Richness,"Functional
-Diversity",Thicket
+Characteristics",Thicket
 fixed,cond,Savanna,0.149427687337979,0.120197672699024,-0.086837055133681,0.413257441150797,plot,biome + 0 + (1 | exclosure_id/cluster_id),functional_diversity_plot,functional_diversity,108,non-significant,16.1169500518336,51.173415842393,-8.31735243700208,Plant Functional Diversity,"Functional
-Diversity",Savanna
+Characteristics",Savanna
 fixed,cond,Thicket,0.124000236507451,0.131512360056937,-0.132566965259688,0.408776743460343,plot,biome + 0 + (1 | exclosure_id/cluster_id),functional_diversity_plot,functional_diversity,108,non-significant,13.2016138729395,50.4975687311936,-12.4155718997358,Plant Functional Diversity,"Functional
-Diversity",Thicket
+Characteristics",Thicket
 fixed,cond,Savanna,-0.584668939494804,0.163827623956594,-0.895534897565653,-0.242501403774237,plot,biome + 0 + (1 | exclosure_id/cluster_id),functional_nearerst_neighbour_distance_plot,functional_diversity,105,significant,-44.2709671906702,-21.5337353911258,-59.1610906124928,Plant Functional Distance,"Functional
-Diversity",Savanna
+Characteristics",Savanna
 fixed,cond,Thicket,-0.0572904615224621,0.213363148131494,-0.48599036480441,0.374138992356445,plot,biome + 0 + (1 | exclosure_id/cluster_id),functional_nearerst_neighbour_distance_plot,functional_diversity,105,non-significant,-5.56802590221242,45.3739195051576,-38.4912266224402,Plant Functional Distance,"Functional
-Diversity",Thicket
+Characteristics",Thicket
 fixed,cond,Savanna,0.343574814612965,0.145973525795849,0.0492941796310209,0.635495389593648,plot,biome + 0 + (1 | exclosure_id/cluster_id),plant_evenness_plot,dominance,105,significant,40.9979005570574,88.7957184176694,5.05293496236599,Plant Evenness,Dominance,Savanna
 fixed,cond,Thicket,0.019660916277597,0.175777234889717,-0.322929738963877,0.363482464690952,plot,biome + 0 + (1 | exclosure_id/cluster_id),plant_evenness_plot,dominance,105,non-significant,1.98554650023883,43.8329635129466,-27.597527669192,Plant Evenness,Dominance,Thicket
 fixed,cond,Savanna,0.566750127687118,0.208075617328762,0.102707192375154,0.930396099583577,plot,biome + 0 + (1 | exclosure_id/cluster_id),shannon_diversity_plot,taxonomic_diversity,105,significant,76.2529737120601,153.551329449969,10.8166881853695,Shannon Diversity,"Taxonomic

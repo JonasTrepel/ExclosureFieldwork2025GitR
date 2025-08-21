@@ -31,6 +31,7 @@ p_south_africa <- ggplot() +
   geom_sf(data = exclosures, fill = "black" ) +
   xlim(c(17, 34)) +
   ylim(c(35, 22)) +
+  annotation_scale(style = "ticks") +
   theme_void()
 p_south_africa
 
@@ -98,3 +99,13 @@ p_roan
 
 ggsave(plot = p_roan, "builds/plots/inkscape/fig_1_components/knp_roan.png", height = 3, width = 3, dpi = 600)
 
+## north arrow 
+
+p_na <- ggplot() +
+  geom_sf(data = exclosures %>% 
+            filter(grepl("Jack's", name)), fill = "white", color = "white", linetype = "dashed", linewidth = .5) + 
+  annotation_north_arrow(location = "tl", which_north = "true",
+                         style = north_arrow_fancy_orienteering,
+                         height = unit(2.5, "cm"), width = unit(2.5, "cm")) +  theme_void()
+p_na
+ggsave(plot = p_na, "builds/plots/inkscape/fig_1_components/north_arrow.png", height = 3, width = 3, dpi = 600)

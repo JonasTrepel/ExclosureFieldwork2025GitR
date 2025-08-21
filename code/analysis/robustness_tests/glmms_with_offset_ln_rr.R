@@ -187,16 +187,16 @@ estimates <- estimates %>%
       "Plant Richness", "Shannon Diversity", "Graminoid Richness", "Forb Richness", "Woody Richness",
       "Plant Dominance", "Plant Evenness",
       "Vegetation Density", "Vegetation Height",
-      "Plant Functional Diversity", "Plant Functional Distance", "Plant Functional Richness", "Plant Functional Dispersion"
+      "Plant Functional Richness", "Plant Functional Diversity", "Plant Functional Dispersion", "Plant Functional Distance"
     )),
     clean_response_tier = case_when(response_tier == "taxonomic_diversity" ~ "Taxonomic\nDiversity", 
                                     response_tier ==  "dominance" ~ "Dominance", 
                                     response_tier ==  "structure"~ "Vegetation\nStructure",
-                                    response_tier ==  "functional_diversity"~ "Functional\nDiversity"),
+                                    response_tier ==  "functional_diversity"~ "Functional\nCharacteristics"),
     clean_response_tier = factor(clean_response_tier, levels = c("Taxonomic\nDiversity", 
                                                                  "Dominance", 
                                                                  "Vegetation\nStructure",
-                                                                 "Functional\nDiversity")))
+                                                                 "Functional\nCharacteristics")))
 
 
 rts <- estimates %>% dplyr::select(response_name, response_tier, clean_response_tier, clean_response)
@@ -223,7 +223,7 @@ ann_text <- tibble::tibble(
   clean_response_tier = factor("Taxonomic\nDiversity", levels = c("Taxonomic\nDiversity", 
                                                                   "Dominance", 
                                                                   "Vegetation\nStructure",
-                                                                  "Functional\nDiversity")))
+                                                                  "Functional\nCharacteristics")))
 
 
 ### Visualize -------------------
@@ -262,7 +262,7 @@ p_plot <- estimates %>%
         panel.grid.minor.x = element_blank(), 
         panel.grid.minor.y = element_line(linetype = "dashed", color = "seashell3"), 
         panel.grid.major.y = element_line(linetype = "dashed", color = "seashell3"),
-        panel.background = element_rect(fill = "seashell1", color = "seashell1"), 
+        panel.background = element_rect(fill = "snow", color = "snow"), 
         strip.text = element_blank() #element_text(size = 10, face = "italic")
   )
 p_plot
@@ -320,7 +320,7 @@ p_site <- estimates %>%
         panel.grid.minor.x = element_blank(), 
         panel.grid.minor.y = element_line(linetype = "dashed", color = "seashell3"), 
         panel.grid.major.y = element_line(linetype = "dashed", color = "seashell3"),
-        panel.background = element_rect(fill = "seashell1", color = "seashell1"), 
+        panel.background = element_rect(fill = "snow", color = "snow"), 
         axis.text.y = element_blank(),
         strip.text = element_text(size = 10, face = "italic"))
 p_site
@@ -484,16 +484,16 @@ estimates <- estimates %>%
       "Plant Richness", "Shannon Diversity", "Graminoid Richness", "Forb Richness", "Woody Richness",
       "Plant Dominance", "Plant Evenness",
       "Vegetation Density", "Vegetation Height",
-      "Plant Functional Diversity", "Plant Functional Distance", "Plant Functional Richness", "Plant Functional Dispersion"
+      "Plant Functional Richness", "Plant Functional Diversity", "Plant Functional Dispersion", "Plant Functional Distance"
     )),
     clean_response_tier = case_when(response_tier == "taxonomic_diversity" ~ "Taxonomic\nDiversity", 
                                     response_tier ==  "dominance" ~ "Dominance", 
                                     response_tier ==  "structure"~ "Vegetation\nStructure",
-                                    response_tier ==  "functional_diversity"~ "Functional\nDiversity"),
+                                    response_tier ==  "functional_diversity"~ "Functional\nCharacteristics"),
     clean_response_tier = factor(clean_response_tier, levels = c("Taxonomic\nDiversity", 
                                                                  "Dominance", 
                                                                  "Vegetation\nStructure",
-                                                                 "Functional\nDiversity")), 
+                                                                 "Functional\nCharacteristics")), 
     term = gsub("biome", "", term),
     biome_clean = factor(term, levels = c("Savanna", "Thicket")))
 
@@ -537,7 +537,7 @@ p_plot <- estimates %>%
         panel.grid.minor.x = element_blank(), 
         panel.grid.minor.y = element_line(linetype = "dashed", color = "seashell3"), 
         panel.grid.major.y = element_line(linetype = "dashed", color = "seashell3"),
-        panel.background = element_rect(fill = "seashell1", color = "seashell1"), 
+        panel.background = element_rect(fill = "snow", color = "snow"), 
         strip.text.y = element_text(size = 9, face = "italic"), 
         strip.text.x = element_text(size = 10, face = "bold"), 
         strip.background.x = element_rect(fill = "seashell3", color = "seashell3" )

@@ -159,16 +159,16 @@ estimates <- estimates %>%
       "Plant Richness", "Shannon Diversity", "Graminoid Richness", "Forb Richness", "Woody Richness",
       "Plant Dominance", "Plant Evenness",
       "Vegetation Density", "Vegetation Height",
-      "Plant Functional Diversity", "Plant Functional Distance", "Plant Functional Richness", "Plant Functional Dispersion"
+      "Plant Functional Richness", "Plant Functional Diversity", "Plant Functional Dispersion", "Plant Functional Distance"
     )),
     clean_response_tier = case_when(response_tier == "taxonomic_diversity" ~ "Taxonomic\nDiversity", 
                                     response_tier ==  "dominance" ~ "Dominance", 
                                     response_tier ==  "structure"~ "Vegetation\nStructure",
-                                    response_tier ==  "functional_diversity"~ "Functional\nDiversity"),
+                                    response_tier ==  "functional_diversity"~ "Functional\nCharacteristics"),
     clean_response_tier = factor(clean_response_tier, levels = c("Taxonomic\nDiversity", 
                                                                  "Dominance", 
                                                                  "Vegetation\nStructure",
-                                                                 "Functional\nDiversity")), 
+                                                                 "Functional\nCharacteristics")), 
     term = gsub("biome", "", term),
     biome_clean = factor(term, levels = c("Savanna", "Thicket")))
 

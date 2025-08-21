@@ -54,41 +54,41 @@ fixed,cond,knp_roan,-0.39969928108937,0.164202169127009,-0.719219394245995,-0.06
 fixed,cond,knp_satara,-0.0520020777739549,0.164969871176466,-0.369834474789325,0.27542016462139,plot,setup_id + 0 + (1 | cluster_id),berger_parker_plot,dominance,108,non-significant,-5.06731056458554,31.7083950705503,-30.9151325953949,Plant Dominance,Dominance,Satara
 fixed,cond,pnr,-0.281891323836347,0.165355074747519,-0.607852955618538,0.0482654150454817,plot,setup_id + 0 + (1 | cluster_id),berger_parker_plot,dominance,108,non-significant,-24.5644339442192,4.94491579594314,-45.548127922881,Plant Dominance,Dominance,PNR
 fixed,cond,addo_jack,-0.063672934636286,0.220279517495143,-0.493090074921122,0.377432057018729,plot,setup_id + 0 + (1 | cluster_id),functional_dispersion_plot,functional_diversity,105,non-significant,-6.16881613474443,45.8534343256205,-38.9263745431749,Plant Functional Dispersion,"Functional
-Diversity",Jack's
+Characteristics",Jack's
 fixed,cond,addo_nyathi_full,0.0733486706018481,0.216849614088097,-0.352734331576634,0.508257488758911,plot,setup_id + 0 + (1 | cluster_id),functional_dispersion_plot,functional_diversity,105,non-significant,7.61056779249563,66.2391933050826,-29.7236129251458,Plant Functional Dispersion,"Functional
-Diversity",Nyathi
+Characteristics",Nyathi
 fixed,cond,knp_nkuhlu_full,-0.122047781930647,0.217498337557829,-0.550684606828818,0.293764609936664,plot,setup_id + 0 + (1 | cluster_id),functional_dispersion_plot,functional_diversity,105,non-significant,-11.4893924584898,34.1468098239091,-42.3445038226137,Plant Functional Dispersion,"Functional
-Diversity",Nkuhlu
+Characteristics",Nkuhlu
 fixed,cond,knp_roan,0.418687351700133,0.217220344539032,-0.0162038192313776,0.844746063681235,plot,setup_id + 0 + (1 | cluster_id),functional_dispersion_plot,functional_diversity,105,non-significant,51.996506600121,132.738673150574,-1.60732435786092,Plant Functional Dispersion,"Functional
-Diversity",Nwaswitshumbe
+Characteristics",Nwaswitshumbe
 fixed,cond,knp_satara,-0.214990811766483,0.22919802262759,-0.669262351507968,0.239361729414728,plot,setup_id + 0 + (1 | cluster_id),functional_dispersion_plot,functional_diversity,105,non-significant,-19.3451149097534,27.0438008273795,-48.7913821901665,Plant Functional Dispersion,"Functional
-Diversity",Satara
+Characteristics",Satara
 fixed,cond,pnr,1.05137881580822,0.2254186372227,0.609701407369457,1.49881527529546,plot,setup_id + 0 + (1 | cluster_id),functional_dispersion_plot,functional_diversity,105,significant,186.15940102355,347.638264652472,83.9881941564962,Plant Functional Dispersion,"Functional
-Diversity",PNR
+Characteristics",PNR
 fixed,cond,addo_jack,0.0300504309092493,0.107630582428723,-0.187577179038675,0.24206382239461,plot,setup_id + 0 + (1 | cluster_id),functional_diversity_plot,functional_diversity,108,non-significant,3.05065020229915,27.3875492006147,-17.1034863020939,Plant Functional Diversity,"Functional
-Diversity",Jack's
+Characteristics",Jack's
 fixed,cond,addo_nyathi_full,0.169283069853079,0.108440984578847,-0.0407362811278441,0.386159197298532,plot,setup_id + 0 + (1 | cluster_id),functional_diversity_plot,functional_diversity,108,non-significant,18.4455375083109,47.1318882162662,-3.99177116167275,Plant Functional Diversity,"Functional
-Diversity",Nyathi
+Characteristics",Nyathi
 fixed,cond,knp_nkuhlu_full,0.0416018111919225,0.106638433700775,-0.171557507235151,0.245774805308697,plot,setup_id + 0 + (1 | cluster_id),functional_diversity_plot,functional_diversity,108,non-significant,4.24792925080624,27.8611604572826,-15.7648174697363,Plant Functional Diversity,"Functional
-Diversity",Nkuhlu
+Characteristics",Nkuhlu
 fixed,cond,knp_roan,0.136293802732323,0.108248363880623,-0.0813307218336298,0.351845444721023,plot,setup_id + 0 + (1 | cluster_id),functional_diversity_plot,functional_diversity,108,non-significant,14.6018547518073,42.1688777231941,-7.81112477161897,Plant Functional Diversity,"Functional
-Diversity",Nwaswitshumbe
+Characteristics",Nwaswitshumbe
 fixed,cond,knp_satara,-0.0100092789529901,0.109587665056781,-0.22113956911855,0.211983331801797,plot,setup_id + 0 + (1 | cluster_id),functional_diversity_plot,functional_diversity,108,non-significant,-0.995935283407623,23.6127280892265,-19.8395206792027,Plant Functional Diversity,"Functional
-Diversity",Satara
+Characteristics",Satara
 fixed,cond,pnr,0.401995887071051,0.108907482079074,0.189188800220327,0.620445500280718,plot,setup_id + 0 + (1 | cluster_id),functional_diversity_plot,functional_diversity,108,significant,49.4805184635883,85.9756379309406,20.8269052412876,Plant Functional Diversity,"Functional
-Diversity",PNR
+Characteristics",PNR
 fixed,cond,addo_jack,-0.154844576544075,0.21163425821544,-0.571016521337646,0.258557881005346,plot,setup_id + 0 + (1 | cluster_id),functional_nearerst_neighbour_distance_plot,functional_diversity,105,non-significant,-14.3451705165284,29.5061107122414,-43.5049137891724,Plant Functional Distance,"Functional
-Diversity",Jack's
+Characteristics",Jack's
 fixed,cond,addo_nyathi_full,0.0228571823738487,0.216715109789873,-0.404094821626336,0.452799387111345,plot,setup_id + 0 + (1 | cluster_id),functional_nearerst_neighbour_distance_plot,functional_diversity,105,non-significant,2.3120409484342,57.2708649239674,-33.2419182831117,Plant Functional Distance,"Functional
-Diversity",Nyathi
+Characteristics",Nyathi
 fixed,cond,knp_nkuhlu_full,-0.63137832421976,0.215681989254461,-1.06204412753688,-0.211129377041244,plot,setup_id + 0 + (1 | cluster_id),functional_nearerst_neighbour_distance_plot,functional_diversity,105,significant,-46.8141777501028,-19.0330692514696,-65.4251666199674,Plant Functional Distance,"Functional
-Diversity",Nkuhlu
+Characteristics",Nkuhlu
 fixed,cond,knp_roan,-0.472684858251517,0.223873780755693,-0.921125546240059,-0.0278479733685998,plot,setup_id + 0 + (1 | cluster_id),functional_nearerst_neighbour_distance_plot,functional_diversity,105,significant,-37.6673523576058,-2.74637930333992,-60.1929258185664,Plant Functional Distance,"Functional
-Diversity",Nwaswitshumbe
+Characteristics",Nwaswitshumbe
 fixed,cond,knp_satara,-0.988820226079759,0.231106809791014,-1.42757706921384,-0.527536933412327,plot,setup_id + 0 + (1 | cluster_id),functional_nearerst_neighbour_distance_plot,functional_diversity,105,significant,-62.7984673794219,-40.9943470176693,-76.0110545790758,Plant Functional Distance,"Functional
-Diversity",Satara
+Characteristics",Satara
 fixed,cond,pnr,-0.262850933684835,0.223860766335666,-0.705746434762171,0.1687802855517,plot,setup_id + 0 + (1 | cluster_id),functional_nearerst_neighbour_distance_plot,functional_diversity,105,non-significant,-23.1143500625453,18.3859999200199,-50.6260107944247,Plant Functional Distance,"Functional
-Diversity",PNR
+Characteristics",PNR
 fixed,cond,addo_jack,-0.018500081777191,0.15657565661307,-0.333234237139589,0.279159542961949,plot,setup_id + 0 + (1 | cluster_id),plant_evenness_plot,dominance,105,non-significant,-1.83300056864264,32.2018245751814,-28.3397680382329,Plant Evenness,Dominance,Jack's
 fixed,cond,addo_nyathi_full,0.0502435328814965,0.164169505930534,-0.262769333141895,0.387706924694143,plot,setup_id + 0 + (1 | cluster_id),plant_evenness_plot,dominance,105,non-significant,5.15271466324214,47.3597845856604,-23.1080758957819,Plant Evenness,Dominance,Nyathi
 fixed,cond,knp_nkuhlu_full,0.150804965481189,0.158301854352728,-0.167387759489678,0.472964409862972,plot,setup_id + 0 + (1 | cluster_id),plant_evenness_plot,dominance,105,non-significant,16.2769855706097,60.4744268891492,-15.4128446984295,Plant Evenness,Dominance,Nkuhlu

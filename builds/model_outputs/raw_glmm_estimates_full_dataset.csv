@@ -18,21 +18,21 @@ Diversity"
 fixed,cond,,Intercept,-0.201091073644728,0.0685791419359817,-2.93224831877374,0.00336517557302353,plot,1 + (1 | exclosure_id/cluster_id),berger_parker_plot,dominance,108,-0.0666759554502039,-0.335506191839252,significant,-18.2162055320404,-6.45017046499055,-28.5023920318917,Plant Dominance,Dominance
 fixed,cond,,Intercept,-0.325184470324541,0.0542520234670522,-5.99396021647061,2.0479149287494e-09,site,1,berger_parker_site,dominance,6,-0.218850504329118,-0.431518436319963,significant,-27.7605918920549,-19.6558179750036,-35.0477912369228,Plant Dominance,Dominance
 fixed,cond,,Intercept,0.17694351121661,0.154103299178898,1.14821364733533,0.250880376732171,plot,1 + (1 | exclosure_id/cluster_id),functional_dispersion_plot,functional_diversity,105,0.47898597760725,-0.125098955174029,non-significant,19.3563668263264,61.4436497137268,-11.7590420729362,Plant Functional Dispersion,"Functional
-Diversity"
+Characteristics"
 fixed,cond,,Intercept,0.00803450597375251,0.0867123710901399,0.0926569746939618,0.926176079124012,site,1,functional_dispersion_site,functional_diversity,6,0.177990753310427,-0.161921741362922,non-significant,0.80668692330772,19.481427310704,-14.9492238485889,Plant Functional Dispersion,"Functional
-Diversity"
+Characteristics"
 fixed,cond,,Intercept,0.0416944854988741,0.0593093628947037,0.703000057055029,0.482055713918861,plot,1 + (1 | exclosure_id/cluster_id),functional_richness_plot,functional_diversity,108,0.157940836772493,-0.0745518657747451,non-significant,4.25759080308259,17.1096906785313,-7.18406668923383,Plant Functional Richness,"Functional
-Diversity"
+Characteristics"
 fixed,cond,,Intercept,-0.074052271128575,0.0648742795063013,-1.14147350370777,0.253672932056805,site,1,functional_richness_site,functional_diversity,6,0.0531013167037756,-0.201205858960926,non-significant,-7.13768476075564,5.4536481867445,-18.2255925719907,Plant Functional Richness,"Functional
-Diversity"
+Characteristics"
 fixed,cond,,Intercept,0.131599094615072,0.0565572046261659,2.32683166512421,0.0199742263699019,plot,1 + (1 | exclosure_id/cluster_id),functional_diversity_plot,functional_diversity,108,0.242451215682357,0.0207469735477868,significant,14.0650934487391,27.4369078421035,2.09636881326598,Plant Functional Diversity,"Functional
-Diversity"
+Characteristics"
 fixed,cond,,Intercept,0.115486913998198,0.0923480338677215,1.25056169754107,0.211094432276531,site,1,functional_diversity_site,functional_diversity,6,0.296489060378932,-0.0655152323825361,non-significant,12.2419826464304,34.5127844727853,-6.34152197666784,Plant Functional Diversity,"Functional
-Diversity"
+Characteristics"
 fixed,cond,,Intercept,-0.37020834129414,0.124100282552731,-2.98313858501359,0.00285308774952793,plot,1 + (1 | exclosure_id/cluster_id),functional_nearerst_neighbour_distance_plot,functional_diversity,105,-0.126971787490788,-0.613444895097493,significant,-30.9409562856999,-11.924147934548,-45.8517697315093,Plant Functional Distance,"Functional
-Diversity"
+Characteristics"
 fixed,cond,,Intercept,-0.12425329367144,0.103593216431887,-1.19943465364971,0.230358979681564,site,1,functional_nearerst_neighbour_distance_site,functional_diversity,6,0.0787894105350588,-0.327295997877939,non-significant,-11.6843885305012,8.19764452362453,-27.9129664645478,Plant Functional Distance,"Functional
-Diversity"
+Characteristics"
 fixed,cond,,Intercept,0.214704551644317,0.0964951740178621,2.22502890771069,0.0260792975953038,plot,1 + (1 | exclosure_id/cluster_id),plant_evenness_plot,dominance,105,0.403835092719327,0.0255740105693071,significant,23.9495635915606,49.7556968547093,2.59038311873872,Plant Evenness,Dominance
 fixed,cond,,Intercept,0.178451612062352,0.0472179854977722,3.7793143900807,0.000157260766412072,site,1,plant_evenness_site,dominance,6,0.270998863637986,0.0859043604867189,significant,19.5365040624995,31.1273580302254,8.97021047423436,Plant Evenness,Dominance
 fixed,cond,,Intercept,0.356116346732955,0.133592817271263,2.66568483251501,0.00768316838893056,plot,1 + (1 | exclosure_id/cluster_id),shannon_diversity_plot,taxonomic_diversity,105,0.617958268584631,0.09427442488128,significant,42.7773655400852,85.5136482054909,9.88612594145366,Shannon Diversity,"Taxonomic
