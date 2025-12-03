@@ -183,11 +183,21 @@ trait_data <- dt_traits %>%
   mutate(leaf_area = ifelse(leaf_type == "a", 0, leaf_area)) %>% # absent leaves have an area of 0... 
   mutate(
     growth_form = as.factor(growth_form_simple),
-    spines = as.factor(spines), 
+    growth_form = factor(growth_form, levels = c(
+       "round_herb",  "messy_herb", "creeping_herb",         
+       "climbing_herb", "cushion_herb",        
+       "parasitic_herb", "straight_herb", 
+       "single_stemmed_woody", "multi_stemmed_woody")),
+    spines = as.factor(spines),
+    spines = factor(spines, levels = c("n", "<2", ">2")),
+    
     biomass_density_ordinal = factor(biomass_density_ordinal,
                                      levels = sort(unique(biomass_density_ordinal)),
                                      ordered = TRUE),
     leaf_type = as.factor(leaf_type), 
+    leaf_type = factor(leaf_type, levels = c(
+      "absent", "linear", "simple", "lobed",
+      "palmately_compound", "pinnately_compound", "succulent")),
     plant_height_max = as.numeric(plant_height_max), 
     leaf_area = as.numeric(leaf_area)) %>%
   dplyr::select(species,
@@ -196,6 +206,7 @@ trait_data <- dt_traits %>%
   unique() %>%
   filter(complete.cases(.))
 
+levels(trait_data$leaf_type)
 
 ### build trait data frame for functions 
 sp_tr <-  trait_data %>% dplyr::select(species, growth_form,
@@ -231,6 +242,20 @@ p
 ggsave(plot = p, "builds/plots/exploratory/fspaces_quality.png", dpi = 600, height = 8, width = 12)
 
 round(fspaces_quality$"quality_fspaces", 3) %>% arrange(mad) # 6 dimensional space it is 
+
+### Test correlation between functional axes and traits
+sp_faxes_coord <- fspaces_quality$"details_fspaces"$"sp_pc_coord"
+
+source("code/functions/traits_faxes_cor_own.R")
+
+tr_faxes <- traits_faxes_cor_own(
+  sp_tr          = sp_tr, 
+  sp_faxes_coord = sp_faxes_coord[ , c("PC1", "PC2", "PC3", "PC4", "PC5", "PC6")], 
+  plot           = TRUE)
+
+(p_pc_t <- tr_faxes$"tr_faxes_plot")
+
+ggsave(plot = p_pc_t, "builds/plots/supplement/mfd_pcoa_vs_traits.png", dpi = 600, height = 12, width = 15)
 
 ### get matrix of species coordinates 
 

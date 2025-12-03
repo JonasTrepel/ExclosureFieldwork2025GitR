@@ -17,7 +17,7 @@ summary(plot_meta)
 ### adapt file_path 
 ## files are too large for Github. See OSF Repo at https://osf.io/d8fm6/
 
-files_raw <- as.data.table(list.files("data/raw/lidar_scans", pattern = ".laz", full.names = TRUE))
+files_raw <- as.data.table(list.files("/Volumes/Untitled/lidar_exclosures_2025", pattern = ".laz", full.names = TRUE))
 
 
 files <- files_raw %>% 
@@ -86,6 +86,10 @@ for(i in 1:nrow(files)){
               mean_Z = mean(Z), 
               mean_height = mean(point_height), 
               
+              q95_height = quantile(point_height, 0.95),
+              q95_z = quantile(Z, 0.95),
+              
+              
               adjusted_mean_2d = mean(distance_2d)/(nrow(.)/possible_points),
               adjusted_mean_3d = mean(distance_3d)/(nrow(.)/possible_points), 
               
@@ -114,7 +118,7 @@ for(i in 1:nrow(files)){
 reserve_lidar <- res %>% unique()
 fwrite(reserve_lidar, "data/processed/fragments/lidar_metrics_750cm_radius.csv")
 
-
+cor.test(reserve_lidar$q95_height, reserve_lidar$mean_height)
 
 
 

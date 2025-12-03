@@ -167,16 +167,16 @@ rts <- estimates %>%
   dplyr::select(response_name, response_tier, clean_response_tier, clean_response, biome_clean, biome = term)
 
 
-fwrite(estimates %>%
-         mutate(estimate_ci = paste0(round(estimate, 2), " (", round(ci_lb, 2), "; ", round(ci_ub, 2), ")"), 
-                percent_change_ci = paste0(round(percent_change, 2),
-                                           " (", round(ci_lb_percent_change, 2), "; ", round(ci_ub_percent_change, 2), ")"),
-                p = round(p.value, 3), 
-                z = round(statistic, 2)) %>% 
-         arrange(clean_response, desc(response_tier)) %>% 
-         dplyr::select(Biome = biome_clean, clean_response, estimate_ci, p, z, percent_change_ci), "builds/model_outputs/table_glmm_estimates_biomes_separately.csv")
+# fwrite(estimates %>%
+#          mutate(estimate_ci = paste0(round(estimate, 2), " (", round(ci_lb, 2), "; ", round(ci_ub, 2), ")"), 
+#                 percent_change_ci = paste0(round(percent_change, 2),
+#                                            " (", round(ci_lb_percent_change, 2), "; ", round(ci_ub_percent_change, 2), ")"),
+#                 p = round(p.value, 3), 
+#                 z = round(statistic, 2)) %>% 
+#          arrange(clean_response, desc(response_tier)) %>% 
+#          dplyr::select(Biome = biome_clean, clean_response, estimate_ci, p, z, percent_change_ci), "builds/model_outputs/table_glmm_estimates_biomes_separately.csv")
 
-fwrite(estimates, "builds/model_outputs/raw_glmm_estimates_biomes.csv")
+ fwrite(estimates, "builds/model_outputs/raw_glmm_estimates_biomes.csv")
 
 
 
@@ -212,3 +212,107 @@ p_plot <- estimates %>%
 p_plot
 
 ggsave(plot = p_plot, "builds/plots/main/glmm_estimates_biomes.png", dpi = 600, height = 6, width = 12)
+
+
+################ Write Results Table -------------------------------------
+
+
+ dt_raw <- fread("data/processed/clean/all_vars.csv") %>% 
+  pivot_longer(
+    cols = c(
+      plant_richness_plot, plant_richness_site,
+      woody_richness_plot, woody_richness_site,
+      forb_richness_plot, forb_richness_site,
+      graminoid_richness_plot, graminoid_richness_site,
+      
+      berger_parker_plot, berger_parker_site, 
+      
+      functional_dispersion_plot, functional_dispersion_site, 
+      functional_diversity_plot, functional_diversity_site, 
+      functional_richness_plot, functional_richness_site, 
+      functional_nearerst_neighbour_distance_plot, functional_nearerst_neighbour_distance_site, 
+      
+      plant_evenness_plot, plant_evenness_site,
+      shannon_diversity_plot, shannon_diversity_site, 
+      
+      point_return_fraction_plot, point_return_fraction_site, 
+      mean_point_height_plot, mean_point_height_site), 
+    names_to = "response_name", values_to = "response_value") %>% 
+  mutate(
+    response_value = ifelse(is.na(response_value) & grepl("richness", response_name), 0, response_value), 
+    clean_response = gsub("_plot", "", response_name),
+    clean_response = gsub("_cluster", "", clean_response),
+    clean_response = gsub("_site", "", clean_response),
+    clean_response = case_when(
+      clean_response == "plant_richness" ~ "Plant Richness", 
+      clean_response == "woody_richness" ~ "Woody Richness", 
+      clean_response == "forb_richness" ~ "Forb Richness", 
+      clean_response == "graminoid_richness" ~ "Graminoid Richness", 
+      clean_response == "shannon_diversity" ~ "Shannon Diversity", 
+      clean_response == "berger_parker" ~ "Plant Dominance", 
+      clean_response == "plant_evenness" ~ "Plant Evenness", 
+      clean_response == "point_return_fraction" ~ "Vegetation Density", 
+      clean_response == "mean_point_height" ~ "Vegetation Height", 
+      clean_response == "functional_nearerst_neighbour_distance" ~ "Plant Functional Distance", 
+      clean_response == "functional_diversity" ~ "Plant Functional Diversity", 
+      clean_response == "functional_richness" ~ "Plant Functional Richness", 
+      clean_response == "functional_dispersion" ~ "Plant Functional Dispersion", 
+    ), 
+    clean_response = factor(clean_response, levels = c(
+      "Plant Richness", "Shannon Diversity", "Graminoid Richness", "Forb Richness", "Woody Richness",
+      "Plant Dominance", "Plant Evenness",
+      "Vegetation Density", "Vegetation Height",
+      "Plant Functional Diversity", "Plant Functional Richness", "Plant Functional Distance", "Plant Functional Dispersion"
+    ))) %>% 
+  mutate(in_or_out = ifelse(in_or_out == "inside", "Exclosure", "Control"),
+         scale = case_when(
+           grepl("site", response_name) ~ "site", 
+           grepl("plot", response_name) ~ "plot")) %>% 
+  mutate(biome = ifelse(setup_id %in% c("addo_nyathi_full", "addo_jack"), "Thicket", "Savanna")) %>% 
+  filter(scale == "plot") %>% 
+  dplyr::select(plot_id, in_or_out, biome, response_value, clean_response)
+
+table(dt_raw$plot_id)
+
+dt_raw2 <- dt_raw %>%
+  group_by(clean_response, biome, in_or_out) %>%
+  summarise(
+    mean_value = round(mean(response_value, na.rm = TRUE), 2),
+    sd_value = round(sd(response_value, na.rm = TRUE), 2)
+  ) %>%
+  mutate(value = paste0(mean_value, "±", sd_value)) %>%
+  select(clean_response, biome, in_or_out, value) %>%
+  tidyr::pivot_wider(
+    names_from = in_or_out,
+    values_from = value,
+    names_prefix = "value_"
+  ) 
+
+
+glimpse(dt_raw2)
+
+table2 <- estimates %>%
+  mutate(estimate_ci = paste0(round(estimate, 2), " (", round(ci_lb, 2), "; ", round(ci_ub, 2), ")"), 
+         percent_change_ci = paste0(round(percent_change, 2),
+                                    " (", round(ci_lb_percent_change, 2), "; ", round(ci_ub_percent_change, 2), ")"),
+         p = round(p.value, 3), 
+         z = round(statistic, 2), 
+         clean_response = gsub("\n", "", clean_response)) %>% 
+  arrange(scale, desc(response_tier)) %>% 
+  mutate(biome = biome_clean) %>% 
+  left_join(dt_raw2) %>% 
+  dplyr::select(Biome = biome_clean,
+                Response = clean_response,
+                `Control (mean ± SD)` = value_Control, 
+                `Exclosure (mean ± SD)` = value_Exclosure, 
+                `Estimate (95% CI)` = estimate_ci, 
+                `p` = p, 
+                `z` = z, 
+                `Percent Change (95% CI)` = percent_change_ci) %>% 
+  unique()
+
+
+unique(dt_raw2$clean_response)
+
+
+fwrite(table2, "builds/model_outputs/table_glmm_estimates_biomes_separately.csv")

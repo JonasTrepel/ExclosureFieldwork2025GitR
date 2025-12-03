@@ -6,6 +6,7 @@ library(scico)
 library(gridExtra)
 library(ggcorrplot)
 library(ggridges)
+library(MetBrewer)
 
 ## 1. Boxplots -------------------------------------------
 
@@ -45,31 +46,32 @@ dt_box <- fread("data/processed/clean/all_vars.csv") %>%
       clean_response == "plant_evenness" ~ "Plant Evenness", 
       clean_response == "point_return_fraction" ~ "Vegetation Density", 
       clean_response == "mean_point_height" ~ "Vegetation Height", 
-      clean_response == "functional_nearerst_neighbour_distance" ~ "Plant Functional Distance", 
-      clean_response == "functional_diversity" ~ "Plant Functional Diversity", 
-      clean_response == "functional_richness" ~ "Plant Functional Richness", 
-      clean_response == "functional_dispersion" ~ "Plant Functional Dispersion", 
+      clean_response == "functional_nearerst_neighbour_distance" ~ "Plant Functional\nDistance", 
+      clean_response == "functional_diversity" ~ "Plant Functional\nDiversity", 
+      clean_response == "functional_richness" ~ "Plant Functional\nRichness", 
+      clean_response == "functional_dispersion" ~ "Plant Functional\nDispersion", 
     ), 
     clean_response = factor(clean_response, levels = c(
       "Plant Richness", "Shannon Diversity", "Graminoid Richness", "Forb Richness", "Woody Richness",
       "Plant Dominance", "Plant Evenness",
       "Vegetation Density", "Vegetation Height",
-      "Plant Functional Diversity", "Plant Functional Richness", "Plant Functional Distance", "Plant Functional Dispersion"
-    ))) 
+      "Plant Functional\nDiversity", "Plant Functional\nRichness", "Plant Functional\nDistance", "Plant Functional\nDispersion"
+    ))) %>% 
+  mutate(in_or_out = ifelse(in_or_out == "inside", "Exclosure", "Control"))
 
 p_p_box <- dt_box %>% 
   dplyr::select(response_value, clean_response, response_name, in_or_out, plot_id) %>% 
   filter(grepl("plot", response_name)) %>% 
   distinct() %>% 
   ggplot(aes(x = in_or_out, y = response_value, color = in_or_out)) +
-  geom_boxplot(outlier.shape = NA, width = 0.6, alpha = 0.9, color = "grey25", fill = "white") +
-  geom_jitter(width = 0.2, alpha = 0.6, size = 1.5) +
-  geom_boxplot(outlier.shape = NA, width = 0.6, alpha = 0.5, color = "grey25", fill = "white") +
-  scale_color_scico_d(palette = "bam") +
-  facet_wrap(~ clean_response, scales = "free_y", ncol = 4) +
+  geom_jitter(width = 0.1, height = 0.2, alpha = 0.2, size = 1) +
+  geom_boxplot(outlier.shape = NA, width = 0.5, alpha = 0.25, color = "grey25", fill = "grey50") +
+  scale_color_met_d(name = "Isfahan1", direction = -1) +
+  facet_wrap(~ clean_response, scales = "free_y", ncol = 5) +
   labs(x = NULL, y = "Response Value", title = "a)", subtitle = "Plot-Scale") +
   theme_bw(base_size = 12) +
   theme(
+    panel.border = element_blank(),
     legend.position = "none",
     plot.subtitle = element_text(size = 12, hjust = 0.5),
     strip.background = element_rect(fill = "grey95", color = NA),
@@ -91,14 +93,14 @@ p_s_box <- dt_box %>%
   filter(grepl("site", response_name)) %>% 
   unique() %>% 
   ggplot(aes(x = in_or_out, y = response_value, color = in_or_out)) +
-  geom_boxplot(outlier.shape = NA, width = 0.6, alpha = 0.9, color = "grey25", fill = "white") +
-  geom_jitter(width = 0.2, alpha = 0.6, size = 1.5) +
-  geom_boxplot(outlier.shape = NA, width = 0.6, alpha = 0.5, color = "grey25", fill = "white") +
-  scale_color_scico_d(palette = "bam") +
-  facet_wrap(~ clean_response, scales = "free_y", ncol = 4) +
+  geom_jitter(width = 0.1, height = 0.2, alpha = 0.2, size = 1) +
+  geom_boxplot(outlier.shape = NA, width = 0.5, alpha = 0.25, color = "grey25", fill = "grey50") +
+  scale_color_met_d(name = "Isfahan1", direction = -1) +
+  facet_wrap(~ clean_response, scales = "free_y", ncol = 5) +
   labs(x = NULL, y = "Response Value", title = "b)", subtitle = "Site-Scale") +
   theme_bw(base_size = 12) +
   theme(
+    panel.border = element_blank(),
     legend.position = "none",
     plot.subtitle = element_text(size = 12, hjust = 0.5),
     strip.background = element_rect(fill = "grey95", color = NA),
@@ -109,7 +111,7 @@ p_s_box <- dt_box %>%
 p_s_box
 
 p_box <- gridExtra::grid.arrange(p_p_box, p_s_box, ncol = 1)
-ggsave(plot = p_box, "builds/plots/supplement/response_boxplots.png", dpi = 600, height = 13, width = 9)
+ggsave(plot = p_box, "builds/plots/supplement/response_boxplots.png", dpi = 600, height = 12, width = 9)
 
 # 2. Correlations ----------------------------------------------------
 

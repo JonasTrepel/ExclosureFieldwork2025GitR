@@ -1,0 +1,16 @@
+Variable 1,Variable 2,Value,Method
+Plant Height Max,Leaf Area,0.383,Spearman
+Plant Height Max,Biomass Density,0.302,Spearman
+Plant Height Max,Growth Form,0.556,Kruskal-Wallis/Eta²
+Plant Height Max,Spines,0.196,Kruskal-Wallis/Eta²
+Plant Height Max,Leaf Type,0.066,Kruskal-Wallis/Eta²
+Leaf Area,Biomass Density,0.143,Spearman
+Leaf Area,Growth Form,0.075,Kruskal-Wallis/Eta²
+Leaf Area,Spines,0.002,Kruskal-Wallis/Eta²
+Leaf Area,Leaf Type,0.16,Kruskal-Wallis/Eta²
+Biomass Density,Growth Form,0.299,Kruskal-Wallis/Eta²
+Biomass Density,Spines,0.047,Kruskal-Wallis/Eta²
+Biomass Density,Leaf Type,0.083,Kruskal-Wallis/Eta²
+Growth Form,Spines,0.338,Cramer’s V
+Growth Form,Leaf Type,0.293,Cramer’s V
+Spines,Leaf Type,0.195,Cramer’s V
