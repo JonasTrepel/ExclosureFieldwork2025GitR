@@ -1,4 +1,4 @@
-#### This repository contains R scripts and data used for the manuscript "Wild large herbivores promote plant diversity and functional redundancy by reducing dominance" (in review)
+#### This repository contains R scripts and data used for the manuscript "Wild large herbivores promote plant diversity and functional redundancy by reducing dominance" by Jonas Trepel, Elizabeth le Roux, Camille Magneville, Anika Oosthuizen, Debbie du Preez, Savannah Reichert, Jens-Christian Svenning & Robert Buitenwerf; Functional Ecology, 2026
 
 ---
 ### `code/cleaning`
